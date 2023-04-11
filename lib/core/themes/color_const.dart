@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //base color
 const Color primaryColor = Color(0xFF1b2f6e);
+const Color secondaryColor = Color(0xFFBDE7FF);
 
 //light theme
 const Color lightBackgroundColor = Color(0xFF00C2FF);
@@ -13,6 +14,7 @@ const Color toolbarTitleColor = Color(0xf2f2f2);
 const Color viewColour = Color(0xFFD9D9D9);
 const Color startColour = Color(0Xff800000);
 const Color bottomListColour = Color(0XffF8F8F8);
+const Color Graycolor = Color.fromARGB(255, 234, 225, 225);
 
 //dark app theme
 const Color appDarkPrimaryColor = Color(0Xff262C2E);

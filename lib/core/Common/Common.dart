@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class Common {
   Future _ackAlert(BuildContext context) {
@@ -41,5 +42,14 @@ class Common {
             ],
           );
         });
+  }
+
+  Widget getDivider() {
+    return Container(
+      height: 0.5.h,
+      width: 30.w,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20), color: Colors.black),
+    );
   }
 }

@@ -3,7 +3,6 @@ import 'package:sizer/sizer.dart';
 import 'color_const.dart';
 import 'font_constant.dart';
 
-
 styleTextForFieldLabel() {
   return TextStyle(
     fontFamily: fontRegular,
