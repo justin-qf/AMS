@@ -1,6 +1,10 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/constants/assets.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
-import 'package:booking_app/screens/Welcomeback.dart';
+import 'package:booking_app/screens/Changepassword.dart';
+import 'package:booking_app/screens/phone.dart';
+import 'package:booking_app/screens/signup.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,72 +23,82 @@ class _LoginpageState extends State<Loginpage> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _isHidden = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(children: [
-        SizedBox(
-          height: double.infinity,
-          width: double.infinity,
-          child: SvgPicture.asset(
-            Asset.bg,
-            fit: BoxFit.cover,
+        resizeToAvoidBottomInset: false,
+        body: Stack(children: [
+          SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: SvgPicture.asset(
+              Asset.bg,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.only(
-                    left: 7.0.w, right: 7.0.w, top: 8.h, bottom: 5.h),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: SvgPicture.asset(
-                          Asset.ams_logo,
-                          height: 10.h,
-                          width: 15.w,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 5.w),
-                        child: const Text(
-                          'AMS',
-                          style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: fontUrbanistBlack),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 1.0.h,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: 5),
-                            child: const Text(
-                              'Sign Into Your Account',
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  fontFamily: fontUrbanistExtraBold,
-                                  fontWeight: FontWeight.w700),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(
+                      left: 7.0.w, right: 7.0.w, top: 8.h, bottom: 5.h),
+                  child: Center(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                        FadeInDown(
+                          from: 50,
+                          child: Center(
+                            child: SvgPicture.asset(
+                              Asset.ams_logo,
+                              height: 10.h,
+                              width: 20.w,
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      Form(
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(right: 5.w),
+                          child: FadeInDown(
+                            from: 50,
+                            child: Text(
+                              'AMS',
+                              style: TextStyle(
+                                  fontSize: 35.sp,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: fontUrbanistBlack),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 1.0.h,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: 2.w),
+                              child: FadeInDown(
+                                from: 50,
+                                child: Text(
+                                  'Sign Into Your Account',
+                                  style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontFamily: opensans_Bold,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Form(
                           key: _formKey,
                           child: Container(
                             child: Column(
@@ -97,20 +111,21 @@ class _LoginpageState extends State<Loginpage> {
                                     Text(
                                       'Email Id',
                                       style: TextStyle(
-                                          fontFamily: fontUrbanistBold,
-                                          fontSize: 18,
+                                          fontFamily: opensans_Bold,
+                                          fontSize: 15.sp,
                                           fontWeight: FontWeight.w700),
                                     ),
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 4.0,
+                                  height: 1.0.h,
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 5.5.h,
                                   child: TextField(
                                     decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.only(left: 25),
+                                      contentPadding: EdgeInsets.only(
+                                          top: 1.h, left: 3.5.h, bottom: 1.h),
                                       hintText: 'info@xyz.com',
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(30),
@@ -123,32 +138,32 @@ class _LoginpageState extends State<Loginpage> {
                                     keyboardType: TextInputType.name,
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 20,
+                                SizedBox(
+                                  height: 1.5.h,
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   // ignore: prefer_const_literals_to_create_immutables
                                   children: [
-                                    const Text(
+                                    Text(
                                       'Password',
                                       style: TextStyle(
-                                          fontFamily: fontUrbanistBold,
+                                          fontFamily: opensans_Bold,
                                           fontWeight: FontWeight.w700,
-                                          fontSize: 18),
+                                          fontSize: 15.sp),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 4.0),
+                                SizedBox(height: 1.0.h),
                                 Container(
-                                  height: 50,
+                                  height: 5.5.h,
                                   child: TextField(
-                                    obscureText: true,
+                                    obscureText: _isHidden,
                                     obscuringCharacter: '*',
                                     decoration: InputDecoration(
                                         hintText: '********',
                                         contentPadding: EdgeInsets.only(
-                                            left: 25, right: 20),
+                                            top: 1.h, left: 3.5.h, bottom: 1.h),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(30),
@@ -156,133 +171,193 @@ class _LoginpageState extends State<Loginpage> {
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(30)),
-                                        suffixIcon: Icon(
-                                          Icons.visibility_off,
-                                          color: Colors.grey,
-                                          size: 20.sp,
+                                        suffixIcon: InkWell(
+                                          onTap: _togglePasswordView,
+                                          child: Icon(
+                                            _isHidden
+                                                ? Icons.visibility_off
+                                                : Icons.visibility,
+                                            color: Colors.grey,
+                                            size: 20.sp,
+                                          ),
                                         )),
                                     controller: _password,
                                     keyboardType: TextInputType.name,
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 45.sp,
+                                  height: 1.h,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Changepassword(),
+                                            ));
+                                      },
+                                      child: Text(
+                                        'Forgot Password?',
+                                        style: TextStyle(
+                                            fontFamily: opensans_Bold,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12.sp),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
-                                    width: 370.sp,
-                                    height: 42.sp,
-                                    child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const WelcomebackPage()));
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.black,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(50))),
-                                        child: Text(
-                                          'Sign In',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16.5.sp,
-                                              fontFamily: fontUrbanistBold,
-                                              fontWeight: FontWeight.w700),
-                                        ))),
+                                  height: 4.h,
+                                ),
+                                FadeInUp(
+                                  from: 50,
+                                  child: SizedBox(
+                                      width: 150.h,
+                                      height: 6.h,
+                                      child: ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const Phone()));
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.black,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50))),
+                                          child: Text(
+                                            'Sign In',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14.5.sp,
+                                                fontFamily: opensans_Bold,
+                                                fontWeight: FontWeight.w700),
+                                          ))),
+                                ),
                               ],
                             ),
-                          )),
-                      SizedBox(
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4.5.h,
+                        ),
+                        FadeInUp(
+                          from: 50,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              getDivider(),
+                              Text(
+                                'Or',
+                                style: TextStyle(
+                                    fontFamily: opensans_Bold,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              getDivider(),
+                            ],
+                          ),
+                        ),
+                      ])),
+                ),
+                SizedBox(
+                  height: 1.3.h,
+                ),
+                FadeInUp(
+                  from: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
                         height: 4.5.h,
+                        width: 4.5.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.black),
+                        child: Icon(
+                          FontAwesomeIcons.googlePlusG,
+                          size: 16.sp,
+                          color: Colors.white,
+                        ),
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          getDivider(),
-                          Text(
-                            'Or',
-                            style: TextStyle(
-                                fontFamily: fontUrbanistBold,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                          getDivider(),
-                        ],
+                      SizedBox(width: 4.5.w),
+                      Container(
+                        height: 4.5.h,
+                        width: 4.5.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.black),
+                        child: Icon(
+                          FontAwesomeIcons.facebookF,
+                          size: 16.sp,
+                          color: Colors.white,
+                        ),
                       ),
-                      SizedBox(
-                        height: 1.3.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.black),
-                            child: Icon(
-                              FontAwesomeIcons.googlePlusG,
-                              size: 18.sp,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(width: 15),
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.black),
-                            child: Icon(
-                              FontAwesomeIcons.facebookF,
-                              size: 18.sp,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 3.7.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RichText(
-                              text: TextSpan(
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: fontUrbanistBlack,
-                                      fontSize: 15.sp),
-                                  children: [
-                                TextSpan(
-                                  text: 'Don’t have an account?  ',
-                                ),
-                                TextSpan(
-                                    text: 'Sign up ',
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 77, 180, 224),
-                                        fontFamily: fontUrbanistBold,
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.w700)),
-                              ])),
-                        ],
-                      )
                     ],
                   ),
                 ),
-              ),
-            ],
-          ),
-        )
-      ]),
-    );
+                SizedBox(
+                  height: 3.7.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FadeInUp(
+                      from: 50,
+                      child: RichText(
+                          text: TextSpan(
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: opensansMedium,
+                                  fontSize: 14.sp),
+                              children: [
+                            TextSpan(
+                              text: 'Don’t have an account? ',
+                            ),
+                            TextSpan(
+                                text: 'Sign up',
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => signuppage(),
+                                        ));
+                                  },
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    decorationThickness: 1.5.sp,
+                                    color: Color.fromARGB(255, 77, 180, 224),
+                                    fontFamily: opensans_Bold,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w700)),
+                          ])),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
+        ]));
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
   }
 }

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/constants/assets.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:booking_app/screens/Otp.dart';
@@ -35,12 +36,15 @@ class _PhoneState extends State<Phone> {
                 padding: EdgeInsets.only(
                   top: 8.h,
                 ),
-                child: Text(
-                  'Welcome Back !',
-                  style: TextStyle(
-                      fontFamily: fontUrbanistExtraBold,
-                      fontSize: 40,
-                      fontWeight: FontWeight.w700),
+                child: FadeInDown(
+                  from: 50,
+                  child: Text(
+                    'Welcome Back !',
+                    style: TextStyle(
+                        fontFamily: opensans_Bold,
+                        fontSize: 32.sp,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
               ),
               SizedBox(
@@ -49,12 +53,15 @@ class _PhoneState extends State<Phone> {
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Container(
                   margin: EdgeInsets.only(right: 40.sp),
-                  child: Text(
-                    'We’ll send You Verification Code',
-                    style: TextStyle(
-                        fontFamily: fontUrbanistExtraBold,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w700),
+                  child: FadeInDown(
+                    from: 50,
+                    child: Text(
+                      'We’ll send You Verification Code',
+                      style: TextStyle(
+                          fontFamily: opensans_Bold,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -76,17 +83,17 @@ class _PhoneState extends State<Phone> {
                                 Text(
                                   'Mobile Number',
                                   style: TextStyle(
-                                      fontFamily: fontUrbanistBold,
+                                      fontFamily: opensans_Bold,
                                       fontSize: 17.5.sp,
                                       fontWeight: FontWeight.w700),
                                 ),
                               ],
                             ),
                             SizedBox(
-                              height: 4.0,
+                              height: 0.5.h,
                             ),
                             Container(
-                              height: 50,
+                              height: 5.5.h,
                               child: TextField(
                                 decoration: InputDecoration(
                                   hintText: '+91 1234567890',
@@ -96,44 +103,38 @@ class _PhoneState extends State<Phone> {
                               ),
                             ),
                             SizedBox(
-                              height: 3.0.sp,
+                              height: 15.h,
                             ),
-                            SizedBox(
-                              height: 70.sp,
+                            FadeInUp(
+                              from: 50,
+                              child: SizedBox(
+                                  width: 150.h,
+                                  height: 6.h,
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const Otp()));
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.black,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(50))),
+                                      child: Text(
+                                        'Get OTP',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14.5.sp,
+                                            fontFamily: opensans_Bold,
+                                            fontWeight: FontWeight.w700),
+                                      ))),
                             ),
-                            SizedBox(
-                                width: 370.sp,
-                                height: 40.sp,
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Otp()));
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.black,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(50))),
-                                    child: Text(
-                                      'Get OTP',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16.5.sp,
-                                          fontFamily: fontUrbanistBold,
-                                          fontWeight: FontWeight.w700),
-                                    ))),
                           ],
                         ),
                       )),
-                ),
-                SizedBox(
-                  height: 3.5.h,
-                ),
-                SizedBox(
-                  height: 4.0.h,
                 ),
               ]),
             ],

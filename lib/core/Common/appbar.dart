@@ -1,22 +1,27 @@
 import 'package:booking_app/core/themes/font_constant.dart';
-import 'package:booking_app/screens/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
-
 import '../constants/assets.dart';
 
+// ignore: must_be_immutable
 class HomeAppBar extends StatelessWidget {
   HomeAppBar(
       {super.key,
       this.openDrawer,
       required this.title,
+      required this.onClick,
       required this.isfilter,
-      required this.icon});
+      required this.leading,
+      required this.icon,
+      this.isBack});
   GlobalKey<ScaffoldState>? openDrawer;
   final String title;
   bool isfilter;
-  String icon = Asset.filter;
+  var icon;
+  var leading;
+  var isBack = null;
+  final Function? onClick;
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +29,19 @@ class HomeAppBar extends StatelessWidget {
       padding: const EdgeInsets.only(left: 22, right: 20, top: 10),
       child: Row(
         children: [
-          InkWell(
-            onTap: () => openDrawer!.currentState!.openDrawer(),
-            borderRadius: BorderRadius.all(Radius.circular(24)),
-            // <-- Opens drawer
-            // child: Icon(
-            //   Icons.arrow_back_rounded,
-            //   size: 30,
-            //   color: Colors.black,
-            // ),
-            child: SvgPicture.asset(Asset.menu),
-          ),
+          title == 'Settings'
+              ? Container()
+              : InkWell(
+                  onTap: () {
+                    print("OPEN DRAWER");
+                    openDrawer?.currentState?.openDrawer();
+                  },
+                  borderRadius: BorderRadius.all(Radius.circular(24)),
+                  child: isBack != null
+                      ? isBack == true
+                          ? SvgPicture.asset(Asset.backbutton)
+                          : SvgPicture.asset(Asset.menu)
+                      : SvgPicture.asset(Asset.cart)),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(top: 1, left: 9, right: 6),
@@ -48,9 +55,9 @@ class HomeAppBar extends StatelessWidget {
                     maxLines: 1,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      fontSize: 17.5,
+                      fontSize: 16.5.sp,
                       color: Colors.black,
-                      fontFamily: fontUrbanistBlack,
+                      fontFamily: opensans_Bold,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w800,
                     ),
@@ -59,38 +66,64 @@ class HomeAppBar extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            child: InkWell(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => notification()));
-              },
-              // onTap: () =>
-              // openDrawer.currentState!.openDrawer(),
-
-              borderRadius: BorderRadius.all(Radius.circular(24)),
-              child: SvgPicture.asset(
-                Asset.notification,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 6.5.w,
-          ),
-          Visibility(
-            visible: isfilter,
-            child: Container(
-              padding: EdgeInsets.only(right: 1.h),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => notification()));
-                },
-                borderRadius: BorderRadius.all(Radius.circular(24)),
-                child: SvgPicture.asset(Asset.cart),
-              ),
-            ),
-          ),
+          title == 'Settings' ||
+                  title == 'Invite Friends' ||
+                  title == 'Profile' ||
+                  title == 'Offer' ||
+                  title == 'Update Vendor' ||
+                  title == 'Services' ||
+                  title == 'Add Services' ||
+                  title == 'Experts' ||
+                  title == 'Add Experts' ||
+                  title == 'Add Vendor Service' ||
+                  title == 'Add Vendor' ||
+                  title == 'Add Customer' ||
+                  title == 'Add Product' ||
+                  title == 'Add Course' ||
+                  title == 'Report Bug'
+              ? Container()
+              : isfilter == true
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          child: InkWell(
+                            onTap: () {
+                              onClick!();
+                            },
+                            borderRadius: BorderRadius.all(Radius.circular(24)),
+                            child: SvgPicture.asset(
+                              Asset.notification,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 6.5.w,
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(right: 1.h),
+                          child: InkWell(
+                            onTap: () {
+                              // Navigator.push(context,
+                              //     MaterialPageRoute(builder: (context) => notification()));
+                            },
+                            borderRadius: BorderRadius.all(Radius.circular(24)),
+                            child: SvgPicture.asset(Asset.cart),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Container(
+                      padding: EdgeInsets.only(right: 1.h),
+                      child: InkWell(
+                        onTap: () {
+                          onClick!();
+                        },
+                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                        child: SvgPicture.asset(Asset.filter),
+                      ),
+                    )
         ],
       ),
     );

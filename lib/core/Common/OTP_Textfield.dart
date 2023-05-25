@@ -43,6 +43,10 @@ class _OtpInputState extends State<OtpInput> {
           if (value.trim().length == 1) {
             setState(() {});
             FocusScope.of(context).nextFocus();
+          } else {
+            setState(() {
+              FocusScope.of(context).previousFocus();
+            });
           }
         },
         style: TextStyle(
@@ -83,7 +87,9 @@ class _OtpInputState extends State<OtpInput> {
             borderRadius: BorderRadius.circular(
                 SizerUtil.deviceType == DeviceType.mobile ? 5.w : 2.5.w),
             borderSide: BorderSide(
-              color: black,
+              color: widget.controller.text.toString().isEmpty
+                  ? secondaryColor
+                  : black,
               width: 0.4.w,
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,12 +36,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ),
         color: Color(0xFF000000),
       ),
-      margin: const EdgeInsets.only(
-        right: 5,
+      margin: EdgeInsets.only(
+        right: 0.5.h,
       ),
-      height: 10,
+      height: 1.h,
       curve: Curves.easeIn,
-      width: _currentPage == index ? 20 : 10,
+      width: _currentPage == index ? 2.5.h : 1.h,
     );
   }
 
@@ -74,33 +75,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SvgPicture.asset(
-                            contents[i].image,
-                            // height: SizeConfig.blockV! * 30,
-                            height: i == 1 ? 25.h : 35.h,
+                          FadeInDown(
+                            from: 50,
+                            child: SvgPicture.asset(
+                              contents[i].image,
+                              // height: SizeConfig.blockV! * 30,
+                              height: i == 1 ? 25.h : 35.h,
+                            ),
                           ),
                           SizedBox(
                             height: 5.h,
                           ),
-                          // Text(
-                          //   contents[i].title,
-                          //   textAlign: TextAlign.center,
-                          //   style: TextStyle(
-                          //     fontFamily: "Mulish",
-                          //     fontWeight: FontWeight.w600,
-                          //     fontSize: (width <= 550) ? 25 : 15,
-                          //   ),
-                          // ),
-                          // const SizedBox(height: 15),
-                          // Text(
-                          //   contents[i].desc,
-                          //   style: TextStyle(
-                          //     fontFamily: "Mulish",
-                          //     fontWeight: FontWeight.w300,
-                          //     fontSize: (width <= 550) ? 17 : 25,
-                          //   ),
-                          //   textAlign: TextAlign.center,
-                          // )
                         ],
                       ),
                     );
@@ -125,83 +110,107 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     Row(
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        const Expanded(
-                          child: Text(
-                              'Lorem ipsum dolor sit amet consectetur.\nId sed purus malesuada euismod.',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: fontUrbanistMedium),
-                              textAlign: TextAlign.center),
-                        )
+                        Expanded(
+                          child: _currentPage == 0
+                              ? FadeInLeft(
+                                  from: 50,
+                                  child: Text(
+                                      'Lorem ipsum dolor sit amet consectetur.\nId sed purus malesuada euismod.',
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: opensansMedium),
+                                      textAlign: TextAlign.center),
+                                )
+                              : FadeInRight(
+                                  from: 50,
+                                  child: Text(
+                                      'Lorem ipsum dolor sit amet consectetur.\nId sed purus malesuada euismod.',
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: opensansMedium),
+                                      textAlign: TextAlign.center),
+                                ),
+                        ),
                       ],
                     ),
-                    _currentPage + 1 == contents.length
-                        ? Padding(
-                            padding: EdgeInsets.only(
-                                top: 8.h, left: 11.5.w, right: 11.5.w),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Loginpage()));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                padding: EdgeInsets.all(15),
-                                textStyle: TextStyle(
-                                    fontSize:
-                                        (double.infinity <= 550) ? 13 : 17),
-                              ),
-                              child: Center(
-                                  child: Text(
-                                "Let's Get Started",
-                                style: TextStyle(
-                                    fontFamily: fontUrbanistBold,
-                                    fontSize: 16.5.sp,
-                                    fontWeight: FontWeight.w700),
-                              )),
-                            ),
-                          )
-                        : Padding(
-                            padding: EdgeInsets.only(top: 8.h),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ElevatedButton(
+                    FadeInUp(
+                      from: 50,
+                      child: _currentPage + 1 == contents.length
+                          ? Padding(
+                              padding: EdgeInsets.only(
+                                  top: 8.h, left: 11.5.w, right: 11.5.w),
+                              child: FadeInUp(
+                                from: 50,
+                                child: ElevatedButton(
                                   onPressed: () {
-                                    _controller.nextPage(
-                                      duration:
-                                          const Duration(milliseconds: 200),
-                                      curve: Curves.easeIn,
-                                    );
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const Loginpage()));
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
-                                    shape: const CircleBorder(
-                                        side: BorderSide(width: 11)),
-                                    elevation: 0,
-                                    // padding: (width <= 550)
-                                    //     ? const EdgeInsets.symmetric(
-                                    //         horizontal: 5, vertical: 5)
-                                    //     : const EdgeInsets.symmetric(
-                                    //         horizontal: 30, vertical: 25),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    padding: EdgeInsets.all(15),
                                     textStyle: TextStyle(
                                         fontSize:
                                             (double.infinity <= 550) ? 13 : 17),
                                   ),
-                                  child: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 50),
+                                  child: Center(
+                                      child: Text(
+                                    "Let's Get Started",
+                                    style: TextStyle(
+                                        fontFamily: opensans_Bold,
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w700),
+                                  )),
                                 ),
-                              ],
+                              ),
+                            )
+                          : Padding(
+                              padding: EdgeInsets.only(top: 8.h),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FadeInUp(
+                                    from: 50,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        _controller.nextPage(
+                                          duration:
+                                              const Duration(milliseconds: 200),
+                                          curve: Curves.easeIn,
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.black,
+                                        shape: const CircleBorder(
+                                            side: BorderSide(width: 11)),
+                                        elevation: 0,
+                                        // padding: (width <= 550)
+                                        //     ? const EdgeInsets.symmetric(
+                                        //         horizontal: 5, vertical: 5)
+                                        //     : const EdgeInsets.symmetric(
+                                        //         horizontal: 30, vertical: 25),
+                                        textStyle: TextStyle(
+                                            fontSize: (double.infinity <= 550)
+                                                ? 13
+                                                : 17),
+                                      ),
+                                      child: Icon(
+                                          Icons.arrow_forward_ios_rounded,
+                                          size: 6.5.h),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          )
+                    )
                   ],
                 ),
               ),

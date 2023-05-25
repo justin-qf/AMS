@@ -1,3 +1,5 @@
+import 'package:booking_app/screens/profile.dart';
+
 class Asset {
   static const assets = "assets/";
   static const svgFolder = 'svgs/';
@@ -7,6 +9,8 @@ class Asset {
   static const background = '$assets${pngFolder}background.png';
   static const logo = '$assets${pngFolder}logo.png';
   static const home_bg = '$assets${pngFolder}home_bg.png';
+  static const img = '$assets${pngFolder}image.jpg';
+
   //static const home_logo = '$assets${pngFolder}home_logo.png';
 
   //SVGS
@@ -52,4 +56,21 @@ class Asset {
   static const profileimg = '$assets${svgFolder}account-icon.svg';
   static const backbutton = '$assets${svgFolder}backbutton.svg';
   static const filter = '$assets${svgFolder}fi-br-filter.svg';
+  static const togglebutton = '$assets${svgFolder}toggle_button.svg';
+  static const rightbackbutton = '$assets${svgFolder}right_backbutton.svg';
+  static const moon = '$assets${svgFolder}fi-br-moon.svg';
+  static const profile = '$assets${svgFolder}Ellipse 18.svg';
+  static const referfriend = '$assets${svgFolder}Refer a friend 1.svg';
+  static const facebook = '$assets${svgFolder}Facebook 2.svg';
+  static const twitter = '$assets${svgFolder}twitter 1.svg';
+  static const instagram = '$assets${svgFolder}Frame 24.svg';
+  static const message = '$assets${svgFolder}Msg 2.svg';
+  static const circle = '$assets${svgFolder}fi-br-circle-small.svg';
+  static const edit = '$assets${svgFolder}fi-br-edit.svg';
+  static const changepass = '$assets${svgFolder}Changepassword.svg';
+  static const bluestar = '$assets${svgFolder}fi-sr-star-octogram-blue.svg';
+  static const orangestar = '$assets${svgFolder}fi-sr-star-octogram-orange.svg';
+  static const bma_logo = '$assets${svgFolder}BMA-LOGO.svg';
+  static const service = '$assets${svgFolder}Ellipse 20.svg';
+  static const white_logo = '$assets${svgFolder}white-logo.svg';
 }

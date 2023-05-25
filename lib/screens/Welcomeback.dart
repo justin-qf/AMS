@@ -1,6 +1,7 @@
 import 'package:booking_app/core/constants/assets.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:booking_app/screens/phone.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,6 +20,7 @@ class _WelcomebackPageState extends State<WelcomebackPage> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _isHidden = true;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +44,8 @@ class _WelcomebackPageState extends State<WelcomebackPage> {
                 child: Text(
                   'Welcome Back !',
                   style: TextStyle(
-                      fontFamily: fontUrbanistExtraBold,
-                      fontSize: 40,
+                      fontFamily: opensans_Bold,
+                      fontSize: 32.sp,
                       fontWeight: FontWeight.w700),
                 ),
               ),
@@ -52,12 +54,12 @@ class _WelcomebackPageState extends State<WelcomebackPage> {
               ),
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Container(
-                  margin: EdgeInsets.only(right: 90.sp),
+                  margin: EdgeInsets.only(right: 75.sp),
                   child: Text(
                     'Sign Into Your Account',
                     style: TextStyle(
-                        fontFamily: fontUrbanistExtraBold,
-                        fontSize: 20,
+                        fontFamily: opensans_Bold,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.w700),
                   ),
                 ),
@@ -80,17 +82,17 @@ class _WelcomebackPageState extends State<WelcomebackPage> {
                                 Text(
                                   'Email Id',
                                   style: TextStyle(
-                                      fontFamily: fontUrbanistBold,
-                                      fontSize: 18,
+                                      fontFamily: opensans_Bold,
+                                      fontSize: 15.sp,
                                       fontWeight: FontWeight.w700),
                                 ),
                               ],
                             ),
                             SizedBox(
-                              height: 4.0,
+                              height: 1.0.h,
                             ),
                             Container(
-                              height: 50,
+                              height: 5.5.h,
                               child: TextField(
                                 decoration: InputDecoration(
                                   hintText: 'info@xyz.com',
@@ -99,45 +101,50 @@ class _WelcomebackPageState extends State<WelcomebackPage> {
                                 keyboardType: TextInputType.name,
                               ),
                             ),
-                            const SizedBox(
-                              height: 20,
+                            SizedBox(
+                              height: 2.h,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               // ignore: prefer_const_literals_to_create_immutables
                               children: [
-                                const Text(
+                                Text(
                                   'Password',
                                   style: TextStyle(
-                                      fontFamily: fontUrbanistBold,
+                                      fontFamily: opensans_Bold,
                                       fontWeight: FontWeight.w700,
-                                      fontSize: 18),
+                                      fontSize: 15.sp),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 4.0),
+                            SizedBox(height: 1.0.h),
                             Container(
-                              height: 50,
+                              height: 5.5.h,
                               child: TextField(
-                                obscureText: true,
+                                obscureText: _isHidden,
                                 obscuringCharacter: '*',
                                 decoration: InputDecoration(
                                     hintText: '********',
-                                    suffixIcon: Icon(
-                                      Icons.visibility_off,
-                                      color: Colors.grey,
-                                      size: 20.sp,
+                                    suffixIcon: InkWell(
+                                      onTap: _togglePasswordView,
+                                      child: Icon(
+                                        _isHidden
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                        color: Colors.grey,
+                                        size: 20.sp,
+                                      ),
                                     )),
                                 controller: _password,
                                 keyboardType: TextInputType.name,
                               ),
                             ),
                             SizedBox(
-                              height: 90.sp,
+                              height: 15.h,
                             ),
                             SizedBox(
-                                width: 370.sp,
-                                height: 42.sp,
+                                width: 150.h,
+                                height: 6.h,
                                 child: ElevatedButton(
                                     onPressed: () {
                                       Navigator.push(
@@ -155,16 +162,13 @@ class _WelcomebackPageState extends State<WelcomebackPage> {
                                       'Sign In',
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 16.5.sp,
-                                          fontFamily: fontUrbanistBold,
+                                          fontSize: 14.5.sp,
+                                          fontFamily: opensans_Bold,
                                           fontWeight: FontWeight.w700),
                                     ))),
                           ],
                         ),
                       )),
-                ),
-                SizedBox(
-                  height: 3.0.h,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -175,8 +179,8 @@ class _WelcomebackPageState extends State<WelcomebackPage> {
                     Text(
                       'Or',
                       style: TextStyle(
-                          fontFamily: fontUrbanistBold,
-                          fontSize: 18.sp,
+                          fontFamily: opensans_Bold,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.w700),
                     ),
                     getDivider(),
@@ -189,27 +193,27 @@ class _WelcomebackPageState extends State<WelcomebackPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      height: 40,
-                      width: 40,
+                      height: 4.5.h,
+                      width: 4.5.h,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.black),
                       child: Icon(
                         FontAwesomeIcons.googlePlusG,
-                        size: 18.sp,
+                        size: 16.sp,
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(width: 15),
+                    SizedBox(width: 4.5.w),
                     Container(
-                      height: 40,
-                      width: 40,
+                      height: 4.5.h,
+                      width: 4.5.h,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.black),
                       child: Icon(
                         FontAwesomeIcons.facebookF,
-                        size: 18.sp,
+                        size: 16.sp,
                         color: Colors.white,
                       ),
                     ),
@@ -225,19 +229,25 @@ class _WelcomebackPageState extends State<WelcomebackPage> {
                         text: TextSpan(
                             style: TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: fontUrbanistBlack,
-                                fontSize: 15.sp),
+                                fontWeight: FontWeight.w500,
+                                fontFamily: opensansMedium,
+                                fontSize: 14.sp),
                             children: [
                           TextSpan(
                             text: 'Don’t have an account?  ',
                           ),
                           TextSpan(
                               text: 'Sign up ',
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  print('Click');
+                                },
                               style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  decorationThickness: 1.5,
                                   color: Color.fromARGB(255, 77, 180, 224),
-                                  fontFamily: fontUrbanistBold,
-                                  fontSize: 18.sp,
+                                  fontFamily: opensans_Bold,
+                                  fontSize: 14.sp,
                                   fontWeight: FontWeight.w700)),
                         ])),
                   ],
@@ -248,5 +258,11 @@ class _WelcomebackPageState extends State<WelcomebackPage> {
         )
       ]),
     );
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
   }
 }
