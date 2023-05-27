@@ -1,11 +1,17 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/screens/signup2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../controllers/sign_in_controller.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
-import '../core/themes/font_constant.dart';
+import '../core/constants/strings.dart';
+import '../custom_componannt/common_views.dart';
+import '../custom_componannt/form_inputs.dart';
 
 class signuppage extends StatefulWidget {
   const signuppage({super.key});
@@ -25,389 +31,169 @@ class _signuppageState extends State<signuppage> {
   TextEditingController _contact2 = TextEditingController();
   TextEditingController _whatsapp = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final signinController = Get.put(SignInController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Stack(children: [
-          SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: SvgPicture.asset(
-              Asset.bg,
-              fit: BoxFit.cover,
+        extendBody: true,
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          minimum: EdgeInsets.only(top: 1.h),
+          child: Stack(children: [
+            SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: SvgPicture.asset(
+                Asset.bg,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          SafeArea(
-              minimum: EdgeInsets.only(top: 1.h),
-              child: Container(
-                  margin: EdgeInsets.only(
-                    top: 0.5.h,
-                  ),
-                  child: Center(
-                      child: Column(children: [
-                    HomeAppBar(
-                      title: 'Add Vendor',
-                      leading: Asset.backbutton,
-                      isfilter: false,
-                      icon: Asset.filter,
-                      isBack: true,
-                      onClick: () {},
-                    ),
-                  ])))),
-          Container(
-            margin: EdgeInsets.only(top: 6.h, left: 1.0.w, right: 1.0.w),
-            padding: EdgeInsets.only(
-                left: 7.0.w, right: 7.0.w, top: 4.h, bottom: 1.h),
-            child: Form(
-                key: _formKey,
-                child: Container(
+            SizedBox(
+              height: 0.5.h,
+            ),
+            Center(
+                child: Column(children: [
+              HomeAppBar(
+                title: Strings.add_vendor,
+                leading: Asset.backbutton,
+                isfilter: false,
+                icon: Asset.filter,
+                isBack: true,
+                onClick: () {
+                  Get.back();
+                },
+              ),
+            ])),
+            Container(
+              margin: EdgeInsets.only(top: 6.h, left: 1.0.w, right: 1.0.w),
+              padding: EdgeInsets.only(
+                  left: 7.0.w, right: 7.0.w, top: 2.h, bottom: 1.h),
+              child: Form(
+                  key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Vendor Name',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
+                      getTitle(Strings.vendor_name),
+                      FadeInUp(
+                          from: 30,
+                          child: AnimatedSize(
+                              duration: const Duration(milliseconds: 300),
+                              child: Obx(() {
+                                return getReactiveFormField(
+                                  node: signinController.vendorNameNode,
+                                  controller: signinController.vendorNameCtr,
+                                  hintLabel: 'Enter Name',
+                                  onChanged: (val) {
+                                    signinController.validateVendorname(val);
+                                    setState(() {});
+                                  },
+                                  errorText: signinController
+                                      .vendorNameModel.value.error,
+                                  inputType: TextInputType.text,
+                                );
+                              }))),
+                      getTitle(Strings.company_title),
+                      FadeInUp(
+                          from: 30,
+                          child: AnimatedSize(
+                              duration: const Duration(milliseconds: 300),
+                              child: Obx(() {
+                                return getReactiveFormField(
+                                  node: signinController.companyNameNode,
+                                  controller: signinController.companyNameCtr,
+                                  hintLabel: Strings.enter_company_name,
+                                  onChanged: (val) {
+                                    signinController.validateCompanyname(val);
+                                    setState(() {});
+                                  },
+                                  errorText: signinController
+                                      .companyNameModel.value.error,
+                                  inputType: TextInputType.text,
+                                );
+                              }))),
+                      getTitle(Strings.company_address),
+                      FadeInUp(
+                          from: 30,
+                          child: AnimatedSize(
+                              duration: const Duration(milliseconds: 300),
+                              child: Obx(() {
+                                return getReactiveFormField(
+                                  node: signinController.addressNode,
+                                  controller: signinController.addressCtr,
+                                  hintLabel: Strings.company_address_hint,
+                                  onChanged: (val) {
+                                    signinController.validateAddressname(val);
+                                    setState(() {});
+                                  },
+                                  errorText:
+                                      signinController.addressModel.value.error,
+                                  inputType: TextInputType.text,
+                                );
+                              }))),
+                      getTitle(Strings.emailId),
+                      FadeInUp(
+                          from: 30,
+                          child: AnimatedSize(
+                              duration: const Duration(milliseconds: 300),
+                              child: Obx(() {
+                                return getReactiveFormField(
+                                  node: signinController.emailNode,
+                                  controller: signinController.emailCtr,
+                                  hintLabel: Strings.emailId_hint,
+                                  onChanged: (val) {
+                                    signinController.validateEmail(val);
+                                    setState(() {});
+                                  },
+                                  errorText:
+                                      signinController.emailModel.value.error,
+                                  inputType: TextInputType.text,
+                                );
+                              }))),
+                      getTitle(Strings.contact_no),
+                      FadeInUp(
+                          from: 30,
+                          child: AnimatedSize(
+                              duration: const Duration(milliseconds: 300),
+                              child: Obx(() {
+                                return getReactiveFormField(
+                                  node: signinController.contactNode,
+                                  controller: signinController.contactCtr,
+                                  formType: FieldType.Mobile,
+                                  hintLabel: Strings.contact_no_hint,
+                                  onChanged: (val) {
+                                    signinController.validatePhone(val);
+                                    setState(() {});
+                                  },
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp("[0-9,+,' ']")),
+                                    // MaskedTextInputFormatter(
+                                    //   mask: 'xxxx xxxx xx',
+                                    //   separator: ' ',
+                                    // ),
+                                  ],
+                                  errorText: signinController
+                                      .mobileNoModel.value.error,
+                                  wantSuffix: true,
+                                  inputType: TextInputType.number,
+                                );
+                              }))),
                       Container(
-                        height: 5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter Name',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          controller: _vendorname,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 0.7.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Text(
-                            'Company Name',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12.sp),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter Company Name',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          controller: _companyname,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 0.7.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Company Address',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 8.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter Company Address',
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                          controller: _address,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 0.7.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Email Id',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter Email ID',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          controller: _email,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 0.7.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Password',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter Password',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          controller: _password,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 0.7.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Contact Person Name',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter Name',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          controller: _personname,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 0.7.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Contact No.1',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter Contact No.1',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          controller: _contact1,
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 0.7.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Contact No.2',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter Contact No.2',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          controller: _contact2,
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 0.7.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Whatsapp No',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.h,
-                        child: TextField(
-                          textAlign: TextAlign.start,
-                          decoration: InputDecoration(
-                            hintText: 'Enter Whatsapp No',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          controller: _whatsapp,
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 3.h,
-                      ),
-                      SizedBox(
-                          width: 150.h,
+                          margin: EdgeInsets.only(top: 5.h),
+                          width: double.infinity,
                           height: 6.h,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Signup2()));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50))),
-                              child: Text(
-                                'Next',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14.5.sp,
-                                    fontFamily: opensans_Bold,
-                                    fontWeight: FontWeight.w700),
-                              ))),
+                          child: getButton(() {
+                            if (signinController.isFormInvalidate.value) {
+                              Get.to(Signup2());
+                            }
+                          })),
                     ],
-                  ),
-                )),
-          ),
-        ]));
+                  )),
+            ),
+          ]),
+        ));
   }
 }

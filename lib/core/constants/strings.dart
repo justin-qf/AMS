@@ -1,7 +1,13 @@
 class Strings {
-
   //pref keys
   static const keyTheme = 'theme';
+
+  //themes
+  static const lightTheme = 'light';
+  static const darkTheme = 'dark';
+
+  static const lightThemeText = 'Theme (Light)';
+  static const darkThemeText = 'Theme (Dark)';
 
   static const noInternetConnection =
       "Internet connection is not active. Please enable it and try again";
@@ -12,9 +18,8 @@ class Strings {
   static const listEmpty = "List Is Empty";
   static const close = "OK";
   // App
-  static const appTitle = 'App Name';
+  static const title = 'AMS';
   static const searchHere = 'Search.......';
-  static const title = "IIMA Intranet";
   static const Preferences = "My Preferences";
   static const institute = "The Institute";
   static const programmes = "Programmes";
@@ -34,7 +39,7 @@ class Strings {
   static const no_first = "+919876546665";
   static const no_second = "+919876546665";
   static const email = "Email ID: ";
-  static const email_id = "adminXYZ@iima.ac.in";
+  static const email_id = "info@xyz.com";
   static const rights = "All Rights Reserved";
 
   //software
@@ -89,4 +94,117 @@ class Strings {
 
   //Remote Confige Service
   static const String main = 'show_main_data';
+
+  //Sign In
+  static const String signInAccount = 'Sign Into Your Account';
+  static const String emailId = 'Email Id';
+  static const String emailId_hint = 'Enter Email Id';
+  static const String password = 'Password';
+  static const String enter_password = 'Enter Password';
+  static const String password_hint = '********';
+  static const String forgot_pass = 'Forgot Password?';
+  static const String sing_in = 'Sign In';
+  static const String havnt_account = 'Don’t have an account? ';
+  static const String sing_up = 'Sign up';
+
+  //Change Password
+  static const String change_pass = 'Change Password';
+  static const String previous_pass = 'Previous Password';
+  static const String enter_previous_pass = 'Enter Previous Password';
+  static const String new_pass = 'Create New Password';
+  static const String enter_new_pass = 'Enter New Password';
+  static const String confirm_new_pass = 'Confirm New Password';
+  static const String submit = 'Submit';
+
+  //Welocme Back
+  static const String welcome_back = 'Welcome Back !';
+  static const String send_code = 'We’ll send You Verification Code';
+  static const String mobile_number = 'Mobile Number';
+  static const String hint_mobile_number = '+91 1234567890';
+  static const String get_otp = 'Get OTP';
+
+  //Profile
+  static const String profile = 'Profile';
+  static const String name = 'Yuvraj';
+  static const String vendor_type = 'Vendor Type :';
+  static const String abc = 'ABC';
+  static const String company_name = 'Company Name :';
+  static const String company_title = 'Company Name';
+  static const String company_name_hint = 'Sam san Tech';
+  static const String company_address = 'Company Address';
+  static const String company_address_hint = 'Enter Company Address';
+  static const String enter_company_name = 'Enter Company Name';
+  static const String address = 'Address :';
+  static const String address_hint = 'Seoul, Korea';
+  static const String contact_one = 'Contact No.1 :';
+  static const String contact_no_one = 'Contact No.1';
+  static const String enter_contact_one = 'Enter Contact No.1';
+  static const String contact_one_hint = '+91 1234567890';
+  static const String contact_two = 'Contact No.2 :';
+  static const String contact_no_two = 'Contact No.2';
+  static const String enter_contact_two = 'Enter Contact No.2';
+  static const String contact_two_hint = '+91 1234567890';
+
+  //referal
+  static const String invite_friends = 'Invite Friends';
+  static const String share_code =
+      'Please share the code before your friends to \n join the app.';
+  static const String refer_code = 'Refer Code';
+  static const String copy = 'Copy';
+  static const String social_media = 'Share Via Social Media';
+  static const String fb = 'Facebook';
+  static const String twitter = 'Twitter';
+  static const String instagram = 'Instagram';
+  static const String message = 'Message';
+
+  //Report Bug
+  static const String report_title = 'Report Bug';
+  static const String select_vendor = 'Select Vendors';
+  static const String upload_img = 'Upload Images';
+  static const String add_img = 'Add Image';
+  static const String upload_video = 'Upload Video';
+  static const String add_video = 'Add Video';
+  static const String note = 'Note';
+  static const String add_note = 'Add Notes';
+
+  //Services
+  static const String search = 'Search';
+
+  //Settings
+  static const String settings = 'Settings';
+  static const String profile_info = 'Profile Information';
+  static const String invite_frd = 'Invite Friends';
+  static const String change_theme = 'Change Theme';
+  static const String rate_us = 'Rate Us';
+  static const String share_us = 'Share Us';
+  static const String logout = 'Log Out';
+
+  //Sign Up
+  static const String add_vendor = 'Add Vendor';
+  static const String vendor_name = 'Vendor Name';
+  static const String enter_name = 'Enter Name';
+  static const String companyName = 'Enter Name';
+  static const String enter_companyName = 'Enter Name';
+  static const String company_add = 'Company Address';
+  static const String enter_company_add = 'Company Address';
+  static const String enter_email = 'Enter Email ID';
+  static const String contact_persone_name = 'Contact Person Name';
+  static const String whatsapp_no = 'Whatsapp No';
+  static const String enter_whatsapp_no = 'Enter Whatsapp No';
+  static const String next = 'Next';
+  static const String contact_no = 'Contact No';
+  static const String contact_no_hint= 'Enter Contact No';
+
+
+  //OTP Screen
+  static const String verification = 'Verification';
+  static const String otp_code = 'Enter your OTP Code here';
+  static const String not_receive_code = 'Didn’t you receive any code?';
+  static const String resend = 'RESEND';
+  static const String verify = 'Verify';
+
+  //Notifications
+  static const String upcoming_title = 'Upcoming';
+  static const String previous_title = 'Previous';
+
 }

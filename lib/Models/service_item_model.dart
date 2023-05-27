@@ -1,8 +1,5 @@
 import 'package:booking_app/Models/service_name.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../core/constants/assets.dart';
 
 List<Service_Item> ServicesItems = <Service_Item>[
   Service_Item(

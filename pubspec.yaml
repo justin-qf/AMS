@@ -36,7 +36,7 @@ dependencies:
   sizer: ^2.0.15
   flutter_svg: ^1.1.1+1
   bouncing_widget: ^2.0.0
-  shared_preferences: ^2.0.15
+  shared_preferences: ^2.1.1
   font_awesome_flutter: ^10.4.0
   google_nav_bar: ^5.0.6
   persistent_bottom_nav_bar: ^5.0.2
@@ -50,6 +50,11 @@ dependencies:
   onboarding_animation: ^0.0.3
   animate_do: ^3.0.2
   liquid_swipe: ^3.1.0
+  sms_autofill: ^2.3.0
+  telephony: ^0.2.0
+  connectivity_plus: ^4.0.1
+  animated_theme_switcher: ^2.0.8
+  encrypted_shared_preferences: ^3.0.1
   
   
   

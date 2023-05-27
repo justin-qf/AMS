@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
+import '../core/constants/strings.dart';
+
 class Phone extends StatefulWidget {
   const Phone({super.key});
 
@@ -39,7 +41,7 @@ class _PhoneState extends State<Phone> {
                 child: FadeInDown(
                   from: 50,
                   child: Text(
-                    'Welcome Back !',
+                    Strings.welcome_back,
                     style: TextStyle(
                         fontFamily: opensans_Bold,
                         fontSize: 32.sp,
@@ -56,7 +58,7 @@ class _PhoneState extends State<Phone> {
                   child: FadeInDown(
                     from: 50,
                     child: Text(
-                      'We’ll send You Verification Code',
+                      Strings.send_code,
                       style: TextStyle(
                           fontFamily: opensans_Bold,
                           fontSize: 15.sp,
@@ -81,7 +83,7 @@ class _PhoneState extends State<Phone> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Mobile Number',
+                                  Strings.mobile_number,
                                   style: TextStyle(
                                       fontFamily: opensans_Bold,
                                       fontSize: 17.5.sp,
@@ -96,7 +98,7 @@ class _PhoneState extends State<Phone> {
                               height: 5.5.h,
                               child: TextField(
                                 decoration: InputDecoration(
-                                  hintText: '+91 1234567890',
+                                  hintText: Strings.hint_mobile_number,
                                 ),
                                 controller: _phonenumber,
                                 keyboardType: TextInputType.number,
@@ -124,7 +126,7 @@ class _PhoneState extends State<Phone> {
                                               borderRadius:
                                                   BorderRadius.circular(50))),
                                       child: Text(
-                                        'Get OTP',
+                                        Strings.get_otp,
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 14.5.sp,

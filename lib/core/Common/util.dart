@@ -10,3 +10,14 @@ Widget getDivider() {
         borderRadius: BorderRadius.circular(20), color: Colors.black),
   );
 }
+
+void hideKeyboard(context) {
+  FocusScopeNode currentFocus = FocusScope.of(context);
+  if (!currentFocus.hasPrimaryFocus) {
+    currentFocus.unfocus();
+  }
+}
+
+void log(tag, data) {
+  print("$tag : ${data}");
+}

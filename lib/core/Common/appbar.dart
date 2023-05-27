@@ -1,8 +1,11 @@
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../constants/assets.dart';
+import '../themes/color_const.dart';
+import '../utils/helper.dart';
 
 // ignore: must_be_immutable
 class HomeAppBar extends StatelessWidget {
@@ -33,15 +36,25 @@ class HomeAppBar extends StatelessWidget {
               ? Container()
               : InkWell(
                   onTap: () {
-                    print("OPEN DRAWER");
-                    openDrawer?.currentState?.openDrawer();
+                    isBack == true
+                        ? Get.back()
+                        : openDrawer?.currentState?.openDrawer();
                   },
                   borderRadius: BorderRadius.all(Radius.circular(24)),
                   child: isBack != null
                       ? isBack == true
-                          ? SvgPicture.asset(Asset.backbutton)
-                          : SvgPicture.asset(Asset.menu)
-                      : SvgPicture.asset(Asset.cart)),
+                          ? SvgPicture.asset(
+                              Asset.backbutton,
+                              color: !isLightMode() ? white : black,
+                            )
+                          : SvgPicture.asset(
+                              Asset.menu,
+                              color: !isLightMode() ? white : black,
+                            )
+                      : SvgPicture.asset(
+                          Asset.cart,
+                          color: !isLightMode() ? white : black,
+                        )),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(top: 1, left: 9, right: 6),
@@ -56,7 +69,7 @@ class HomeAppBar extends StatelessWidget {
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       fontSize: 16.5.sp,
-                      color: Colors.black,
+                      color: !isLightMode() ? white : black,
                       fontFamily: opensans_Bold,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w800,

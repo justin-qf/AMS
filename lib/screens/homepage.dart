@@ -5,43 +5,30 @@ import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import '../Models/expert.dart';
-import '../Models/expert_model.dart';
-import '../Models/offers.dart';
-import '../Models/offers_model.dart';
-import '../Models/service_item_model.dart';
 import '../Models/service_name.dart';
+import '../controllers/home_screen_controller.dart';
 import '../core/Common/appbar.dart';
 import 'notification.dart';
 
 class home extends StatefulWidget {
-  home({super.key, this.openDrawer});
-  GlobalKey<ScaffoldState>? openDrawer;
+  home({
+    super.key,
+  });
 
   @override
   State<home> createState() => _homeState();
 }
 
 class _homeState extends State<home> {
-  var icon;
-  var leading;
-  var isfilter;
-  var title;
-  DatePickerController _controller = DatePickerController();
-  DateTime _selectedValue = DateTime.now();
-  List<Service_Item> staticData = ServicesItems;
-  List<ExpertItem> staticData1 = expertItems;
-  List<OfferItem> staticData2 = offersItems;
-  bool state = false;
+  var controller = Get.put(HomeScreenController());
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent));
     return Scaffold(
         floatingActionButton: Visibility(
           visible: false,
@@ -58,8 +45,7 @@ class _homeState extends State<home> {
                 size: 3.5.h,
                 color: Colors.white,
               ),
-              onPressed: () => widget.openDrawer!.currentState!
-                  .openDrawer(), // <-- Opens drawer
+              onPressed: () => controller.drawerAction, // <-- Opens drawer
             ),
           ),
         ),
@@ -74,26 +60,27 @@ class _homeState extends State<home> {
           ),
           Container(
             margin: EdgeInsets.only(top: 5.h),
-            // padding: EdgeInsets.only(left: 1.h, right: 1.h),
             child: Column(
               children: [
                 FadeInDown(
                   from: 50,
                   child: Container(
                     child: HomeAppBar(
-                      openDrawer: widget.openDrawer,
+                      openDrawer: controller.drawer_key,
                       title: 'Book My Appointment',
                       leading: Asset.backbutton,
                       isfilter: true,
                       isBack: false,
                       onClick: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (
-                              context,
-                            ) =>
-                                    notification(this.icon, this.leading)));
+                        Get.to(
+                            notification(controller.icon, controller.leading));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (
+                        //       context,
+                        //     ) =>
+                        //             notification(this.icon, this.leading)));
                       },
                       icon: Asset.filter,
                     ),
@@ -107,16 +94,21 @@ class _homeState extends State<home> {
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          FadeInDown(
-                            from: 70,
-                            child: Text(
-                              'March 22, 2023',
-                              style: TextStyle(
-                                  fontSize: 16.5.sp,
-                                  fontFamily: opensansMedium,
-                                  fontWeight: FontWeight.w700),
-                            ),
+                          Obx(
+                            () {
+                              return FadeInDown(
+                                from: 70,
+                                child: Text(
+                                  (controller.picDate.value.toString()),
+                                  style: TextStyle(
+                                      fontSize: 16.5.sp,
+                                      fontFamily: opensansMedium,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              );
+                            },
                           ),
                           Container(
                             margin: EdgeInsets.only(right: 9.h),
@@ -133,6 +125,18 @@ class _homeState extends State<home> {
                         ],
                       ),
                       InkWell(
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1950),
+                              lastDate: DateTime(2100));
+                          if (pickedDate != null) {
+                            String formattedDate =
+                                DateFormat.yMMMMd().format(pickedDate);
+                            controller.updateDate(formattedDate);
+                          }
+                        },
                         focusColor: Colors.amber,
                         child: Container(
                           margin: EdgeInsets.only(
@@ -164,7 +168,7 @@ class _homeState extends State<home> {
                     DateTime.now(),
                     width: 7.h,
                     height: 10.h,
-                    controller: _controller,
+                    controller: controller.datePickerController,
                     initialSelectedDate: DateTime.now(),
                     selectionColor: Colors.black,
                     selectedTextColor: Colors.white,
@@ -173,7 +177,7 @@ class _homeState extends State<home> {
                     ],
                     onDateChange: (date) {
                       setState(() {
-                        _selectedValue = date;
+                        controller.selectedValue = date;
                       });
                     },
                   ),
@@ -205,7 +209,7 @@ class _homeState extends State<home> {
                       scrollDirection: Axis.horizontal,
                       clipBehavior: Clip.antiAlias,
                       itemBuilder: (context, index) {
-                        Service_Item data = staticData[index];
+                        Service_Item data = controller.staticData[index];
                         return Container(
                           width: 37.w,
                           margin: EdgeInsets.only(left: 3.h),
@@ -246,7 +250,7 @@ class _homeState extends State<home> {
                           ),
                         );
                       },
-                      itemCount: staticData.length),
+                      itemCount: controller.staticData.length),
                 ),
                 SizedBox(
                   height: 1.5.h,
@@ -271,7 +275,7 @@ class _homeState extends State<home> {
                       scrollDirection: Axis.horizontal,
                       clipBehavior: Clip.antiAlias,
                       itemBuilder: (context, index) {
-                        ExpertItem data = staticData1[index];
+                        ExpertItem data = controller.staticData1[index];
                         return Container(
                           width: 37.w,
                           margin: EdgeInsets.only(left: 3.h),
@@ -312,7 +316,7 @@ class _homeState extends State<home> {
                           ),
                         );
                       },
-                      itemCount: staticData1.length),
+                      itemCount: controller.staticData1.length),
                 ),
                 SizedBox(
                   height: 1.5.h,
@@ -425,9 +429,9 @@ class _homeState extends State<home> {
                               ),
                               Container(
                                 child: CupertinoSwitch(
-                                  value: state,
+                                  value: controller.switch_state,
                                   onChanged: (value) {
-                                    state = value;
+                                    controller.switch_state = value;
                                     setState(
                                       () {},
                                     );

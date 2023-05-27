@@ -1,17 +1,26 @@
+import 'package:booking_app/core/themes/color_const.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:booking_app/screens/homepage.dart';
 import 'package:booking_app/screens/signup.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Models/Staff_model.dart';
 import '../Models/service.dart';
 import '../Models/service_model.dart';
 import '../Models/staff.dart';
+import '../controllers/theme_controller.dart';
+import '../core/Common/Common.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
+import '../core/constants/get_storage_key.dart';
+import '../core/constants/strings.dart';
+import '../core/utils/helper.dart';
 
 class profile extends StatefulWidget {
   const profile({super.key});
@@ -25,103 +34,135 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
   List<ServiceItem> staticData = SettingsItems;
   List<StaffItem> staticData1 = StaffItems;
   var currentPage = 0;
+  bool state = false;
+  int isDarkMode = 0;
+  final getStorage = GetStorage();
 
   @override
   void initState() {
     tabController = TabController(vsync: this, length: 3, initialIndex: 0);
+    isDarkMode = getStorage.read(GetStorageKey.IS_DARK_MODE) ?? 1;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Common().trasparent_statusbar();
     return Scaffold(
         resizeToAvoidBottomInset: false,
         extendBody: true,
-        backgroundColor: Colors.white,
-        body: Stack(children: [
-          SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: SvgPicture.asset(
-              Asset.bg,
-              fit: BoxFit.cover,
-            ),
-          ),
-          SafeArea(
-              minimum: EdgeInsets.only(top: 1.h),
-              child: Container(
-                  margin: EdgeInsets.only(top: 0.5.h, right: 3.5.h),
-                  child: Center(
-                      child: Column(
-                    children: [
-                      HomeAppBar(
-                        title: 'Profile',
-                        leading: Asset.backbutton,
-                        isfilter: false,
-                        icon: Asset.filter,
-                        isBack: true,
-                        onClick: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => home(),
-                              ));
-                        },
-                      ),
-                    ],
-                  )))),
-          Column(
-            children: [
-              Center(
-                child: Container(
-                  margin: EdgeInsets.only(top: 13.h),
-                  child: SvgPicture.asset(Asset.profileimg, height: 10.h),
-                ),
+        backgroundColor: !isLightMode() ? black : white,
+        body: SafeArea(
+          minimum: EdgeInsets.only(top: 1.h),
+          child: Stack(children: [
+            SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: SvgPicture.asset(
+                Asset.bg,
+                fit: BoxFit.cover,
               ),
-              SizedBox(height: 1.h),
-              Text(
-                'Kim Se-jeong',
-                style: TextStyle(
-                    fontFamily: opensansMedium,
-                    fontSize: 16.5.sp,
-                    fontWeight: FontWeight.w700),
-              )
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 25.h),
-            child: SafeArea(
-              child: getListViewItem(),
             ),
-          ),
-        ]));
+            Container(
+              color: !isLightMode() ? black : white,
+              child: Column(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(top: 0.5.h, right: 3.5.h),
+                      child: Center(
+                          child: Column(
+                        children: [
+                          HomeAppBar(
+                            title: Strings.profile,
+                            leading: Asset.backbutton,
+                            isfilter: false,
+                            icon: Asset.filter,
+                            isBack: true,
+                            onClick: () {
+                              Get.put(home());
+                            },
+                          ),
+                        ],
+                      ))),
+                  Container(
+                    child: CupertinoSwitch(
+                      value: state,
+                      onChanged: (value) async {
+                        state = value;
+                        setState(() {
+                          isDarkMode = isDarkMode == 0 ? 1 : 0;
+                        });
+                        var switchOn;
+                        if (value == true) {
+                          switchOn = 1;
+                        } else {
+                          switchOn = 0;
+                        }
+                        await getStorage.write(
+                            GetStorageKey.IS_DARK_MODE, isDarkMode);
+                        //setState(() {});
+                        Get.find<ThemeController>().updateState(isDarkMode);
+                        Get.find<ThemeController>().update();
+                        setState(
+                          () {},
+                        );
+                      },
+                      thumbColor: CupertinoColors.white,
+                      activeColor: CupertinoColors.black,
+                      trackColor: Colors.grey,
+                    ),
+                  ),
+                  Center(
+                    child: SvgPicture.asset(
+                      Asset.profileimg,
+                      height: 10.h,
+                      color: !isLightMode() ? white : black,
+                    ),
+                  ),
+                  SizedBox(height: 1.h),
+                  Text(
+                    Strings.name,
+                    style: TextStyle(
+                        color: !isLightMode() ? white : black,
+                        fontFamily: opensansMedium,
+                        fontSize: 16.5.sp,
+                        fontWeight: FontWeight.w700),
+                  )
+                ],
+              ),
+            ),
+            getListViewItem()
+          ]),
+        ));
   }
 
   getListViewItem() {
-    return DefaultTabController(
-        length: 3,
-        child: Column(children: [
-          SizedBox(
-            height: 1.5.h,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              getTab("Basic", 30, 0),
-              getTab("Staff", 30, 1),
-              getTab("Service", 30, 2),
-            ],
-          ),
-          Expanded(
-            child: TabBarView(
-              physics: NeverScrollableScrollPhysics(),
-              controller: tabController,
+    return Container(
+      color: !isLightMode() ? black : white,
+      margin: EdgeInsets.only(top: 26.h),
+      child: DefaultTabController(
+          length: 3,
+          child: Column(children: [
+            SizedBox(
+              height: 1.5.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                    child: Container(
-                  margin: EdgeInsets.only(
-                      top: 5.h, left: 8.w, right: 8.w, bottom: 1.h),
-                  child: Expanded(
+                getTab("Basic", 30, 0),
+                getTab("Staff", 30, 1),
+                getTab("Service", 30, 2),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                controller: tabController,
+                children: [
+                  Container(
+                      child: Container(
+                    margin: EdgeInsets.only(
+                        top: 5.h, left: 8.w, right: 8.w, bottom: 1.h),
                     child: Container(
                       padding: EdgeInsets.only(
                           top: 1.5.h, left: 6.w, right: 4.w, bottom: 1.5.h),
@@ -134,7 +175,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                'Vendor Type :',
+                                Strings.vendor_type,
                                 style: TextStyle(
                                     fontFamily: opensansMedium,
                                     fontWeight: FontWeight.w400,
@@ -155,7 +196,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                           ),
                           SizedBox(height: 0.5.h),
                           Text(
-                            'ABC',
+                            Strings.abc,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
@@ -165,7 +206,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                             height: 2.h,
                           ),
                           Text(
-                            'Company Name :',
+                            Strings.company_name,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
@@ -176,7 +217,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                             height: 0.5.h,
                           ),
                           Text(
-                            'Sam san Tech',
+                            Strings.company_name_hint,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
@@ -186,7 +227,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                             height: 2.h,
                           ),
                           Text(
-                            'Address :',
+                            Strings.address,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
@@ -197,7 +238,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                             height: 0.5.h,
                           ),
                           Text(
-                            'Seoul, Korea',
+                            Strings.address_hint,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
@@ -207,7 +248,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                             height: 2.h,
                           ),
                           Text(
-                            'Contact No.1 :',
+                            Strings.contact_one,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
@@ -218,7 +259,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                             height: 0.5.h,
                           ),
                           Text(
-                            '+91 1234567890',
+                            Strings.contact_one_hint,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
@@ -228,7 +269,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                             height: 2.h,
                           ),
                           Text(
-                            'Contact No.2 :',
+                            Strings.contact_two,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
@@ -239,7 +280,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                             height: 0.5.h,
                           ),
                           Text(
-                            '+91 1234567890',
+                            Strings.contact_two_hint,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
@@ -259,20 +300,20 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
-                  ),
-                )),
-                Container(
-                  margin: EdgeInsets.only(top: 3.h),
-                  child: ListView.builder(
-                      shrinkWrap: false,
-                      clipBehavior: Clip.antiAlias,
-                      itemBuilder: (context, index) {
-                        StaffItem data = staticData1[index];
-
-                        return Container(
-                          margin: EdgeInsets.only(
-                              top: 1.5.h, left: 8.w, right: 8.w, bottom: 1.5.h),
-                          child: Expanded(
+                  )),
+                  Container(
+                    margin: EdgeInsets.only(top: 3.h),
+                    child: ListView.builder(
+                        shrinkWrap: false,
+                        clipBehavior: Clip.antiAlias,
+                        itemBuilder: (context, index) {
+                          StaffItem data = staticData1[index];
+                          return Container(
+                            margin: EdgeInsets.only(
+                                top: 1.5.h,
+                                left: 8.w,
+                                right: 8.w,
+                                bottom: 1.5.h),
                             child: Container(
                               padding: EdgeInsets.only(
                                   top: 1.5.h,
@@ -344,23 +385,20 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                                 ],
                               ),
                             ),
-                          ),
-                        );
-                      },
-                      itemCount: staticData1.length),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 3.h),
-                  child: ListView.builder(
-                      shrinkWrap: false,
-                      clipBehavior: Clip.antiAlias,
-                      itemBuilder: (context, index) {
-                        ServiceItem data = staticData[index];
-
-                        return Container(
-                          margin: EdgeInsets.only(
-                              top: 1.5.h, left: 8.w, right: 8.w, bottom: 1.h),
-                          child: Expanded(
+                          );
+                        },
+                        itemCount: staticData1.length),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 3.h),
+                    child: ListView.builder(
+                        shrinkWrap: false,
+                        clipBehavior: Clip.antiAlias,
+                        itemBuilder: (context, index) {
+                          ServiceItem data = staticData[index];
+                          return Container(
+                            margin: EdgeInsets.only(
+                                top: 1.5.h, left: 8.w, right: 8.w, bottom: 1.h),
                             child: Container(
                               padding: EdgeInsets.only(
                                   top: 1.5.h,
@@ -408,15 +446,15 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                                 ],
                               ),
                             ),
-                          ),
-                        );
-                      },
-                      itemCount: staticData.length),
-                ),
-              ],
+                          );
+                        },
+                        itemCount: staticData.length),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ]));
+          ])),
+    );
   }
 
   getTab(str, pad, index) {
@@ -430,14 +468,12 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
         setState(() {});
       }),
       child: AnimatedContainer(
-        width: 90,
-
-        //width: 50.w,
+        width: 25.w,
         duration: const Duration(milliseconds: 300),
         margin: EdgeInsets.symmetric(
           horizontal: 8,
         ),
-        padding: EdgeInsets.only(left: 15, right: 15, top: 11, bottom: 11),
+        padding: EdgeInsets.only(top: 11, bottom: 11),
         alignment: Alignment.center,
         decoration: BoxDecoration(
             color: currentPage == index ? Colors.black : Colors.white,
@@ -456,14 +492,11 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
             Text(
               str,
               style: TextStyle(
-                  fontSize: 12.5.sp,
+                  fontSize: 12.2.sp,
                   fontFamily: opensans_Bold,
                   fontWeight: FontWeight.w700,
                   color:
                       currentPage == index ? Colors.white : Colors.grey[850]),
-            ),
-            SizedBox(
-              width: currentPage == index ? 8 : 0,
             ),
           ],
         ),

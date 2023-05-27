@@ -15,72 +15,61 @@ class Navdrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Container(
-            height: double.infinity,
-            width: MediaQuery.of(context).size.width * 0.8,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(23),
-                  bottomRight: Radius.circular(23)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  spreadRadius: 1,
-                  blurRadius: 10,
-                ),
-              ],
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(23), bottomRight: Radius.circular(23)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            spreadRadius: 1,
+            blurRadius: 10,
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(23),
+          bottomRight: Radius.circular(23),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              end: Alignment.bottomCenter,
+              begin: Alignment.topCenter,
+              colors: [Theme.of(context).primaryColor, Color(0xff995DFF)],
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(23),
-                bottomRight: Radius.circular(23),
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    end: Alignment.bottomCenter,
-                    begin: Alignment.topCenter,
-                    colors: [Theme.of(context).primaryColor, Color(0xff995DFF)],
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(40),
+              bottomRight: Radius.circular(40),
+            ),
+          ),
+          child: Drawer(
+            width: MediaQuery.of(context).size.width * 0.8,
+            shadowColor: Colors.white,
+            elevation: 0,
+            backgroundColor: Colors.grey[900],
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  buildHeader(context),
+                  SizedBox(
+                    height: 1.h,
                   ),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(40),
-                    bottomRight: Radius.circular(40),
+                  Divider(
+                    color: Colors.grey,
+                    height: 2.h,
+                    thickness: 1,
                   ),
-                ),
-                child: Drawer(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  shadowColor: Colors.white,
-                  elevation: 0,
-                  backgroundColor: Colors.grey[900],
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        buildHeader(context),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        Divider(
-                          color: Colors.grey,
-                          height: 2.h,
-                          thickness: 1,
-                        ),
-                        buildMenuItems(context),
-                      ],
-                    ),
-                  ),
-                ),
+                  buildMenuItems(context),
+                ],
               ),
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 

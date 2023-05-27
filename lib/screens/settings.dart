@@ -10,6 +10,7 @@ import '../Models/setting.dart';
 import '../Models/settings_model.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
+import '../core/constants/strings.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -45,7 +46,7 @@ class _SettingsState extends State<Settings> {
               child: Center(
                   child: Column(children: [
                 HomeAppBar(
-                  title: 'Settings',
+                  title: Strings.settings,
                   leading: Asset.backbutton,
                   isfilter: false,
                   icon: Asset.filter,
@@ -89,7 +90,7 @@ class _SettingsState extends State<Settings> {
                                     builder: (context) => profile()));
                           },
                           child: Text(
-                            'Profile Information',
+                            Strings.profile_info,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontSize: 14.sp,
@@ -127,7 +128,7 @@ class _SettingsState extends State<Settings> {
                                     builder: (context) => referal()));
                           },
                           child: Text(
-                            'Invite Friends',
+                            Strings.invite_frd,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontSize: 14.sp,
@@ -163,7 +164,7 @@ class _SettingsState extends State<Settings> {
                           visualDensity:
                               VisualDensity(horizontal: 0, vertical: -1),
                           title: Text(
-                            'Change Theme',
+                            Strings.change_theme,
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontSize: 14.sp,
@@ -199,7 +200,7 @@ class _SettingsState extends State<Settings> {
                         visualDensity:
                             VisualDensity(horizontal: 0, vertical: -1),
                         title: Text(
-                          'Rate Us',
+                          Strings.rate_us,
                           style: TextStyle(
                               fontFamily: opensansMedium,
                               fontSize: 14.sp,
@@ -221,7 +222,7 @@ class _SettingsState extends State<Settings> {
                         visualDensity:
                             VisualDensity(horizontal: 0, vertical: -1),
                         title: Text(
-                          'Share Us',
+                          Strings.share_us,
                           style: TextStyle(
                               fontFamily: opensansMedium,
                               fontSize: 14.sp,
@@ -243,7 +244,7 @@ class _SettingsState extends State<Settings> {
                         visualDensity:
                             VisualDensity(horizontal: 0, vertical: -1),
                         title: Text(
-                          'Log Out',
+                          Strings.logout,
                           style: TextStyle(
                               fontFamily: opensansMedium,
                               fontSize: 14.sp,

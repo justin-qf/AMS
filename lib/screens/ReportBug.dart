@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
+import '../core/constants/strings.dart';
 import '../core/themes/font_constant.dart';
 
 class ReportBug extends StatefulWidget {
@@ -41,7 +42,7 @@ class _ReportBugState extends State<ReportBug> {
               child: Center(
                   child: Column(children: [
                 HomeAppBar(
-                  title: 'Report Bug',
+                  title: Strings.report_title,
                   leading: Asset.backbutton,
                   isfilter: false,
                   icon: Asset.filter,
@@ -64,7 +65,7 @@ class _ReportBugState extends State<ReportBug> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Select Vendors',
+                        Strings.select_vendor,
                         style: TextStyle(
                             fontFamily: opensans_Bold,
                             fontSize: 12.sp,
@@ -79,7 +80,7 @@ class _ReportBugState extends State<ReportBug> {
                     height: 5.5.h,
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Select Vendor',
+                        hintText: Strings.select_vendor,
                         contentPadding:
                             EdgeInsets.only(top: 1.h, left: 2.h, bottom: 1.h),
                         focusedBorder: OutlineInputBorder(
@@ -100,7 +101,7 @@ class _ReportBugState extends State<ReportBug> {
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       Text(
-                        'Upload Images',
+                        Strings.upload_img,
                         style: TextStyle(
                             fontFamily: opensans_Bold,
                             fontWeight: FontWeight.w700,
@@ -115,7 +116,7 @@ class _ReportBugState extends State<ReportBug> {
                     height: 5.5.h,
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: 'Add Image',
+                          hintText: Strings.add_img,
                           contentPadding:
                               EdgeInsets.only(top: 1.h, left: 2.h, bottom: 1.h),
                           focusedBorder: OutlineInputBorder(
@@ -135,7 +136,7 @@ class _ReportBugState extends State<ReportBug> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Upload Video',
+                        Strings.upload_video,
                         style: TextStyle(
                             fontFamily: opensans_Bold,
                             fontSize: 12.sp,
@@ -150,7 +151,7 @@ class _ReportBugState extends State<ReportBug> {
                     height: 5.5.h,
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: 'Add Video',
+                          hintText: Strings.add_video,
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -170,7 +171,7 @@ class _ReportBugState extends State<ReportBug> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Note',
+                        Strings.note,
                         style: TextStyle(
                             fontFamily: opensans_Bold,
                             fontSize: 12.sp,
@@ -185,7 +186,7 @@ class _ReportBugState extends State<ReportBug> {
                     height: 5.5.h,
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: 'Add Notes',
+                          hintText: Strings.add_note,
                           // contentPadding:
                           //     EdgeInsets.only(top: 1.h, left: 2.h, bottom: 1.h),
                           focusedBorder: OutlineInputBorder(
@@ -216,7 +217,7 @@ class _ReportBugState extends State<ReportBug> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50))),
                           child: Text(
-                            'Submit',
+                            Strings.submit,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14.5.sp,

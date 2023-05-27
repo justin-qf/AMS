@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/constants/assets.dart';
+import '../core/constants/strings.dart';
 import '../core/themes/font_constant.dart';
 import 'login.dart';
 
@@ -43,7 +44,7 @@ class _ChangepasswordState extends State<Changepassword> {
                     top: 8.h,
                   ),
                   child: Text(
-                    'Change Password',
+                    Strings.change_pass,
                     style: TextStyle(
                         fontFamily: opensans_Bold,
                         fontSize: 25.sp,
@@ -91,7 +92,7 @@ class _ChangepasswordState extends State<Changepassword> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Previous Password',
+                                        Strings.previous_pass,
                                         style: TextStyle(
                                             fontFamily: opensans_Bold,
                                             fontSize: 14.sp,
@@ -109,7 +110,7 @@ class _ChangepasswordState extends State<Changepassword> {
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.only(
                                             top: 1.h, left: 3.h, bottom: 1.h),
-                                        hintText: 'Enter Previous Password',
+                                        hintText: Strings.enter_previous_pass,
                                         hintStyle: TextStyle(fontSize: 12.sp),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius:
@@ -132,7 +133,7 @@ class _ChangepasswordState extends State<Changepassword> {
                                     // ignore: prefer_const_literals_to_create_immutables
                                     children: [
                                       Text(
-                                        'Create New Password',
+                                        Strings.new_pass,
                                         style: TextStyle(
                                             fontFamily: opensans_Bold,
                                             fontWeight: FontWeight.w700,
@@ -147,7 +148,7 @@ class _ChangepasswordState extends State<Changepassword> {
                                       obscureText: _isHidden,
                                       obscuringCharacter: '*',
                                       decoration: InputDecoration(
-                                          hintText: 'Enter New Password',
+                                          hintText: Strings.enter_new_pass,
                                           hintStyle: TextStyle(fontSize: 12.sp),
                                           contentPadding: EdgeInsets.only(
                                               top: 1.h, left: 3.h, bottom: 1.h),
@@ -181,7 +182,7 @@ class _ChangepasswordState extends State<Changepassword> {
                                     // ignore: prefer_const_literals_to_create_immutables
                                     children: [
                                       Text(
-                                        'Confirm New Password',
+                                        Strings.confirm_new_pass,
                                         style: TextStyle(
                                             fontFamily: opensans_Bold,
                                             fontWeight: FontWeight.w700,
@@ -196,7 +197,7 @@ class _ChangepasswordState extends State<Changepassword> {
                                       obscureText: _isHidden1,
                                       obscuringCharacter: '*',
                                       decoration: InputDecoration(
-                                          hintText: 'Confirm New Password',
+                                          hintText: Strings.confirm_new_pass,
                                           contentPadding: EdgeInsets.only(
                                               top: 1.h, left: 3.h, bottom: 1.h),
                                           hintStyle: TextStyle(fontSize: 12.sp),
@@ -242,7 +243,7 @@ class _ChangepasswordState extends State<Changepassword> {
                                                       BorderRadius.circular(
                                                           50))),
                                           child: Text(
-                                            'Submit',
+                                            Strings.submit,
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14.5.sp,

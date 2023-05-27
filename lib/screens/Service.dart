@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import '../Models/hairservice_model.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
+import '../core/constants/strings.dart';
 import '../core/themes/font_constant.dart';
 
 class Servicepage extends StatefulWidget {
@@ -38,7 +39,7 @@ class _ServicepageState extends State<Servicepage> {
                   child: Center(
                       child: Column(children: [
                     HomeAppBar(
-                      title: 'Services',
+                      title: Strings.services,
                       leading: Asset.backbutton,
                       isfilter: false,
                       icon: Asset.filter,
@@ -56,7 +57,7 @@ class _ServicepageState extends State<Servicepage> {
                 decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.only(top: 1.h, left: 2.h, bottom: 1.h),
-                    hintText: 'Search',
+                    hintText: Strings.search,
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),

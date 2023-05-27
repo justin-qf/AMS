@@ -17,19 +17,36 @@ class OtpInput extends StatefulWidget {
 
 class _OtpInputState extends State<OtpInput> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     widget.node.addListener(() {
-      setState(() {});
       setState(() {});
     });
     widget.controller.addListener(() {
       setState(() {});
     });
 
+    // setState(() {
+    //   widget.node.addListener(() {
+    //     if (widget.node.hasFocus) {
+    //       if (widget.controller.text.isEmpty) {
+    //         FocusScope.of(context).requestFocus(widget.node);
+    //       }
+    //     }
+    //   });
+    // });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       height: SizerUtil.deviceType == DeviceType.mobile ? 15.w : 10.w,
       width: SizerUtil.deviceType == DeviceType.mobile ? 15.w : 10.w,
       child: TextFormField(
+        onTap: () {
+          print("ID DONE");
+        },
+        focusNode: widget.node,
         cursorColor: Colors.black,
         controller: widget.controller,
         autofocus: widget.autoFocus,
@@ -40,6 +57,7 @@ class _OtpInputState extends State<OtpInput> {
         keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
         onChanged: (value) {
+          print("ONCHANGE");
           if (value.trim().length == 1) {
             setState(() {});
             FocusScope.of(context).nextFocus();

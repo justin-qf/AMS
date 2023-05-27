@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
+import '../core/Common/Common.dart';
 import '../core/Common/OTP_Textfield.dart';
+import '../core/constants/strings.dart';
 import '../core/themes/font_constant.dart';
 
 class Otp extends StatefulWidget {
@@ -21,7 +23,6 @@ class _OtpState extends State<Otp> {
   late TextEditingController otp2 = TextEditingController();
   late TextEditingController otp3 = TextEditingController();
   late TextEditingController otp4 = TextEditingController();
-  FocusNode focusNode = FocusNode();
   FocusNode node1 = FocusNode();
   FocusNode node2 = FocusNode();
   FocusNode node3 = FocusNode();
@@ -30,6 +31,16 @@ class _OtpState extends State<Otp> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    node1.dispose();
+    node2.dispose();
+    node3.dispose();
+    node4.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,7 +67,7 @@ class _OtpState extends State<Otp> {
                       top: 8.h,
                     ),
                     child: Text(
-                      'Verification',
+                      Strings.verification,
                       style: TextStyle(
                           fontFamily: opensans_Bold,
                           fontSize: 30.sp,
@@ -96,7 +107,7 @@ class _OtpState extends State<Otp> {
                         children: [
                           Container(
                             child: Text(
-                              'Enter your OTP Code here',
+                              Strings.otp_code,
                               style: TextStyle(
                                   fontSize: 14.sp,
                                   fontFamily: opensansMedium,
@@ -113,7 +124,7 @@ class _OtpState extends State<Otp> {
                         children: [
                           OtpInput(
                             otp1,
-                            true,
+                            false,
                             node1,
                           ),
                           SizedBox(width: 4.5.w),
@@ -127,46 +138,40 @@ class _OtpState extends State<Otp> {
                       SizedBox(
                         height: 3.0.h,
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            child: Text(
-                              'Didn’t you receive any code?',
-                              style: TextStyle(
-                                  fontSize: 13.5.sp,
-                                  fontFamily: opensansMedium,
-                                  fontWeight: FontWeight.w700),
-                            ),
+                      FadeInUp(
+                        from: 50,
+                        child: Container(
+                          child: Text(
+                            Strings.not_receive_code,
+                            style: TextStyle(
+                                fontSize: 13.5.sp,
+                                fontFamily: opensansMedium,
+                                fontWeight: FontWeight.w700),
                           ),
-                        ],
+                        ),
                       ),
                       SizedBox(
                         height: 1.5.h,
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              print('Click');
-                            },
-                            child: Container(
-                              child: Text(
-                                'RESEND',
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: Colors.black,
-                                    decorationThickness: 1.5,
-                                    fontSize: 15.sp,
-                                    fontFamily: opensans_Bold,
-                                    fontWeight: FontWeight.w700),
-                              ),
+                      FadeInUp(
+                        from: 50,
+                        child: InkWell(
+                          onTap: () {
+                            Common.PopupDialog(context);
+                          },
+                          child: Container(
+                            child: Text(
+                              Strings.resend,
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Colors.black,
+                                  decorationThickness: 1.5,
+                                  fontSize: 15.sp,
+                                  fontFamily: opensans_Bold,
+                                  fontWeight: FontWeight.w700),
                             ),
                           ),
-                        ],
+                        ),
                       ),
                       SizedBox(
                         height: 5.h,
@@ -189,7 +194,7 @@ class _OtpState extends State<Otp> {
                                         borderRadius:
                                             BorderRadius.circular(50))),
                                 child: Text(
-                                  'Verify',
+                                  Strings.verify,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.5.sp,

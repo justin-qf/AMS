@@ -6,6 +6,7 @@ import 'package:sizer/sizer.dart';
 
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
+import '../core/constants/strings.dart';
 
 class referal extends StatefulWidget {
   const referal({super.key});
@@ -40,7 +41,7 @@ class _referalState extends State<referal> {
                       child: Column(
                     children: [
                       HomeAppBar(
-                        title: 'Invite Friends',
+                        title: Strings.invite_friends,
                         leading: Asset.backbutton,
                         isfilter: false,
                         icon: Asset.filter,
@@ -69,7 +70,7 @@ class _referalState extends State<referal> {
                     height: 1.5.h,
                   ),
                   Text(
-                    'Please share the code before your friends to \n join the app.',
+                    Strings.share_code,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontFamily: opensansMedium,
@@ -91,7 +92,7 @@ class _referalState extends State<referal> {
                               Row(
                                 children: [
                                   Text(
-                                    'Refer Code',
+                                    Strings.refer_code,
                                     style: TextStyle(
                                         fontFamily: opensans_Bold,
                                         fontSize: 16.sp,
@@ -135,7 +136,7 @@ class _referalState extends State<referal> {
                                               borderRadius:
                                                   BorderRadius.circular(12))),
                                       child: Text(
-                                        'Copy',
+                                        Strings.copy,
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 15.sp,
@@ -148,7 +149,7 @@ class _referalState extends State<referal> {
                             height: 4.h,
                           ),
                           Text(
-                            'Share Via Social Media',
+                            Strings.social_media,
                             style: TextStyle(
                                 fontFamily: opensans_Bold,
                                 fontSize: 16.sp,
@@ -159,9 +160,7 @@ class _referalState extends State<referal> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               InkWell(
-                                onTap: () {
-                                  print('Click');
-                                },
+                                onTap: () {},
                                 child: Container(
                                   height: 5.h,
                                   width: 35.w,
@@ -186,7 +185,7 @@ class _referalState extends State<referal> {
                                       SizedBox(width: 2.w),
                                       Container(
                                         child: Text(
-                                          'Facebook',
+                                          Strings.fb,
                                           style: TextStyle(
                                             fontFamily: opensansMedium,
                                           ),
@@ -219,7 +218,7 @@ class _referalState extends State<referal> {
                                     ),
                                     SizedBox(width: 1.w),
                                     Container(
-                                      child: Text('Twitter',
+                                      child: Text(Strings.twitter,
                                           style: TextStyle(
                                               fontFamily: opensansMedium)),
                                     ),
@@ -231,33 +230,6 @@ class _referalState extends State<referal> {
                           SizedBox(
                             height: 2.h,
                           ),
-                          // Container(
-                          //   height: 5.h,
-                          //   width: 35.w,
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.white,
-                          //     borderRadius:
-                          //         BorderRadius.all(Radius.circular(10)),
-                          //     boxShadow: [
-                          //       BoxShadow(
-                          //           color: Colors.black.withOpacity(0.2),
-                          //           spreadRadius: 0.1,
-                          //           blurRadius: 10,
-                          //           offset: Offset(0.5, 0.5)),
-                          //     ],
-                          //   ),
-                          //   child: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.center,
-                          //     children: [
-                          //       Container(
-                          //         child: SvgPicture.asset(Asset.facebook),
-                          //       ),
-                          //       SizedBox(width: 1.w),
-                          //       Container(
-                          //         child: Text('Facebook'),
-                          //       ),
-                          //     ],
-                          //   ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -284,7 +256,7 @@ class _referalState extends State<referal> {
                                     ),
                                     SizedBox(width: 2.w),
                                     Container(
-                                      child: Text('Instagram',
+                                      child: Text(Strings.instagram,
                                           style: TextStyle(
                                               fontFamily: opensansMedium)),
                                     )
@@ -314,7 +286,7 @@ class _referalState extends State<referal> {
                                     ),
                                     SizedBox(width: 1.w),
                                     Container(
-                                      child: Text('Message',
+                                      child: Text(Strings.message,
                                           style: TextStyle(
                                               fontFamily: opensansMedium)),
                                     ),

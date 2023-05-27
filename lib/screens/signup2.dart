@@ -1,5 +1,4 @@
 import 'package:booking_app/screens/login.dart';
-import 'package:booking_app/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
