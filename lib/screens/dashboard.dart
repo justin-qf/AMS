@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../controllers/home_screen_controller.dart';
-import '../core/utils/helper.dart';
 import 'Appointment.dart';
 import 'navdrawer.dart';
 
@@ -17,9 +16,6 @@ class dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: const MyHomePage(),
     );
   }
@@ -34,9 +30,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var controller = Get.put(HomeScreenController());
+
   @override
   void initState() {
-    setState(() {});
     super.initState();
   }
 
@@ -51,62 +47,60 @@ class _MyHomePageState extends State<MyHomePage> {
       resizeToAvoidBottomInset: false,
       extendBody: true,
       bottomNavigationBar: Container(
-        color: !isLightMode() ? black : white,
+        // color: !isLightMode() ? black : white,
         child: ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
           ),
           child: Container(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 10,
-                    color: Colors.black.withOpacity(.1),
-                  )
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            decoration: BoxDecoration(
+              color: white,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 10,
+                  color: Colors.black.withOpacity(.1),
+                )
+              ],
+            ),
+            child: FadeInUp(
+              from: 50,
+              child: GNav(
+                rippleColor: Colors.grey[300]!,
+                hoverColor: Colors.grey[100]!,
+                gap: 5,
+                curve: Curves.bounceInOut,
+                activeColor: Colors.white,
+                iconSize: 24,
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                duration: Duration(milliseconds: 400),
+                tabBorderRadius: 10,
+                tabBackgroundColor: Colors.black,
+                color: Colors.black,
+                tabs: [
+                  GButton(
+                    icon: Icons.home,
+                    text: 'Home',
+                  ),
+                  GButton(
+                    icon: Icons.assignment_add,
+                    text: 'Appointment',
+                  ),
+                  GButton(
+                    icon: Icons.supervised_user_circle,
+                    text: 'Profile',
+                  ),
                 ],
-              ),
-              child: FadeInUp(
-                from: 50,
-                child: GNav(
-                  rippleColor: Colors.grey[300]!,
-                  hoverColor: Colors.grey[100]!,
-                  gap: 5,
-                  curve: Curves.bounceInOut,
-                  activeColor: Colors.white,
-                  iconSize: 24,
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  duration: Duration(milliseconds: 400),
-                  tabBorderRadius: 10,
-                  tabBackgroundColor: Colors.black,
-                  color: Colors.black,
-                  tabs: [
-                    GButton(
-                      icon: Icons.home,
-                      text: 'Home',
-                    ),
-                    GButton(
-                      icon: Icons.assignment_add,
-                      text: 'Appointment',
-                    ),
-                    GButton(
-                      icon: Icons.supervised_user_circle,
-                      text: 'Profile',
-                    ),
-                  ],
-                  selectedIndex: controller.currentPage,
-                  onTabChange: (index) {
-                    setState(() {
-                      controller.changeIndex(index);
-                      //currentPage = index;
-                    });
-                  },
-                ),
+                selectedIndex: controller.currentPage,
+                onTabChange: (index) {
+                  setState(() {
+                    controller.changeIndex(index);
+                    //currentPage = index;
+                  });
+                },
               ),
             ),
           ),

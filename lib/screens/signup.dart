@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-import '../controllers/sign_in_controller.dart';
+import '../controllers/sign_up_controller.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
@@ -21,17 +21,7 @@ class signuppage extends StatefulWidget {
 }
 
 class _signuppageState extends State<signuppage> {
-  TextEditingController _vendorname = TextEditingController();
-  TextEditingController _companyname = TextEditingController();
-  TextEditingController _address = TextEditingController();
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
-  TextEditingController _personname = TextEditingController();
-  TextEditingController _contact1 = TextEditingController();
-  TextEditingController _contact2 = TextEditingController();
-  TextEditingController _whatsapp = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  final signinController = Get.put(SignInController());
+  final signinController = Get.put(SignUpController());
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +61,7 @@ class _signuppageState extends State<signuppage> {
               padding: EdgeInsets.only(
                   left: 7.0.w, right: 7.0.w, top: 2.h, bottom: 1.h),
               child: Form(
-                  key: _formKey,
+                  key: signinController.formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,

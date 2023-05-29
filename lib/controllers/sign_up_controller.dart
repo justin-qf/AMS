@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import '../Models/sign_in_form_validation.dart';
 import 'internet_controller.dart';
 
-class SignInController extends GetxController {
+class SignUpController extends GetxController {
   late final GetStorage _getStorage;
   final InternetController _networkManager = Get.find<InternetController>();
 
@@ -20,6 +20,8 @@ class SignInController extends GetxController {
       addressCtr,
       emailCtr,
       contactCtr;
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
