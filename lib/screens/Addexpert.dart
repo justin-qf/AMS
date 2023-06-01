@@ -1,10 +1,16 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/controllers/addexpert_controller.dart';
+import 'package:booking_app/screens/signup2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
+import '../controllers/addproduct_controller.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
-import '../core/themes/font_constant.dart';
+import '../core/constants/strings.dart';
+import '../custom_componannt/common_views.dart';
+import '../custom_componannt/form_inputs.dart';
 
 class AddExpert extends StatefulWidget {
   const AddExpert({super.key});
@@ -14,189 +20,121 @@ class AddExpert extends StatefulWidget {
 }
 
 class _AddExpertState extends State<AddExpert> {
-  TextEditingController _servicename = TextEditingController();
-  TextEditingController _expert = TextEditingController();
-  TextEditingController _rupee = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
+  final Addexpertcontroller = Get.put(AddexpertController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          SizedBox(
+        resizeToAvoidBottomInset: false,
+        extendBody: true,
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          minimum: EdgeInsets.only(top: 1.h),
+          child: Stack(children: [
+            SizedBox(
               height: double.infinity,
               width: double.infinity,
               child: SvgPicture.asset(
                 Asset.bg,
                 fit: BoxFit.cover,
-              )),
-          SafeArea(
-              minimum: EdgeInsets.only(top: 1.h),
+              ),
+            ),
+            SizedBox(
+              height: 0.5.h,
+            ),
+            Center(
+                child: Column(children: [
+              HomeAppBar(
+                title: Strings.add_product,
+                leading: Asset.backbutton,
+                isfilter: false,
+                icon: Asset.filter,
+                isBack: true,
+                onClick: () {
+                  Get.back();
+                },
+              ),
+            ])),
+            SingleChildScrollView(
               child: Container(
-                  margin: EdgeInsets.only(
-                    top: 0.5.h,
-                  ),
-                  child: Center(
-                      child: Column(children: [
-                    HomeAppBar(
-                      title: 'Add Experts',
-                      leading: Asset.backbutton,
-                      isfilter: false,
-                      icon: Asset.filter,
-                      isBack: true,
-                      onClick: () {},
-                    ),
-                  ])))),
-          Container(
-            margin: EdgeInsets.only(top: 5.h),
-            child: Container(
-                margin: EdgeInsets.only(top: 5.5.h, left: 1.0.w, right: 1.0.w),
+                margin: EdgeInsets.only(top: 6.h, left: 1.0.w, right: 1.0.w),
                 padding: EdgeInsets.only(
-                    left: 7.0.w, right: 7.0.w, top: 4.h, bottom: 1.h),
+                    left: 7.0.w, right: 7.0.w, top: 2.h, bottom: 1.h),
                 child: Form(
-                    key: _formKey,
-                    child: Container(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Expert Name',
-                                style: TextStyle(
-                                    fontFamily: opensans_Bold,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          Container(
-                            height: 5.5.h,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(
-                                    top: 1.h, left: 2.h, bottom: 1.h),
-                                hintText: 'Enter Name',
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                              ),
-                              controller: _expert,
-                              keyboardType: TextInputType.name,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2.5.h,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            // ignore: prefer_const_literals_to_create_immutables
-                            children: [
-                              Text(
-                                'Service Name',
-                                style: TextStyle(
-                                    fontFamily: opensans_Bold,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 12.sp),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          Container(
-                            height: 5.5.h,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(
-                                    top: 1.h, left: 2.h, bottom: 1.h),
-                                hintText: 'Enter Name',
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                              ),
-                              controller: _servicename,
-                              keyboardType: TextInputType.name,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2.5.h,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            // ignore: prefer_const_literals_to_create_immutables
-                            children: [
-                              Text(
-                                'Price',
-                                style: TextStyle(
-                                    fontFamily: opensans_Bold,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 12.sp),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          Container(
-                            height: 5.5.h,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(
-                                    top: 1.h, left: 2.h, bottom: 1.h),
-                                hintText: '₹ 2000',
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                              ),
-                              controller: _rupee,
-                              keyboardType: TextInputType.name,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 7.h,
-                          ),
-                          SizedBox(
-                              width: 150.h,
-                              height: 6.h,
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             const Loginpage()));
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.black,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50))),
-                                  child: Text(
-                                    'Submit',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14.5.sp,
-                                        fontFamily: opensans_Bold,
-                                        fontWeight: FontWeight.w700),
-                                  ))),
-                        ])))),
-          )
-        ],
-      ),
-    );
+                    key: Addexpertcontroller.formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        getTitle(Strings.expert),
+                        FadeInUp(
+                            from: 30,
+                            child: AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: Obx(() {
+                                  return getReactiveFormField(
+                                    node: Addexpertcontroller.ExpertNode,
+                                    controller: Addexpertcontroller.Expertctr,
+                                    hintLabel: Strings.expert_hint,
+                                    onChanged: (val) {
+                                      Addexpertcontroller.validateExpertname(
+                                          val);
+                                    },
+                                    errorText: Addexpertcontroller
+                                        .ExpertModel.value.error,
+                                    inputType: TextInputType.text,
+                                  );
+                                }))),
+                        getTitle(Strings.service),
+                        FadeInUp(
+                            from: 30,
+                            child: AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: Obx(() {
+                                  return getReactiveFormField(
+                                    node: Addexpertcontroller.ServiceNode,
+                                    controller: Addexpertcontroller.Servicectr,
+                                    hintLabel: Strings.service_hint,
+                                    onChanged: (val) {
+                                      Addexpertcontroller.validateServicename(
+                                          val);
+                                    },
+                                    errorText: Addexpertcontroller
+                                        .ServiceModel.value.error,
+                                    inputType: TextInputType.text,
+                                  );
+                                }))),
+                        getTitle(Strings.price),
+                        FadeInUp(
+                            from: 30,
+                            child: AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: Obx(() {
+                                  return getReactiveFormField(
+                                    node: Addexpertcontroller.PriceNode,
+                                    controller: Addexpertcontroller.Pricectr,
+                                    hintLabel: Strings.price_hint,
+                                    onChanged: (val) {
+                                      Addexpertcontroller.validatePrice(val);
+                                    },
+                                    errorText: Addexpertcontroller
+                                        .PriceModel.value.error,
+                                    inputType: TextInputType.text,
+                                  );
+                                }))),
+                        Container(
+                            margin: EdgeInsets.only(top: 5.h),
+                            width: double.infinity,
+                            height: 6.h,
+                            child: getButton(() {
+                              if (Addexpertcontroller.isFormInvalidate.value) {
+                                Get.to(Signup2());
+                              }
+                            })),
+                      ],
+                    )),
+              ),
+            ),
+          ]),
+        ));
   }
 }

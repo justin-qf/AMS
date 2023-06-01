@@ -8,22 +8,22 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../controllers/login_controller.dart';
 import '../core/Common/util.dart';
 import '../core/constants/strings.dart';
 
-class Loginpage extends StatefulWidget {
-  const Loginpage({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<Loginpage> createState() => _LoginpageState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginpageState extends State<Loginpage> {
-  final TextEditingController _email = TextEditingController();
-  final TextEditingController _password = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+class _LoginScreenState extends State<LoginScreen> {
+  final Logincontroller = LoginController();
   bool _isHidden = true;
 
   @override
@@ -104,7 +104,6 @@ class _LoginpageState extends State<Loginpage> {
                             height: 8.h,
                           ),
                           Form(
-                            key: _formKey,
                             child: Container(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -141,7 +140,6 @@ class _LoginpageState extends State<Loginpage> {
                                             borderRadius:
                                                 BorderRadius.circular(30)),
                                       ),
-                                      controller: _email,
                                       keyboardType: TextInputType.name,
                                     ),
                                   ),
@@ -191,7 +189,6 @@ class _LoginpageState extends State<Loginpage> {
                                               size: 20.sp,
                                             ),
                                           )),
-                                      controller: _password,
                                       keyboardType: TextInputType.name,
                                     ),
                                   ),
@@ -342,11 +339,12 @@ class _LoginpageState extends State<Loginpage> {
                                   text: Strings.sing_up,
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => signuppage(),
-                                          ));
+                                      Get.to(signuppage());
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //       builder: (context) => signuppage(),
+                                      //     ));
                                     },
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,

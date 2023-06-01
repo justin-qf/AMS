@@ -20,6 +20,7 @@ Widget getReactiveFormField(
     bool? wantSuffix,
     bool? isDataValidated,
     Function? onTap,
+    bool isExpand = false,
     bool isFromAddStory = false,
     bool isFromIntro = false,
     bool isEnable = true}) {
@@ -29,6 +30,7 @@ Widget getReactiveFormField(
         hintText: hintLabel,
         errorText: errorText,
         node: node,
+        isExpand: isExpand,
         inputFormatters: inputFormatters,
         onChanged: onChanged,
         inputType: inputType,

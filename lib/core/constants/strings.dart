@@ -182,6 +182,7 @@ class Strings {
   //Sign Up
   static const String add_vendor = 'Add Vendor';
   static const String vendor_name = 'Vendor Name';
+  static const String update_vendor = 'Update Vendor';
   static const String enter_name = 'Enter Name';
   static const String companyName = 'Enter Name';
   static const String enter_companyName = 'Enter Name';
@@ -193,8 +194,28 @@ class Strings {
   static const String enter_whatsapp_no = 'Enter Whatsapp No';
   static const String next = 'Next';
   static const String contact_no = 'Contact No';
-  static const String contact_no_hint= 'Enter Contact No';
+  static const String contact_no_hint = 'Enter Contact No';
+  static const String logo = 'Logo';
+  static const String logo_hint = 'Select Image(Logo)';
+  static const String breachers = 'Breachers';
+  static const String breachers_hint = 'Select Breachers';
+  static const String pass_hint = 'Enter Password';
+  static const String contact_1 = 'Enter Contact No.1';
+  static const String contact_2 = 'Enter Contact No.2';
+  static const String whatsapp_hint = 'Enter Whatsapp No.';
+  static const String profile_hint = 'Select Profile';
+  static const String property = 'Property Images';
+  static const String property_hint = 'Select Property Images';
 
+  //Vendor Service
+  static const String field = 'Field Name';
+  static const String field_hint = 'Enter Name';
+  static const String time = 'Time';
+  static const String time_hint = 'Time';
+  static const String approx = 'Approx Settings';
+  static const String approx_hint = '15';
+  static const String duration = 'Sitting Duration';
+  static const String duration_hint = 'Sitting Duration';
 
   //OTP Screen
   static const String verification = 'Verification';
@@ -207,4 +228,66 @@ class Strings {
   static const String upcoming_title = 'Upcoming';
   static const String previous_title = 'Previous';
 
+  //Homeappbar
+  static const String add_vendor_service = 'Add Vendor Service';
+  static const String add_product = 'Add Product';
+
+  //Customer
+  static const String customer = 'Customer Name';
+  static const String dob = 'Date Of Birth';
+  static const String dob_hint = 'Select Date';
+  static const String doa = 'Date Of Anniversary';
+  static const String doa_hint = 'Date Of Anniversary';
+  static const String profile_photo = 'Profile Photo';
+  static const String profile_photo_hint = 'Select Profile Photo';
+  static const String enteraddress = 'Enter Address';
+
+  //AddProduct
+  static const String Name = 'Name';
+  static const String name_hint = 'Enter Name';
+  static const String product_img = 'Product Image';
+  static const String product_img_hint = 'Add Image';
+  static const String description = 'Description';
+  static const String description_hint = 'Add Description';
+  static const String category = 'Select Product Category';
+  static const String category_hint = 'Select Category';
+  static const String amount = 'Amount';
+  static const String amount_hint = '₹ 2000';
+  static const String quantity = 'Quantity';
+  static const String quantity_hint = '1';
+
+  //AddCourse
+  static const String student = 'Student';
+  static const String student_hint = 'Select Student';
+  static const String course = 'Course';
+  static const String course_hint = 'Select Course';
+  static const String fees = 'Fees';
+  static const String fees_hint = '₹ 2000';
+  static const String starting = 'Starting From';
+  static const String starting_hint = 'Select Date';
+  static const String notes = 'Other Notes';
+  static const String notes_hint = 'Add Notes';
+  static const String id = 'Id Proof';
+  static const String id_hint = 'Add Photo';
+
+  //ReportBug
+  static const String selectvendor = 'Select Vendor';
+  static const String vendor_hint = 'Select Vendor';
+  static const String upload = 'Upload Image';
+  static const String upload_hint = 'Add Image';
+  static const String upload_videoo = 'Upload Video';
+  static const String upload_video_hint = 'Add Video';
+
+  //AddService /Add Expert
+  static const String service = 'Service Name';
+  static const String service_hint = 'Enter Name';
+  static const String expert = 'Expert Name';
+  static const String expert_hint = 'Enter Name';
+  static const String price = 'Price';
+  static const String price_hint = '₹ 2000';
+
+  //Appointment Booking
+  static const String Appointment_slot = 'Appointment Slot';
+  static const String customer_hint = 'Customer Name';
+  static const String Services = 'Services';
 }

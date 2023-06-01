@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Models/notification_model.dart';
 import '../Models/product.dart';
+import '../controllers/Appointment_screen_controller.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
 import '../core/themes/font_constant.dart';
+import 'Upcoming_Appointment.dart';
 
 class Appointment extends StatefulWidget {
   Appointment({super.key, this.openDrawer});
@@ -20,6 +23,8 @@ class Appointment extends StatefulWidget {
 
 class _AppointmentState extends State<Appointment>
     with TickerProviderStateMixin {
+  var controller = Get.put(AppointmentScreenController());
+  var upcomingappointment = UpcomingAppointment();
   List<ProductItem> staticData = notificationItems;
   late TabController tabController;
   var currentPage = 0;

@@ -18,6 +18,7 @@ class CustomFormField extends StatelessWidget {
       required this.node,
       this.controller,
       this.formType,
+      this.isExpand,
       this.isVerified,
       this.wantSuffix,
       this.onVerifiyButtonClick,
@@ -33,6 +34,7 @@ class CustomFormField extends StatelessWidget {
   final String? errorText;
   final FocusNode node;
   final Function(String?)? onChanged;
+  final bool? isExpand;
   final String? Function(String?)? validator;
   final TextInputType inputType;
   final bool? isVerified;
@@ -68,7 +70,11 @@ class CustomFormField extends StatelessWidget {
         contentPadding: EdgeInsets.only(
             left: 5.w,
             right: 5.w,
-            top: SizerUtil.deviceType == DeviceType.mobile ? 0.w : 3.w,
+            top: SizerUtil.deviceType == DeviceType.mobile
+                ? isExpand!
+                    ? 10.h
+                    : 0.w
+                : 3.w,
             bottom: SizerUtil.deviceType == DeviceType.mobile ? 0.w : 3.w),
         //EdgeInsets.symmetric(vertical: 1.8.h, horizontal: 5.w),
         hintText: hintText,

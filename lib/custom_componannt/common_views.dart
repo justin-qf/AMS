@@ -80,6 +80,7 @@ getTitle(String title) {
   );
 }
 
+
 getTopBackground(context) {
   return SvgPicture.asset(Asset.add_service,
       height: 20.h, width: 20.h, color: !isLightMode() ? null : Colors.white);

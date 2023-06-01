@@ -1,8 +1,10 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:booking_app/screens/Intro.dart';
+import 'package:booking_app/screens/AddCustomer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../core/constants/assets.dart';
+import 'AddVendorService.dart';
+import 'Intro.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});

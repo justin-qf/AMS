@@ -1,3 +1,4 @@
+import 'package:booking_app/screens/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
@@ -5,7 +6,6 @@ import 'package:sizer/sizer.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 import '../core/themes/font_constant.dart';
-import 'login.dart';
 
 class Changepassword extends StatefulWidget {
   const Changepassword({super.key});
@@ -234,7 +234,7 @@ class _ChangepasswordState extends State<Changepassword> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        Loginpage()));
+                                                        LoginScreen()));
                                           },
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Colors.black,

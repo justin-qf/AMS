@@ -1,10 +1,16 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/screens/signup2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../controllers/addproduct_controller.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
-import '../core/themes/font_constant.dart';
+import '../core/constants/strings.dart';
+import '../custom_componannt/common_views.dart';
+import '../custom_componannt/form_inputs.dart';
 
 class AddCourse extends StatefulWidget {
   const AddCourse({super.key});
@@ -14,327 +20,197 @@ class AddCourse extends StatefulWidget {
 }
 
 class _AddCourseState extends State<AddCourse> {
-  TextEditingController _customername = TextEditingController();
-  TextEditingController _profile = TextEditingController();
-  TextEditingController _dob = TextEditingController();
-  TextEditingController _doa = TextEditingController();
-  TextEditingController _address = TextEditingController();
-  TextEditingController _contact1 = TextEditingController();
-  TextEditingController _contact2 = TextEditingController();
-  TextEditingController _email = TextEditingController();
-  TextEditingController _whatsapp = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
+  final Product = Get.put(ProductController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Stack(children: [
-          SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: SvgPicture.asset(
-              Asset.bg,
-              fit: BoxFit.cover,
+        extendBody: true,
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          minimum: EdgeInsets.only(top: 1.h),
+          child: Stack(children: [
+            SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: SvgPicture.asset(
+                Asset.bg,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          SafeArea(
-              minimum: EdgeInsets.only(top: 1.h),
+            SizedBox(
+              height: 0.5.h,
+            ),
+            Center(
+                child: Column(children: [
+              HomeAppBar(
+                title: Strings.add_product,
+                leading: Asset.backbutton,
+                isfilter: false,
+                icon: Asset.filter,
+                isBack: true,
+                onClick: () {
+                  Get.back();
+                },
+              ),
+            ])),
+            SingleChildScrollView(
               child: Container(
-                  margin: EdgeInsets.only(
-                    top: 0.5.h,
-                  ),
-                  child: Center(
-                      child: Column(children: [
-                    HomeAppBar(
-                      title: 'Add Course',
-                      leading: Asset.backbutton,
-                      isfilter: false,
-                      icon: Asset.filter,
-                      isBack: true,
-                      onClick: () {},
-                    ),
-                  ])))),
-          Container(
-            margin: EdgeInsets.only(top: 8.h, left: 1.0.w, right: 1.0.w),
-            padding: EdgeInsets.only(
-                left: 7.0.w, right: 7.0.w, top: 4.h, bottom: 1.h),
-            child: Form(
-                key: _formKey,
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Student',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Select Student',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          controller: _customername,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Text(
-                            'Course',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12.sp),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'Select Course',
-                              contentPadding: EdgeInsets.only(
-                                  top: 1.h, left: 2.h, bottom: 1.h),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30)),
-                              suffixIcon: Icon(Icons.arrow_drop_down_sharp)),
-                          controller: _profile,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Fees',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: '₹ 2000',
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                          controller: _dob,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Starting From',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 5.5.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'Select Date',
-                              contentPadding: EdgeInsets.only(
-                                  top: 1.h, left: 2.h, bottom: 1.h),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30)),
-                              suffixIcon: Icon(Icons.calendar_month)),
-                          controller: _doa,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Description',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 7.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Add Description',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                          controller: _address,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Other Notes',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 7.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Add Notes',
-                            contentPadding: EdgeInsets.only(
-                                top: 1.h, left: 2.h, bottom: 1.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                          controller: _contact1,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Id Proof',
-                            style: TextStyle(
-                                fontFamily: opensans_Bold,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 0.5.h,
-                      ),
-                      Container(
-                        height: 7.h,
-                        child: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'Add Photo',
-                              contentPadding: EdgeInsets.only(
-                                  top: 1.h, left: 2.h, bottom: 1.h),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              suffixIcon: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.photo_sharp))),
-                          controller: _contact1,
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 7.h,
-                      ),
-                      SizedBox(
-                          width: 150.h,
-                          height: 6.h,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => const Signup2()));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50))),
-                              child: Text(
-                                'Submit',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14.5.sp,
-                                    fontFamily: opensans_Bold,
-                                    fontWeight: FontWeight.w700),
-                              ))),
-                    ],
-                  ),
-                )),
-          ),
-        ]));
+                margin: EdgeInsets.only(top: 6.h, left: 1.0.w, right: 1.0.w),
+                padding: EdgeInsets.only(
+                    left: 7.0.w, right: 7.0.w, top: 2.h, bottom: 1.h),
+                child: Form(
+                    key: Product.formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        getTitle(Strings.student),
+                        FadeInUp(
+                            from: 30,
+                            child: AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: Obx(() {
+                                  return getReactiveFormField(
+                                    node: Product.NameNode,
+                                    controller: Product.NameCtr,
+                                    hintLabel: Strings.student_hint,
+                                    onChanged: (val) {
+                                      Product.validatename(val);
+                                    },
+                                    errorText: Product.NameModel.value.error,
+                                    inputType: TextInputType.text,
+                                  );
+                                }))),
+                        getTitle(Strings.course),
+                        FadeInUp(
+                            from: 30,
+                            child: AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: Obx(() {
+                                  return getReactiveFormField(
+                                    node: Product.productimgNode,
+                                    controller: Product.productimgCtr,
+                                    hintLabel: Strings.course_hint,
+                                    onChanged: (val) {
+                                      // Product.validateCompanyname(val);
+                                      setState(() {});
+                                    },
+                                    errorText:
+                                        Product.productimgModel.value.error,
+                                    inputType: TextInputType.text,
+                                  );
+                                }))),
+                        getTitle(Strings.fees),
+                        FadeInUp(
+                            from: 30,
+                            child: AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: Obx(() {
+                                  return getReactiveFormField(
+                                    node: Product.descriptionNode,
+                                    controller: Product.descriptionCtr,
+                                    hintLabel: Strings.fees_hint,
+                                    onChanged: (val) {
+                                      // Product.validateAddressname(val);
+                                      setState(() {});
+                                    },
+                                    errorText:
+                                        Product.descriptionModel.value.error,
+                                    inputType: TextInputType.text,
+                                  );
+                                }))),
+                        getTitle(Strings.starting),
+                        FadeInUp(
+                            from: 30,
+                            child: AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: Obx(() {
+                                  return getReactiveFormField(
+                                    node: Product.categoryNode,
+                                    controller: Product.categroryCtr,
+                                    hintLabel: Strings.starting_hint,
+                                    onChanged: (val) {
+                                      // Product.validateEmail(val);
+                                      setState(() {});
+                                    },
+                                    errorText:
+                                        Product.categroryModel.value.error,
+                                    inputType: TextInputType.text,
+                                  );
+                                }))),
+                        getTitle(Strings.description),
+                        FadeInUp(
+                            from: 30,
+                            child: AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: Obx(() {
+                                  return getReactiveFormField(
+                                    node: Product.amountNode,
+                                    controller: Product.amountCtr,
+                                    hintLabel: Strings.description_hint,
+                                    onChanged: (val) {
+                                      // Product.validateEmail(val);
+                                      setState(() {});
+                                    },
+                                    isExpand: true,
+                                    errorText: Product.amountModel.value.error,
+                                    inputType: TextInputType.text,
+                                  );
+                                }))),
+                        getTitle(Strings.notes),
+                        FadeInUp(
+                            from: 30,
+                            child: AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: Obx(() {
+                                  return getReactiveFormField(
+                                    node: Product.quantitynode,
+                                    controller: Product.quantityCtr,
+                                    hintLabel: Strings.notes_hint,
+                                    onChanged: (val) {
+                                      // Product.validateEmail(val);
+                                      setState(() {});
+                                    },
+                                    isExpand: true,
+                                    errorText:
+                                        Product.quantityModel.value.error,
+                                    inputType: TextInputType.text,
+                                  );
+                                }))),
+                        getTitle(Strings.id),
+                        FadeInUp(
+                            from: 30,
+                            child: AnimatedSize(
+                                duration: const Duration(milliseconds: 300),
+                                child: Obx(() {
+                                  return getReactiveFormField(
+                                    node: Product.quantitynode,
+                                    controller: Product.quantityCtr,
+                                    hintLabel: Strings.id_hint,
+                                    onChanged: (val) {
+                                      // Product.validateEmail(val);
+                                      setState(() {});
+                                    },
+                                    errorText:
+                                        Product.quantityModel.value.error,
+                                    inputType: TextInputType.text,
+                                  );
+                                }))),
+                        Container(
+                            margin: EdgeInsets.only(top: 5.h),
+                            width: double.infinity,
+                            height: 6.h,
+                            child: getButton(() {
+                              if (Product.isFormInvalidate.value) {
+                                Get.to(Signup2());
+                              }
+                            })),
+                      ],
+                    )),
+              ),
+            ),
+          ]),
+        ));
   }
 }

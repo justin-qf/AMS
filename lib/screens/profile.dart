@@ -1,7 +1,6 @@
 import 'package:booking_app/core/themes/color_const.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:booking_app/screens/homepage.dart';
-import 'package:booking_app/screens/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
@@ -21,6 +20,7 @@ import '../core/constants/assets.dart';
 import '../core/constants/get_storage_key.dart';
 import '../core/constants/strings.dart';
 import '../core/utils/helper.dart';
+import 'UpdateVendor.dart';
 
 class profile extends StatefulWidget {
   const profile({super.key});
@@ -64,7 +64,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
               ),
             ),
             Container(
-              color: !isLightMode() ? black : white,
+              color: !isLightMode() ? white : black,
               child: Column(
                 children: [
                   Container(
@@ -116,14 +116,14 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                     child: SvgPicture.asset(
                       Asset.profileimg,
                       height: 10.h,
-                      color: !isLightMode() ? white : black,
+                      color: !isLightMode() ? black : white,
                     ),
                   ),
                   SizedBox(height: 1.h),
                   Text(
                     Strings.name,
                     style: TextStyle(
-                        color: !isLightMode() ? white : black,
+                        color: !isLightMode() ? black : white,
                         fontFamily: opensansMedium,
                         fontSize: 16.5.sp,
                         fontWeight: FontWeight.w700),
@@ -138,7 +138,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
 
   getListViewItem() {
     return Container(
-      color: !isLightMode() ? black : white,
+      color: !isLightMode() ? white : black,
       margin: EdgeInsets.only(top: 26.h),
       child: DefaultTabController(
           length: 3,
@@ -185,11 +185,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                               IconButton(
                                   alignment: Alignment.topRight,
                                   onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                signuppage()));
+                                    Get.to(UpdateVendor());
                                   },
                                   icon: SvgPicture.asset(Asset.edit))
                             ],
@@ -399,51 +395,57 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
                           return Container(
                             margin: EdgeInsets.only(
                                 top: 1.5.h, left: 8.w, right: 8.w, bottom: 1.h),
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  top: 1.5.h,
-                                  left: 4.w,
-                                  right: 4.w,
-                                  bottom: 1.5.h),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        child: data.icon,
-                                      ),
-                                      SizedBox(
-                                        width: 3.w,
-                                      ),
-                                      Container(
-                                        child: Text(
-                                          data.Name,
-                                          style: TextStyle(
-                                              fontFamily: opensansMedium,
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w400),
+                            child: InkWell(
+                              onTap: () {
+                                Common.PopupDialogs(context);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 1.5.h,
+                                    left: 4.w,
+                                    right: 4.w,
+                                    bottom: 1.5.h),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          child: data.icon,
                                         ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black.withOpacity(0.2),
-                                      spreadRadius: 0.1,
-                                      blurRadius: 10,
-                                      offset: Offset(0.5, 0.5)),
-                                ],
+                                        SizedBox(
+                                          width: 3.w,
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            data.Name,
+                                            style: TextStyle(
+                                                fontFamily: opensansMedium,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.2),
+                                        spreadRadius: 0.1,
+                                        blurRadius: 10,
+                                        offset: Offset(0.5, 0.5)),
+                                  ],
+                                ),
                               ),
                             ),
                           );

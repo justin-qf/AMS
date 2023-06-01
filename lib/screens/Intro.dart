@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 import '../core/constants/assets.dart';
-import 'login.dart';
+import 'LoginScreen.dart';
 import 'onboarding-content.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -149,7 +149,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const Loginpage()));
+                                                const LoginScreen()));
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,

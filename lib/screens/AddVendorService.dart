@@ -1,10 +1,15 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/screens/signup2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
+import '../controllers/AddVendorService_controller.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
-import '../core/themes/font_constant.dart';
+import '../core/constants/strings.dart';
+import '../custom_componannt/common_views.dart';
+import '../custom_componannt/form_inputs.dart';
 
 class VendorService extends StatefulWidget {
   const VendorService({super.key});
@@ -14,227 +19,148 @@ class VendorService extends StatefulWidget {
 }
 
 class _VendorServiceState extends State<VendorService> {
-  final _formKey = GlobalKey<FormState>();
-  TextEditingController _vendor = TextEditingController();
-  TextEditingController _company = TextEditingController();
-  TextEditingController _address = TextEditingController();
-  TextEditingController _email = TextEditingController();
+  final AddvendorserviceController = Get.put(AddVendorServiceController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Stack(children: [
-          SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: SvgPicture.asset(
-              Asset.bg,
-              fit: BoxFit.cover,
+        extendBody: true,
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          minimum: EdgeInsets.only(top: 1.h),
+          child: Stack(children: [
+            SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: SvgPicture.asset(
+                Asset.bg,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          SafeArea(
-              minimum: EdgeInsets.only(top: 1.h),
-              child: Container(
-                  margin: EdgeInsets.only(
-                    top: 0.5.h,
-                  ),
-                  child: Center(
-                      child: Column(children: [
-                    HomeAppBar(
-                      title: 'Add Vendor Service',
-                      leading: Asset.backbutton,
-                      isfilter: false,
-                      icon: Asset.filter,
-                      isBack: true,
-                      onClick: () {},
-                    ),
-                  ])))),
-          Container(
-              margin: EdgeInsets.only(top: 7.h, left: 1.0.w, right: 1.0.w),
+            SizedBox(
+              height: 0.5.h,
+            ),
+            Center(
+                child: Column(children: [
+              HomeAppBar(
+                title: Strings.add_vendor_service,
+                leading: Asset.backbutton,
+                isfilter: false,
+                icon: Asset.filter,
+                isBack: true,
+                onClick: () {
+                  Get.back();
+                },
+              ),
+            ])),
+            Container(
+              margin: EdgeInsets.only(top: 6.h, left: 1.0.w, right: 1.0.w),
               padding: EdgeInsets.only(
-                  left: 7.0.w, right: 7.0.w, top: 4.h, bottom: 1.h),
+                  left: 7.0.w, right: 7.0.w, top: 2.h, bottom: 1.h),
               child: Form(
-                  key: _formKey,
-                  child: Container(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Field Name',
-                              style: TextStyle(
-                                  fontFamily: opensans_Bold,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 0.5.h,
-                        ),
-                        Container(
-                          height: 5.5.h,
-                          child: TextField(
-                            decoration: InputDecoration(
-                                hintText: 'Enter Name',
-                                contentPadding: EdgeInsets.only(
-                                    top: 1.h, left: 2.h, bottom: 1.h),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                suffixIcon: IconButton(
-                                    padding: EdgeInsets.only(bottom: 0.1.h),
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.arrow_drop_down,
-                                      size: 5.h,
-                                    ))),
-                            controller: _vendor,
-                            keyboardType: TextInputType.name,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Text(
-                              'Time',
-                              style: TextStyle(
-                                  fontFamily: opensans_Bold,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12.sp),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 0.5.h,
-                        ),
-                        Container(
-                          height: 5.5.h,
-                          child: TextField(
-                            decoration: InputDecoration(
-                                hintText: 'Time',
-                                contentPadding: EdgeInsets.only(
-                                    top: 1.h, left: 2.h, bottom: 1.h),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                suffixIcon: Icon(Icons.watch_later_outlined)),
-                            controller: _company,
-                            keyboardType: TextInputType.name,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Text(
-                              'Approx Sittings',
-                              style: TextStyle(
-                                  fontFamily: opensans_Bold,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12.sp),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 0.5.h,
-                        ),
-                        Container(
-                          height: 5.5.h,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: '15',
-                              contentPadding: EdgeInsets.only(
-                                  top: 1.h, left: 2.h, bottom: 1.h),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30)),
-                            ),
-                            controller: _address,
-                            keyboardType: TextInputType.name,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Text(
-                              'Sitting Duration',
-                              style: TextStyle(
-                                  fontFamily: opensans_Bold,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12.sp),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 0.5.h,
-                        ),
-                        Container(
-                          height: 5.5.h,
-                          child: TextField(
-                            decoration: InputDecoration(
-                                hintText: 'Sitting Duration',
-                                contentPadding: EdgeInsets.only(
-                                    top: 1.h, left: 2.h, bottom: 1.h),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                suffixIcon: Icon(Icons.watch_later_outlined)),
-                            controller: _email,
-                            keyboardType: TextInputType.name,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 7.h,
-                        ),
-                        SizedBox(
-                            width: 150.h,
-                            height: 6.h,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             const Loginpage()));
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.black,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50))),
-                                child: Text(
-                                  'Submit',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14.5.sp,
-                                      fontFamily: opensans_Bold,
-                                      fontWeight: FontWeight.w700),
-                                ))),
-                      ]))))
-        ]));
+                  key: AddvendorserviceController.formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      getTitle(Strings.field),
+                      FadeInUp(
+                          from: 30,
+                          child: AnimatedSize(
+                              duration: const Duration(milliseconds: 300),
+                              child: Obx(() {
+                                return getReactiveFormField(
+                                  node: AddvendorserviceController.FieldNode,
+                                  controller:
+                                      AddvendorserviceController.fieldctr,
+                                  hintLabel: Strings.field_hint,
+                                  onChanged: (val) {
+                                    AddvendorserviceController
+                                        .validateFieldname(val);
+                                  },
+                                  errorText: AddvendorserviceController
+                                      .FieldModel.value.error,
+                                  inputType: TextInputType.text,
+                                );
+                              }))),
+                      getTitle(Strings.time),
+                      FadeInUp(
+                          from: 30,
+                          child: AnimatedSize(
+                              duration: const Duration(milliseconds: 300),
+                              child: Obx(() {
+                                return getReactiveFormField(
+                                  node: AddvendorserviceController.TimeNode,
+                                  controller:
+                                      AddvendorserviceController.timectr,
+                                  hintLabel: Strings.time_hint,
+                                  onChanged: (val) {
+                                    AddvendorserviceController.validateTime(
+                                        val);
+                                    setState(() {});
+                                  },
+                                  errorText: AddvendorserviceController
+                                      .TimeModel.value.error,
+                                  inputType: TextInputType.text,
+                                );
+                              }))),
+                      getTitle(Strings.approx),
+                      FadeInUp(
+                          from: 30,
+                          child: AnimatedSize(
+                              duration: const Duration(milliseconds: 300),
+                              child: Obx(() {
+                                return getReactiveFormField(
+                                  node: AddvendorserviceController.ApproxNode,
+                                  controller:
+                                      AddvendorserviceController.approxctr,
+                                  hintLabel: Strings.approx_hint,
+                                  onChanged: (val) {
+                                    AddvendorserviceController.validateApprox(
+                                        val);
+                                    setState(() {});
+                                  },
+                                  errorText: AddvendorserviceController
+                                      .ApproxModel.value.error,
+                                  inputType: TextInputType.text,
+                                );
+                              }))),
+                      getTitle(Strings.duration),
+                      FadeInUp(
+                          from: 30,
+                          child: AnimatedSize(
+                              duration: const Duration(milliseconds: 300),
+                              child: Obx(() {
+                                return getReactiveFormField(
+                                  node: AddvendorserviceController.DurationNode,
+                                  controller:
+                                      AddvendorserviceController.durationctr,
+                                  hintLabel: Strings.duration_hint,
+                                  onChanged: (val) {
+                                    AddvendorserviceController.validateDuration(
+                                        val);
+                                    setState(() {});
+                                  },
+                                  errorText: AddvendorserviceController
+                                      .DurationModel.value.error,
+                                  inputType: TextInputType.text,
+                                );
+                              }))),
+                      Container(
+                          margin: EdgeInsets.only(top: 5.h),
+                          width: double.infinity,
+                          height: 6.h,
+                          child: getButton(() {
+                            if (AddvendorserviceController
+                                .isFormInvalidate.value) {
+                              Get.to(Signup2());
+                            }
+                          })),
+                    ],
+                  )),
+            ),
+          ]),
+        ));
   }
 }

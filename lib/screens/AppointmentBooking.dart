@@ -1,25 +1,29 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:booking_app/controllers/addproduct_controller.dart';
 import 'package:booking_app/screens/signup2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+
+import '../controllers/addproduct_controller.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
+import '../core/themes/font_constant.dart';
 import '../custom_componannt/common_views.dart';
 import '../custom_componannt/form_inputs.dart';
 
-class AddProduct extends StatefulWidget {
-  const AddProduct({super.key});
+class AppointmentBookingScreen extends StatefulWidget {
+  const AppointmentBookingScreen({super.key});
 
   @override
-  State<AddProduct> createState() => _AddProductState();
+  State<AppointmentBookingScreen> createState() =>
+      _AppointmentBookingScreenState();
 }
 
-class _AddProductState extends State<AddProduct> {
+class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
   final Product = Get.put(ProductController());
+  bool check1 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +69,7 @@ class _AddProductState extends State<AddProduct> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        getTitle(Strings.Name),
+                        getTitle(Strings.customer),
                         FadeInUp(
                             from: 30,
                             child: AnimatedSize(
@@ -74,7 +78,7 @@ class _AddProductState extends State<AddProduct> {
                                   return getReactiveFormField(
                                     node: Product.NameNode,
                                     controller: Product.NameCtr,
-                                    hintLabel: Strings.name_hint,
+                                    hintLabel: Strings.customer_hint,
                                     onChanged: (val) {
                                       Product.validatename(val);
                                     },
@@ -82,7 +86,7 @@ class _AddProductState extends State<AddProduct> {
                                     inputType: TextInputType.text,
                                   );
                                 }))),
-                        getTitle(Strings.product_img),
+                        getTitle(Strings.Services),
                         FadeInUp(
                             from: 30,
                             child: AnimatedSize(
@@ -91,9 +95,9 @@ class _AddProductState extends State<AddProduct> {
                                   return getReactiveFormField(
                                     node: Product.productimgNode,
                                     controller: Product.productimgCtr,
-                                    hintLabel: Strings.product_img_hint,
+                                    hintLabel: Strings.Services,
                                     onChanged: (val) {
-                                      Product.validatename(val);
+                                      Product.validateProductimg(val);
                                       setState(() {});
                                     },
                                     errorText:
@@ -101,42 +105,22 @@ class _AddProductState extends State<AddProduct> {
                                     inputType: TextInputType.text,
                                   );
                                 }))),
-                        getTitle(Strings.description),
+                        getTitle(Strings.Appointment_slot),
                         FadeInUp(
                             from: 30,
                             child: AnimatedSize(
                                 duration: const Duration(milliseconds: 300),
                                 child: Obx(() {
                                   return getReactiveFormField(
-                                    node: Product.descriptionNode,
-                                    controller: Product.descriptionCtr,
-                                    hintLabel: Strings.description_hint,
+                                    node: Product.productimgNode,
+                                    controller: Product.productimgCtr,
+                                    hintLabel: Strings.Services,
                                     onChanged: (val) {
-                                      Product.validateDescription(val);
-                                      setState(() {});
-                                    },
-                                    isExpand: true,
-                                    errorText:
-                                        Product.descriptionModel.value.error,
-                                    inputType: TextInputType.text,
-                                  );
-                                }))),
-                        getTitle(Strings.category),
-                        FadeInUp(
-                            from: 30,
-                            child: AnimatedSize(
-                                duration: const Duration(milliseconds: 300),
-                                child: Obx(() {
-                                  return getReactiveFormField(
-                                    node: Product.categoryNode,
-                                    controller: Product.categroryCtr,
-                                    hintLabel: Strings.category_hint,
-                                    onChanged: (val) {
-                                      Product.validateCategory(val);
+                                      Product.validateProductimg(val);
                                       setState(() {});
                                     },
                                     errorText:
-                                        Product.categroryModel.value.error,
+                                        Product.productimgModel.value.error,
                                     inputType: TextInputType.text,
                                   );
                                 }))),
@@ -147,36 +131,65 @@ class _AddProductState extends State<AddProduct> {
                                 duration: const Duration(milliseconds: 300),
                                 child: Obx(() {
                                   return getReactiveFormField(
-                                    node: Product.amountNode,
-                                    controller: Product.amountCtr,
+                                    node: Product.descriptionNode,
+                                    controller: Product.descriptionCtr,
                                     hintLabel: Strings.amount_hint,
                                     onChanged: (val) {
                                       Product.validateAmount(val);
                                       setState(() {});
                                     },
-                                    errorText: Product.amountModel.value.error,
+                                    errorText:
+                                        Product.descriptionModel.value.error,
                                     inputType: TextInputType.text,
                                   );
                                 }))),
-                        getTitle(Strings.quantity),
+                        getTitle(Strings.notes),
                         FadeInUp(
                             from: 30,
                             child: AnimatedSize(
                                 duration: const Duration(milliseconds: 300),
                                 child: Obx(() {
                                   return getReactiveFormField(
-                                    node: Product.quantitynode,
-                                    controller: Product.quantityCtr,
-                                    hintLabel: Strings.quantity_hint,
+                                    node: Product.descriptionNode,
+                                    controller: Product.descriptionCtr,
+                                    hintLabel: Strings.notes_hint,
                                     onChanged: (val) {
                                       Product.validateQuantity(val);
                                       setState(() {});
                                     },
+                                    isExpand: true,
                                     errorText:
-                                        Product.quantityModel.value.error,
+                                        Product.descriptionModel.value.error,
                                     inputType: TextInputType.text,
                                   );
                                 }))),
+                        Theme(
+                          data: ThemeData(
+                              checkboxTheme: CheckboxThemeData(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)))),
+                          child: CheckboxListTile(
+                            controlAffinity: ListTileControlAffinity.leading,
+                            activeColor: Colors.black,
+                            visualDensity:
+                                VisualDensity(horizontal: -2, vertical: -4),
+                            contentPadding:
+                                EdgeInsets.only(top: 0.5, bottom: 0.5),
+                            value: check1,
+                            onChanged: (bool? value) {
+                              print(value);
+                              setState(() {
+                                check1 = value!;
+                              });
+                            },
+                            title: Text(
+                              'Remind Customer ?',
+                              style: TextStyle(
+                                  fontFamily: opensansMedium,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ),
                         Container(
                             margin: EdgeInsets.only(top: 5.h),
                             width: double.infinity,

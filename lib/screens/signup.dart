@@ -78,7 +78,6 @@ class _signuppageState extends State<signuppage> {
                                   hintLabel: 'Enter Name',
                                   onChanged: (val) {
                                     signinController.validateVendorname(val);
-                                    setState(() {});
                                   },
                                   errorText: signinController
                                       .vendorNameModel.value.error,
@@ -118,6 +117,7 @@ class _signuppageState extends State<signuppage> {
                                     signinController.validateAddressname(val);
                                     setState(() {});
                                   },
+                                  isExpand: true,
                                   errorText:
                                       signinController.addressModel.value.error,
                                   inputType: TextInputType.text,

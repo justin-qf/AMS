@@ -38,6 +38,7 @@ class SignUpController extends GetxController {
     addressCtr = TextEditingController();
     emailCtr = TextEditingController();
     contactCtr = TextEditingController();
+
     enableSignUpButton();
     super.onInit();
   }

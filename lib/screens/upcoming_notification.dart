@@ -21,6 +21,11 @@ class _UpcomingNotificationScreenState
   var controller = Get.put(NotificationScreenController());
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: false,

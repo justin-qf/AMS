@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/constants/assets.dart';
-import 'package:booking_app/screens/dashboard.dart';
+import 'package:booking_app/screens/DashboardScreen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -186,7 +186,7 @@ class _OtpState extends State<Otp> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => MyHomePage()));
+                                          builder: (context) => dashboard()));
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,

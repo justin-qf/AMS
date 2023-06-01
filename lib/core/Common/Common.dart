@@ -171,6 +171,61 @@ class Common {
         });
   }
 
+  static Future<Object?> PopupDialogs(BuildContext context) {
+    return showGeneralDialog(
+        barrierColor: black.withOpacity(0.6),
+        transitionBuilder: (context, a1, a2, widget) {
+          return Transform.scale(
+            scale: a1.value,
+            child: Opacity(
+                opacity: a1.value,
+                child: CupertinoAlertDialog(
+                  title: Text(
+                    "HairCuts",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: black,
+                      fontFamily: fontBold,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  content: Text(
+                    "Haircutting (also hair shaping) - is the process of cutting, tapering, texturizing and thinning using any hair cutting tools in order to create a shape. ",
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: black,
+                      fontFamily: fontMedium,
+                    ),
+                  ),
+                  actions: [
+                    CupertinoDialogAction(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("DONE",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: black,
+                            fontFamily: fontBold,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      isDefaultAction: true,
+                      isDestructiveAction: true,
+                    ),
+                    // The "No" button
+                  ],
+                )),
+          );
+        },
+        transitionDuration: Duration(milliseconds: 200),
+        barrierDismissible: true,
+        barrierLabel: '',
+        context: context,
+        pageBuilder: (context, animation1, animation2) {
+          return Container();
+        });
+  }
+
   void trasparent_statusbar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarIconBrightness:

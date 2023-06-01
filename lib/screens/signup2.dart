@@ -1,4 +1,3 @@
-import 'package:booking_app/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
@@ -6,6 +5,7 @@ import 'package:sizer/sizer.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
 import '../core/themes/font_constant.dart';
+import 'LoginScreen.dart';
 
 class Signup2 extends StatefulWidget {
   const Signup2({super.key});
@@ -214,7 +214,7 @@ class _Signup2State extends State<Signup2> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const Loginpage()));
+                                              const LoginScreen()));
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
