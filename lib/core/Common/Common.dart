@@ -1,10 +1,13 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/themes/color_const.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../screens/phone.dart';
 import '../utils/helper.dart';
 
 class Common {
@@ -174,7 +177,32 @@ class Common {
   void trasparent_statusbar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarIconBrightness:
-            !isLightMode() ? Brightness.light : Brightness.dark,
+            isDarkMode() ? Brightness.light : Brightness.dark,
         statusBarColor: Colors.transparent));
+  }
+
+  Widget getBtn(String title) {
+    return FadeInUp(
+      from: 50,
+      child: SizedBox(
+          width: 150.h,
+          height: 6.h,
+          child: ElevatedButton(
+              onPressed: () {
+                Get.to(const Phone());
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50))),
+              child: Text(
+                title,
+                style: TextStyle(
+                    color: white,
+                    fontSize: 14.5.sp,
+                    fontFamily: opensans_Bold,
+                    fontWeight: FontWeight.w700),
+              ))),
+    );
   }
 }

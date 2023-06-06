@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import '../constants/get_storage_key.dart';
 
-bool isLightMode() {
+bool isDarkMode() {
   bool isDark;
   var data = GetStorage().read(GetStorageKey.IS_DARK_MODE);
   if (data == null || data.toString().isEmpty) {
     isDark = false;
+    print("IsDarkModeEMPTY${isDark}");
   } else if (GetStorage().read(GetStorageKey.IS_DARK_MODE) == 1) {
     isDark = false;
+    print("IsLIGHTModeEMPTY${isDark}");
   } else {
     isDark = true;
+    print("IsDarkMode${isDark}");
   }
 
   return isDark;

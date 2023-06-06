@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/constants/assets.dart';
+import 'package:booking_app/core/themes/color_const.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +13,9 @@ import 'package:sizer/sizer.dart';
 import '../Models/expert.dart';
 import '../Models/service_name.dart';
 import '../controllers/home_screen_controller.dart';
+import '../core/Common/Common.dart';
 import '../core/Common/appbar.dart';
+import '../core/utils/helper.dart';
 import 'notification.dart';
 
 class home extends StatefulWidget {
@@ -29,6 +32,7 @@ class _homeState extends State<home> {
 
   @override
   Widget build(BuildContext context) {
+    Common().trasparent_statusbar();
     return Scaffold(
       body: Stack(children: [
         SizedBox(
@@ -46,6 +50,7 @@ class _homeState extends State<home> {
               FadeInDown(
                 from: 50,
                 child: Container(
+                  color: isDarkMode() ? black : white,
                   child: HomeAppBar(
                     openDrawer: controller.drawer_key,
                     title: 'Book My Appointment',
@@ -76,6 +81,7 @@ class _homeState extends State<home> {
                               child: Text(
                                 (controller.picDate.value.toString()),
                                 style: TextStyle(
+                                    color: black,
                                     fontSize: 16.5.sp,
                                     fontFamily: opensansMedium,
                                     fontWeight: FontWeight.w700),
@@ -90,7 +96,9 @@ class _homeState extends State<home> {
                             child: Text(
                               '04:48 PM',
                               style: TextStyle(
-                                  fontSize: 13.sp, fontFamily: opensansMedium),
+                                  color: black,
+                                  fontSize: 13.sp,
+                                  fontFamily: opensansMedium),
                             ),
                           ),
                         ),
@@ -169,7 +177,9 @@ class _homeState extends State<home> {
                     Text(
                       'Services',
                       style: TextStyle(
-                          fontFamily: opensansMedium, fontSize: 15.sp),
+                          color: black,
+                          fontFamily: opensansMedium,
+                          fontSize: 15.sp),
                     ),
                   ],
                 ),
@@ -186,7 +196,7 @@ class _homeState extends State<home> {
                         width: 37.w,
                         margin: EdgeInsets.only(left: 3.h),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: white,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           boxShadow: [
                             BoxShadow(
@@ -235,7 +245,9 @@ class _homeState extends State<home> {
                     Text(
                       'Experts',
                       style: TextStyle(
-                          fontFamily: opensansMedium, fontSize: 15.sp),
+                          color: black,
+                          fontFamily: opensansMedium,
+                          fontSize: 15.sp),
                     ),
                   ],
                 ),
@@ -301,7 +313,9 @@ class _homeState extends State<home> {
                     Text(
                       'Offers',
                       style: TextStyle(
-                          fontFamily: opensansMedium, fontSize: 15.sp),
+                          color: black,
+                          fontFamily: opensansMedium,
+                          fontSize: 15.sp),
                     ),
                   ],
                 ),

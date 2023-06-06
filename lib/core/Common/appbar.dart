@@ -45,15 +45,15 @@ class HomeAppBar extends StatelessWidget {
                       ? isBack == true
                           ? SvgPicture.asset(
                               Asset.backbutton,
-                              color: !isLightMode() ? white : black,
+                              color: isDarkMode() ? white : black,
                             )
                           : SvgPicture.asset(
                               Asset.menu,
-                              color: !isLightMode() ? white : black,
+                              color: isDarkMode() ? white : black,
                             )
                       : SvgPicture.asset(
                           Asset.cart,
-                          color: !isLightMode() ? white : black,
+                          color: isDarkMode() ? white : black,
                         )),
           Expanded(
             child: Padding(
@@ -69,7 +69,7 @@ class HomeAppBar extends StatelessWidget {
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       fontSize: 16.5.sp,
-                      color: !isLightMode() ? white : black,
+                      color: isDarkMode() ? white : black,
                       fontFamily: opensans_Bold,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w800,

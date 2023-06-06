@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../core/themes/color_const.dart';
 import '../core/themes/font_constant.dart';
+import '../core/utils/helper.dart';
 
 Future showbottomsheetdialog(BuildContext context) {
   bool? check2 = false;
@@ -11,6 +13,7 @@ Future showbottomsheetdialog(BuildContext context) {
   bool check1 = false;
   return showModalBottomSheet(
     context: context,
+    backgroundColor: isDarkMode() ? white : black,
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
       top: Radius.circular(25.0),
@@ -28,6 +31,7 @@ Future showbottomsheetdialog(BuildContext context) {
                 child: Text(
               'Filter',
               style: TextStyle(
+                  color: isDarkMode() ? white : black,
                   fontFamily: opensans_Bold,
                   fontWeight: FontWeight.w700,
                   fontSize: 20.sp),
@@ -69,6 +73,7 @@ Future showbottomsheetdialog(BuildContext context) {
                             title: Text(
                               'Cancelations',
                               style: TextStyle(
+                                  color: isDarkMode() ? white : black,
                                   fontFamily: opensansMedium,
                                   fontWeight: FontWeight.w400),
                             ),
@@ -94,6 +99,7 @@ Future showbottomsheetdialog(BuildContext context) {
                             },
                             title: Text('Pending',
                                 style: TextStyle(
+                                    color: isDarkMode() ? white : black,
                                     fontFamily: opensansMedium,
                                     fontWeight: FontWeight.w400)),
                           ),
@@ -120,6 +126,7 @@ Future showbottomsheetdialog(BuildContext context) {
                             },
                             title: Text('Late Cancelations',
                                 style: TextStyle(
+                                    color: isDarkMode() ? white : black,
                                     fontFamily: opensansMedium,
                                     fontWeight: FontWeight.w400)),
                           ),
@@ -143,7 +150,7 @@ Future showbottomsheetdialog(BuildContext context) {
                           child: Text(
                             'Apply',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: isDarkMode() ? white : black,
                                 fontSize: 14.5.sp,
                                 fontFamily: opensans_Bold,
                                 fontWeight: FontWeight.w700),

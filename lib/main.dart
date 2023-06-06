@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
                       theme: !ctr.isDark.value
                           ? ThemeData.light()
                           : ThemeData.dark(),
-                      debugShowCheckedModeBanner: false,
+                      https://github.com/Esra2-Abdelltif/sala-App.git: false,
                       home: Splashscreen(),
                       defaultTransition: Transition.rightToLeftWithFade,
                     );

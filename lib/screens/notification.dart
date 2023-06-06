@@ -1,3 +1,5 @@
+import 'package:booking_app/core/themes/color_const.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:booking_app/screens/previous_notification.dart';
 import 'package:booking_app/screens/upcoming_notification.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +46,6 @@ class _notificationState extends State<notification>
       extendBody: true,
       backgroundColor: Colors.white,
       body: SafeArea(
-        minimum: EdgeInsets.only(top: 1.h),
         child: Stack(children: [
           SizedBox(
             height: double.infinity,
@@ -54,27 +55,20 @@ class _notificationState extends State<notification>
               fit: BoxFit.cover,
             ),
           ),
-          Container(
-              margin: EdgeInsets.only(
-                top: 0.5.h,
-              ),
-              child: Center(
-                  child: Column(children: [
-                HomeAppBar(
-                  title: 'Notifications',
-                  leading: Asset.backbutton,
-                  isfilter: false,
-                  icon: Asset.filter,
-                  isBack: true,
-                  onClick: () {
-                    showbottomsheetdialog(context);
-                  },
-                ),
-              ]))),
-          Container(
-            margin: EdgeInsets.only(top: 4.h),
-            child: getListViewItem(),
-          ),
+          Center(
+              child: Column(children: [
+            HomeAppBar(
+              title: 'Notifications',
+              leading: Asset.backbutton,
+              isfilter: false,
+              icon: Asset.filter,
+              isBack: true,
+              onClick: () {
+                showbottomsheetdialog(context);
+              },
+            ),
+          ])),
+          getListViewItem(),
         ]),
       ),
     );
@@ -83,40 +77,45 @@ class _notificationState extends State<notification>
   getListViewItem() {
     return DefaultTabController(
         length: 2,
-        child: Column(children: [
-          getPaddingFromStatusBar(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              getTab(Strings.upcoming_title, 30, 0),
-              getTab(Strings.previous_title, 30, 1),
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 2.h, top: 2.h, left: 3.5.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+        child: Container(
+          margin: EdgeInsets.only(top: 4.h),
+          padding: EdgeInsets.symmetric(horizontal: 1.8.w),
+          child: Column(children: [
+            getPaddingFromStatusBar(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'March 22,2023',
-                  style: TextStyle(
-                      fontSize: 14.sp,
-                      fontFamily: opensansMedium,
-                      fontWeight: FontWeight.w700),
-                ),
+                getTab(Strings.upcoming_title, 30, 0),
+                getTab(Strings.previous_title, 30, 1),
               ],
             ),
-          ),
-          Expanded(
-            child: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                controller: controller.tabController,
+            Container(
+              margin: EdgeInsets.only(bottom: 2.h, top: 2.h, left: 6.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  upcomingNotificationScreen,
-                  previousNotificationScreen
-                ]),
-          ),
-        ]));
+                  Text(
+                    'March 22,2023',
+                    style: TextStyle(
+                        color: isDarkMode() ? black : white,
+                        fontSize: 14.sp,
+                        fontFamily: opensansMedium,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  controller: controller.tabController,
+                  children: [
+                    upcomingNotificationScreen,
+                    previousNotificationScreen
+                  ]),
+            ),
+          ]),
+        ));
   }
 
   getTab(str, pad, index) {
@@ -134,20 +133,18 @@ class _notificationState extends State<notification>
             width: 40.w,
             duration: const Duration(milliseconds: 300),
             margin: EdgeInsets.symmetric(
-              horizontal: 3.5.w,
+              horizontal: 2.5.w,
             ),
             padding: EdgeInsets.only(
                 left: 5.w, right: 5.w, top: 1.3.h, bottom: 1.3.h),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: controller.currentPage.value == index
-                    ? Colors.black
-                    : Colors.white,
+                color: controller.currentPage.value == index ? black : white,
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 10,
                     spreadRadius: 0.1,
-                    color: Colors.black.withOpacity(.1),
+                    color: black.withOpacity(.1),
                   )
                 ],
                 borderRadius: BorderRadius.circular(50)),
@@ -162,7 +159,7 @@ class _notificationState extends State<notification>
                       fontFamily: opensans_Bold,
                       fontWeight: FontWeight.w700,
                       color: controller.currentPage.value == index
-                          ? Colors.white
+                          ? white
                           : Colors.grey[850]),
                 ),
                 SizedBox(
@@ -173,12 +170,15 @@ class _notificationState extends State<notification>
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: controller.currentPage.value == index
-                                ? Colors.white
+                                ? white
                                 : null),
                         padding: EdgeInsets.only(
                             left: 5, right: 5, top: 1, bottom: 1),
                         child: controller.currentPage.value == index
-                            ? Text("6", style: TextStyle(fontSize: 12.5.sp))
+                            ? Text("6",
+                                style: TextStyle(
+                                    fontSize: 12.5.sp,
+                                    color: isDarkMode() ? black : white))
                             : null,
                       )
                     : Container()

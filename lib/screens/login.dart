@@ -2,14 +2,15 @@ import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/constants/assets.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:booking_app/screens/Changepassword.dart';
-import 'package:booking_app/screens/phone.dart';
 import 'package:booking_app/screens/signup.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../core/Common/Common.dart';
 import '../core/Common/util.dart';
 import '../core/constants/strings.dart';
 
@@ -205,12 +206,7 @@ class _LoginpageState extends State<Loginpage> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Changepassword(),
-                                              ));
+                                          Get.to(Changepassword());
                                         },
                                         child: Text(
                                           Strings.forgot_pass,
@@ -225,34 +221,7 @@ class _LoginpageState extends State<Loginpage> {
                                   SizedBox(
                                     height: 4.h,
                                   ),
-                                  FadeInUp(
-                                    from: 50,
-                                    child: SizedBox(
-                                        width: 150.h,
-                                        height: 6.h,
-                                        child: ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const Phone()));
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.black,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50))),
-                                            child: Text(
-                                              Strings.sing_in,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14.5.sp,
-                                                  fontFamily: opensans_Bold,
-                                                  fontWeight: FontWeight.w700),
-                                            ))),
-                                  ),
+                                  Common().getBtn(Strings.sing_in),
                                 ],
                               ),
                             ),
@@ -265,8 +234,6 @@ class _LoginpageState extends State<Loginpage> {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
-
-                              // ignore: prefer_const_literals_to_create_immutables
                               children: [
                                 getDivider(),
                                 Text(

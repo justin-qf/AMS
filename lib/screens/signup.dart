@@ -155,7 +155,6 @@ class _signuppageState extends State<signuppage> {
                                   hintLabel: Strings.contact_no_hint,
                                   onChanged: (val) {
                                     signinController.validatePhone(val);
-                                    setState(() {});
                                   },
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
@@ -167,7 +166,6 @@ class _signuppageState extends State<signuppage> {
                                   ],
                                   errorText: signinController
                                       .mobileNoModel.value.error,
-                                  wantSuffix: true,
                                   inputType: TextInputType.number,
                                 );
                               }))),

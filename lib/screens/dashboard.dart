@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../controllers/home_screen_controller.dart';
+import '../core/Common/Common.dart';
 import 'Appointment.dart';
 import 'navdrawer.dart';
 
@@ -38,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Common().trasparent_statusbar();
     return Scaffold(
       drawer: Navdrawer(),
       key: controller.drawer_key,

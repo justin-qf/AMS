@@ -1,4 +1,5 @@
 import 'package:booking_app/controllers/notification_screen_controller.dart';
+import 'package:booking_app/core/themes/color_const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:sizer/sizer.dart';
 import '../Models/product.dart';
 import '../core/constants/assets.dart';
 import '../core/themes/font_constant.dart';
+import '../core/utils/helper.dart';
 
 class PreviousNotificationScreen extends StatefulWidget {
   const PreviousNotificationScreen({super.key});
@@ -36,13 +38,13 @@ class _PreviousNotificationScreenState
   getListItem(BuildContext context, int index) {
     ProductItem data = controller.staticData[index];
     return Container(
-      margin: EdgeInsets.only(top: 1.h, left: 7.w, right: 7.w, bottom: 1.h),
+      margin: EdgeInsets.only(top: 1.h, left: 6.5.w, right: 6.5.w, bottom: 1.h),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(10)),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: black.withOpacity(0.2),
               spreadRadius: 0.1,
               blurRadius: 10,
               offset: Offset(0.5, 0.5)),
@@ -100,6 +102,7 @@ class _PreviousNotificationScreenState
                           child: Text(
                             data.Name,
                             style: TextStyle(
+                                color: isDarkMode() ? black : white,
                                 fontFamily: opensansMedium,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w700),
@@ -124,12 +127,16 @@ class _PreviousNotificationScreenState
                         child: Text(
                       data.title,
                       style: TextStyle(
-                          fontFamily: opensansMedium, fontSize: 11.sp),
+                          color: isDarkMode() ? black : white,
+                          fontFamily: opensansMedium,
+                          fontSize: 11.sp),
                     )),
                     Text(
                       data.time,
                       style: TextStyle(
-                          fontFamily: opensansMedium, fontSize: 10.5.sp),
+                          color: isDarkMode() ? black : white,
+                          fontFamily: opensansMedium,
+                          fontSize: 10.5.sp),
                     )
                   ],
                 ),
