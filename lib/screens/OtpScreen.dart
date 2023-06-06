@@ -1,11 +1,14 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/core/constants/assets.dart';
+import 'package:booking_app/screens/DashboardScreen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
-import 'package:sms_autofill/sms_autofill.dart';
-import 'package:telephony/telephony.dart';
 
-import '../core/constants/assets.dart';
+import '../core/Common/Common.dart';
+import '../core/Common/OTP_Textfield.dart';
+import '../core/constants/strings.dart';
 import '../core/themes/font_constant.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -16,97 +19,195 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  Telephony telephony = Telephony.instance;
+  late TextEditingController otp1 = TextEditingController();
+  late TextEditingController otp2 = TextEditingController();
+  late TextEditingController otp3 = TextEditingController();
+  late TextEditingController otp4 = TextEditingController();
+  FocusNode node1 = FocusNode();
+  FocusNode node2 = FocusNode();
+  FocusNode node3 = FocusNode();
+  FocusNode node4 = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      telephony.listenIncomingSms(
-        onNewMessage: (SmsMessage message) {
-          print(message.address); //+977981******67, sender nubmer
-          print(message.body); //Your OTP code is 34567
-          print(message.date); //1659690242000, timestamp
+  }
 
-          String sms = message.body.toString(); //get the message
-          print("-----------------");
-          print(sms);
-
-          if (message.address == "+917359792115") {
-            //verify SMS is sent for OTP with sender number
-            String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
-            //prase code from the OTP sms
-
-            //otpbox.set(otpcode.split(""));
-
-            //split otp code to list of number
-            //and populate to otb boxes
-
-            setState(() {
-              print(otpcode);
-              //refresh UI
-            });
-          } else {
-            print("Normal message.");
-          }
-        },
-        listenInBackground: false,
-      );
-    });
-
-    setState(() {});
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    node1.dispose();
+    node2.dispose();
+    node3.dispose();
+    node4.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
+        resizeToAvoidBottomInset: false,
+        body: Stack(children: [
           SizedBox(
             height: double.infinity,
             width: double.infinity,
             child: SvgPicture.asset(Asset.bg, fit: BoxFit.cover),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                margin: EdgeInsets.only(right: 35.sp),
-                padding: EdgeInsets.only(
-                  top: 8.h,
-                ),
-                child: FadeInDown(
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                FadeInDown(
                   from: 50,
-                  child: Text(
-                    "Otp",
-                    style: TextStyle(
-                        fontFamily: opensans_Bold,
-                        fontSize: 32.sp,
-                        fontWeight: FontWeight.w700),
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      right: 95.sp,
+                    ),
+                    padding: EdgeInsets.only(
+                      top: 8.h,
+                    ),
+                    child: Text(
+                      Strings.verification,
+                      style: TextStyle(
+                          fontFamily: opensans_Bold,
+                          fontSize: 30.sp,
+                          fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
-              ),
-              PinFieldAutoFill(
-                codeLength: 4,
-                decoration: UnderlineDecoration(
-                  textStyle: const TextStyle(fontSize: 20, color: Colors.black),
-                  colorBuilder:
-                      FixedColorBuilder(Colors.black.withOpacity(0.3)),
-                ),
-                currentCode: "123456",
-                onCodeSubmitted: (code) {},
-                onCodeChanged: (code) {
-                  if (code!.length == 4) {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                  }
-                },
-              ),
-            ],
-          )
-        ],
-      ),
-    );
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FadeInDown(
+                        from: 50,
+                        child: Container(
+                          padding: EdgeInsets.only(
+                            left: 7.0.w,
+                            right: 7.0.w,
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  Asset.otp,
+                                  height: 40.h,
+                                  width: 30.h,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: Text(
+                              Strings.otp_code,
+                              style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontFamily: opensansMedium,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          OtpInput(
+                            otp1,
+                            false,
+                            node1,
+                          ),
+                          SizedBox(width: 4.5.w),
+                          OtpInput(otp2, false, node2),
+                          SizedBox(width: 4.5.w),
+                          OtpInput(otp3, false, node3),
+                          SizedBox(width: 4.5.w),
+                          OtpInput(otp4, false, node4),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 3.0.h,
+                      ),
+                      FadeInUp(
+                        from: 50,
+                        child: Container(
+                          child: Text(
+                            Strings.not_receive_code,
+                            style: TextStyle(
+                                fontSize: 13.5.sp,
+                                fontFamily: opensansMedium,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 1.5.h,
+                      ),
+                      FadeInUp(
+                        from: 50,
+                        child: InkWell(
+                          onTap: () {
+                            Common.PopupDialog(context);
+                          },
+                          child: Container(
+                            child: Text(
+                              Strings.resend,
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Colors.black,
+                                  decorationThickness: 1.5,
+                                  fontSize: 15.sp,
+                                  fontFamily: opensans_Bold,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      FadeInUp(
+                        from: 50,
+                        child: SizedBox(
+                            width: 80.w,
+                            height: 6.h,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => dashboard()));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.black,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(50))),
+                                child: Text(
+                                  Strings.verify,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14.5.sp,
+                                      fontFamily: opensans_Bold,
+                                      fontWeight: FontWeight.w700),
+                                ))),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ]));
   }
 }

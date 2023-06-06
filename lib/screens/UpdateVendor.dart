@@ -1,13 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/controllers/UpdateVendor_controller.dart';
-import 'package:booking_app/screens/signup2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-import '../controllers/sign_up_controller.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
@@ -163,7 +161,7 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                     controller: UpdatevendorController.passctr,
                                     hintLabel: Strings.pass_hint,
                                     onChanged: (val) {
-                                      UpdatevendorController.validateEmail(val);
+                                      UpdatevendorController.validatePass(val);
                                       setState(() {});
                                     },
                                     errorText: UpdatevendorController
@@ -185,7 +183,8 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                     formType: FieldType.Mobile,
                                     hintLabel: Strings.contact_no_hint,
                                     onChanged: (val) {
-                                      UpdatevendorController.validatePhone(val);
+                                      UpdatevendorController.validatePhone1(
+                                          val);
                                       setState(() {});
                                     },
                                     inputFormatters: [
@@ -198,7 +197,6 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                     ],
                                     errorText: UpdatevendorController
                                         .contactoneModel.value.error,
-                                    wantSuffix: true,
                                     inputType: TextInputType.number,
                                   );
                                 }))),
@@ -216,7 +214,8 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                     formType: FieldType.Mobile,
                                     hintLabel: Strings.contact_no_hint,
                                     onChanged: (val) {
-                                      UpdatevendorController.validatePhone(val);
+                                      UpdatevendorController.validatePhone2(
+                                          val);
                                       setState(() {});
                                     },
                                     inputFormatters: [
@@ -228,8 +227,7 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                       // ),
                                     ],
                                     errorText: UpdatevendorController
-                                        .contactoneModel.value.error,
-                                    wantSuffix: true,
+                                        .contacttwoModel.value.error,
                                     inputType: TextInputType.number,
                                   );
                                 }))),
@@ -246,7 +244,8 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                     formType: FieldType.Mobile,
                                     hintLabel: Strings.contact_no_hint,
                                     onChanged: (val) {
-                                      UpdatevendorController.validatePhone(val);
+                                      UpdatevendorController.validatePhone3(
+                                          val);
                                       setState(() {});
                                     },
                                     inputFormatters: [
@@ -258,8 +257,7 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                       // ),
                                     ],
                                     errorText: UpdatevendorController
-                                        .contactoneModel.value.error,
-                                    wantSuffix: true,
+                                        .whatsappModel.value.error,
                                     inputType: TextInputType.number,
                                   );
                                 }))),
@@ -273,7 +271,11 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                     node: UpdatevendorController.LogoNode,
                                     controller: UpdatevendorController.logoctr,
                                     hintLabel: Strings.logo_hint,
-                                    onChanged: (val) {},
+                                    wantSuffix: true,
+                                    onChanged: (val) {
+                                      UpdatevendorController.validateLogo(val);
+                                      setState(() {});
+                                    },
                                     errorText: UpdatevendorController
                                         .logoModel.value.error,
                                     inputType: TextInputType.text,
@@ -290,7 +292,10 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                     controller:
                                         UpdatevendorController.breacherctr,
                                     hintLabel: Strings.breachers_hint,
+                                    wantSuffix: true,
                                     onChanged: (val) {
+                                      UpdatevendorController.validateBreacher(
+                                          val);
                                       setState(() {});
                                     },
                                     errorText: UpdatevendorController
@@ -309,7 +314,10 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                     controller:
                                         UpdatevendorController.profilectr,
                                     hintLabel: Strings.profile_hint,
+                                    wantSuffix: true,
                                     onChanged: (val) {
+                                      UpdatevendorController.validateProfile(
+                                          val);
                                       setState(() {});
                                     },
                                     errorText: UpdatevendorController
@@ -328,7 +336,10 @@ class _UpdateVendorState extends State<UpdateVendor> {
                                     controller:
                                         UpdatevendorController.propertyctr,
                                     hintLabel: Strings.property_hint,
+                                    wantSuffix: true,
                                     onChanged: (val) {
+                                      UpdatevendorController.validateProperty(
+                                          val);
                                       setState(() {});
                                     },
                                     errorText: UpdatevendorController
@@ -343,7 +354,7 @@ class _UpdateVendorState extends State<UpdateVendor> {
                             child: getButton(() {
                               if (UpdatevendorController
                                   .isFormInvalidate.value) {
-                                Get.to(Signup2());
+                                // Get.to(Signup2());
                               }
                             })),
                       ],

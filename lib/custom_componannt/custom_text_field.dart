@@ -1,5 +1,7 @@
+import 'package:booking_app/core/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import '../../core/themes/color_const.dart';
 import '../core/themes/font_constant.dart';
@@ -13,6 +15,7 @@ class CustomFormField extends StatelessWidget {
       required this.errorText,
       this.onChanged,
       this.validator,
+      this.title,
       this.inputFormatters,
       required this.inputType,
       required this.node,
@@ -20,10 +23,17 @@ class CustomFormField extends StatelessWidget {
       this.formType,
       this.isExpand,
       this.isVerified,
+      this.isStarting,
+      this.isPhoto,
+      this.isDropdown,
+      this.isCalender,
+      this.isHidden,
       this.wantSuffix,
       this.onVerifiyButtonClick,
       this.isDataValidated,
       this.onTap,
+      this.isPick,
+      this.isPassword,
       this.isFromAddStory = false,
       this.isEnable = true})
       : super(key: key);
@@ -32,20 +42,32 @@ class CustomFormField extends StatelessWidget {
   final FieldType? formType;
   final List<TextInputFormatter>? inputFormatters;
   final String? errorText;
+  final String? title;
   final FocusNode node;
   final Function(String?)? onChanged;
   final bool? isExpand;
   final String? Function(String?)? validator;
   final TextInputType inputType;
   final bool? isVerified;
+  final bool? isPick;
+  final bool? isStarting;
+  final bool? isDropdown;
+  final bool? isPhoto;
+  final bool? isPassword;
+  final bool? isCalender;
   final Function? onVerifiyButtonClick;
   final bool? wantSuffix;
+  final bool? isHidden;
   final bool? isDataValidated;
   final Function? onTap;
   bool isEnable = true;
   bool isFromAddStory = false;
+  bool obscuretext = false;
   @override
   Widget build(BuildContext context) {
+    print(
+      "wantSuffix${wantSuffix}",
+    );
     return TextFormField(
       enabled: isEnable,
       cursorColor: primaryColor,
@@ -65,6 +87,8 @@ class CustomFormField extends StatelessWidget {
               color: black)
           : styleTextFormFieldText(),
       textAlignVertical: TextAlignVertical.center,
+      obscureText: obscuretext,
+      obscuringCharacter: '*',
       decoration: InputDecoration(
         labelStyle: styleTextForFieldLabel(node),
         contentPadding: EdgeInsets.only(
@@ -79,6 +103,7 @@ class CustomFormField extends StatelessWidget {
         //EdgeInsets.symmetric(vertical: 1.8.h, horizontal: 5.w),
         hintText: hintText,
         errorText: errorText,
+
         hintStyle: styleTextForFieldHint(),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
@@ -98,6 +123,7 @@ class CustomFormField extends StatelessWidget {
             color: inputBorderColor,
           ),
         ),
+
         // prefixStyle: styleTextFormFieldText(),
         prefixIcon: formType != null && formType == FieldType.Mobile
             ? Container(
@@ -112,32 +138,52 @@ class CustomFormField extends StatelessWidget {
             : null,
         prefixIconConstraints:
             const BoxConstraints(minHeight: 25, maxHeight: 30),
-        suffix: (wantSuffix != null &&
-                wantSuffix! &&
-                controller!.text.toString().isNotEmpty &&
-                errorText == null)
+        suffixIcon: wantSuffix == true
             ? GestureDetector(
                 onTap: () {
-                  onVerifiyButtonClick!();
+                  obscuretext = !obscuretext;
+                  print('Hidden');
+                  // onVerifiyButtonClick!();
                 },
-                child: Container(
-                  padding: const EdgeInsets.only(
-                      top: 3, right: 5, left: 5, bottom: 3),
-                  decoration: BoxDecoration(
-                      color: isVerified! ? Colors.green : primaryColor,
-                      borderRadius: BorderRadius.circular(3)),
-                  child: Text(
-                    isVerified! ? 'Verified' : 'Verify',
-                    style: TextStyle(
-                        fontSize: 7.sp,
-                        fontFamily: fontMedium,
-                        color: Colors.white),
-                  ),
-                ),
-              )
+                child: isStarting == true
+                    ? SvgPicture.asset(Asset.time,
+                        height: 5, width: 5, fit: BoxFit.scaleDown)
+                    : isDropdown == true
+                        ? SvgPicture.asset(
+                            Asset.dropdown,
+                            height: 5,
+                            width: 5,
+                            fit: BoxFit.scaleDown,
+                          )
+                        : isCalender == true
+                            ? SvgPicture.asset(
+                                Asset.calender,
+                                height: 5,
+                                width: 5,
+                                fit: BoxFit.scaleDown,
+                                color: Colors.grey,
+                              )
+                            : InkWell(
+                                child: isPassword == true
+                                    ? Icon(
+                                        Icons.visibility_off,
+                                        color: Colors.grey,
+                                        size: 20.sp,
+                                      )
+                                    :
+                                    // : Icon(
+                                    //     Icons.photo,
+                                    //     size: 25,
+                                    //   ))
+                                    SvgPicture.asset(Asset.photos,
+                                        height: 5,
+                                        width: 5,
+                                        fit: BoxFit.scaleDown),
+                              ))
             : Container(
                 width: 1,
               ),
+
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: const BorderSide(

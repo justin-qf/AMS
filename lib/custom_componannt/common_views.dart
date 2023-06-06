@@ -1,14 +1,20 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'dart:io' show Platform;
 
+import '../controllers/AppointmentBooking_controller.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 import '../core/themes/color_const.dart';
 import '../core/themes/font_constant.dart';
 import '../core/utils/helper.dart';
+
+bool Click = true;
+bool White = true;
+bool Black = true;
 
 Widget getScreenBackground(context) {
   return Container(
@@ -80,6 +86,71 @@ getTitle(String title) {
   );
 }
 
+getTime(String time, AppointmentBookingController controler) {
+  return Row(
+    children: [
+      InkWell(
+        onTap: () {
+          controler.isClickd.value = !controler.isClickd.value;
+          //controler.setOnClick(controler.isClickd.value);
+          print("ISCLICK::::${controler.isClickd.value}");
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          height: 5.h,
+          width: 25.w,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: controler.isClickd.value ? Colors.black : Colors.grey),
+          child: Center(
+            child: Text(
+              time,
+              style: TextStyle(
+                  fontFamily: opensans_Bold,
+                  fontSize:
+                      SizerUtil.deviceType == DeviceType.mobile ? 12.sp : 13.sp,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+        ),
+      ),
+      SizedBox(
+        height: 0.5.h,
+      ),
+    ],
+  );
+
+  // return Row(
+  //   children: [
+  //     InkWell(
+  //       onTap: () {
+  //         isClick = !isClick;
+  //       },
+  //       child: AnimatedContainer(
+  //         duration: const Duration(milliseconds: 300),
+  //         height: 5.h,
+  //         width: 25.w,
+  //         decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(20),
+  //             color: isClick ? Colors.black : Colors.grey),
+  //         child: Center(
+  //           child: Text(
+  //             time,
+  //             style: TextStyle(
+  //                 fontFamily: opensans_Bold,
+  //                 fontSize:
+  //                     SizerUtil.deviceType == DeviceType.mobile ? 12.sp : 13.sp,
+  //                 fontWeight: FontWeight.w700),
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //     SizedBox(
+  //       height: 0.5.h,
+  //     ),
+  //   ],
+  // );
+}
 
 getTopBackground(context) {
   return SvgPicture.asset(Asset.add_service,

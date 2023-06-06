@@ -5,13 +5,13 @@ import 'package:get_storage/get_storage.dart';
 import '../Models/sign_in_form_validation.dart';
 import 'internet_controller.dart';
 
-class LoginController extends GetxController {
+class PhoneController extends GetxController {
   late final GetStorage _getStorage;
   final InternetController _networkManager = Get.find<InternetController>();
 
-  late FocusNode Email, Pass;
+  late FocusNode Phone;
 
-  late TextEditingController emailctr, passctr;
+  late TextEditingController phonectr;
 
   final formKey = GlobalKey<FormState>();
 
@@ -19,48 +19,33 @@ class LoginController extends GetxController {
   void onInit() {
     _getStorage = GetStorage();
 
-    Email = FocusNode();
-    Pass = FocusNode();
+    Phone = FocusNode();
 
-    emailctr = TextEditingController();
-    passctr = TextEditingController();
+    phonectr = TextEditingController();
 
     enableSignUpButton();
     super.onInit();
   }
 
   var isLoading = false.obs;
-  var emailModel = ValidationModel(null, null, isValidate: false).obs;
-  var passModel = ValidationModel(null, null, isValidate: false).obs;
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  var phoneModel = ValidationModel(null, null, isValidate: false).obs;
 
   void enableSignUpButton() {
-    if (emailModel.value.isValidate == false) {
-      isFormInvalidate.value = false;
-    } else if (passModel.value.isValidate == false) {
+    if (phoneModel.value.isValidate == false) {
       isFormInvalidate.value = false;
     } else {
       isFormInvalidate.value = true;
     }
   }
 
-  void validateEmail(String? val) {
-    emailModel.update((model) {
-      if (val != null && val.isEmpty) {
-        model!.error = "Enter Email";
+  void validatePhone(String? val) {
+    phoneModel.update((model) {
+      if (val == null || val.isEmpty) {
+        model!.error = "Enter Contact No.1";
         model.isValidate = false;
-      } else {
-        model!.error = null;
-        model.isValidate = true;
-      }
-    });
-
-    enableSignUpButton();
-  }
-
-  void validatePassword(String? val) {
-    passModel.update((model) {
-      if (val != null && val.isEmpty) {
-        model!.error = "Enter Password";
+      } else if (val.replaceAll(' ', '').length < 10) {
+        model!.error = "Enter Valid Contact No";
         model.isValidate = false;
       } else {
         model!.error = null;

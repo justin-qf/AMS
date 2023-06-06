@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../Models/sign_in_form_validation.dart';
-import 'internet_controller.dart';
+import '../../Models/sign_in_form_validation.dart';
+import '../../controllers/internet_controller.dart';
 
 class LoginController extends GetxController {
   late final GetStorage _getStorage;
@@ -30,6 +30,7 @@ class LoginController extends GetxController {
   }
 
   var isLoading = false.obs;
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   var emailModel = ValidationModel(null, null, isValidate: false).obs;
   var passModel = ValidationModel(null, null, isValidate: false).obs;
 

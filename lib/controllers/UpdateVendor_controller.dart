@@ -94,7 +94,7 @@ class UpdateVendorController extends GetxController {
   void validateVendorname(String? val) {
     vendornameModel.update((model) {
       if (val != null && val.isEmpty) {
-        model!.error = "Enter Company Name";
+        model!.error = "Enter Name";
         model.isValidate = false;
       } else {
         model!.error = null;
@@ -165,13 +165,103 @@ class UpdateVendorController extends GetxController {
     enableSignUpButton();
   }
 
-  void validatePhone(String? val) {
+  void validatePhone1(String? val) {
     contactoneModel.update((model) {
       if (val == null || val.isEmpty) {
-        model!.error = "Enter Contact No";
+        model!.error = "Enter Contact No.1";
         model.isValidate = false;
       } else if (val.replaceAll(' ', '').length < 10) {
         model!.error = "Enter Valid Contact No";
+        model.isValidate = false;
+      } else {
+        model!.error = null;
+        model.isValidate = true;
+      }
+    });
+
+    enableSignUpButton();
+  }
+
+  void validatePhone2(String? val) {
+    contacttwoModel.update((model) {
+      if (val == null || val.isEmpty) {
+        model!.error = "Enter Contact No.2";
+        model.isValidate = false;
+      } else if (val.replaceAll(' ', '').length < 10) {
+        model!.error = "Enter Valid Contact No";
+        model.isValidate = false;
+      } else {
+        model!.error = null;
+        model.isValidate = true;
+      }
+    });
+
+    enableSignUpButton();
+  }
+
+  void validatePhone3(String? val) {
+    whatsappModel.update((model) {
+      if (val == null || val.isEmpty) {
+        model!.error = "Enter Whatsapp No";
+        model.isValidate = false;
+      } else if (val.replaceAll(' ', '').length < 10) {
+        model!.error = "Enter Valid Contact No";
+        model.isValidate = false;
+      } else {
+        model!.error = null;
+        model.isValidate = true;
+      }
+    });
+
+    enableSignUpButton();
+  }
+
+  void validateLogo(String? val) {
+    logoModel.update((model) {
+      if (val == null || val.isEmpty) {
+        model!.error = "Select Logo";
+        model.isValidate = false;
+      } else {
+        model!.error = null;
+        model.isValidate = true;
+      }
+    });
+
+    enableSignUpButton();
+  }
+
+  void validateBreacher(String? val) {
+    breacherModel.update((model) {
+      if (val == null || val.isEmpty) {
+        model!.error = "Select Breachers";
+        model.isValidate = false;
+      } else {
+        model!.error = null;
+        model.isValidate = true;
+      }
+    });
+
+    enableSignUpButton();
+  }
+
+  void validateProfile(String? val) {
+    profileModel.update((model) {
+      if (val == null || val.isEmpty) {
+        model!.error = "Select Profile Pic";
+        model.isValidate = false;
+      } else {
+        model!.error = null;
+        model.isValidate = true;
+      }
+    });
+
+    enableSignUpButton();
+  }
+
+  void validateProperty(String? val) {
+    propertyModel.update((model) {
+      if (val == null || val.isEmpty) {
+        model!.error = "Select Property Images";
         model.isValidate = false;
       } else {
         model!.error = null;

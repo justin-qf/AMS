@@ -1,5 +1,3 @@
-import 'package:booking_app/screens/profile.dart';
-
 class Asset {
   static const assets = "assets/";
   static const svgFolder = 'svgs/';
@@ -73,4 +71,7 @@ class Asset {
   static const bma_logo = '$assets${svgFolder}BMA-LOGO.svg';
   static const service = '$assets${svgFolder}Ellipse 20.svg';
   static const white_logo = '$assets${svgFolder}white-logo.svg';
+  static const photos = '$assets${svgFolder}photos_img.svg';
+  static const time = '$assets${svgFolder}time.svg';
+  static const dropdown = '$assets${svgFolder}dropdown.svg';
 }

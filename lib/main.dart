@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
+import 'package:booking_app/Screens/SplashScreen.dart';
 import 'package:booking_app/core/Common/Common.dart';
-import 'package:booking_app/screens/Splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

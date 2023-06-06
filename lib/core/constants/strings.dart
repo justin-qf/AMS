@@ -212,7 +212,7 @@ class Strings {
   static const String field_hint = 'Enter Name';
   static const String time = 'Time';
   static const String time_hint = 'Time';
-  static const String approx = 'Approx Settings';
+  static const String approx = 'Approx Sittings';
   static const String approx_hint = '15';
   static const String duration = 'Sitting Duration';
   static const String duration_hint = 'Sitting Duration';
@@ -231,7 +231,10 @@ class Strings {
   //Homeappbar
   static const String add_vendor_service = 'Add Vendor Service';
   static const String add_product = 'Add Product';
-
+  static const String appointment_booking = 'Appointment Booking';
+  static const String add_course = 'Add Course';
+  static const String add_customer = 'Add Customer';
+  static const String report_bug = 'Report Bug';
   //Customer
   static const String customer = 'Customer Name';
   static const String dob = 'Date Of Birth';
@@ -290,4 +293,16 @@ class Strings {
   static const String Appointment_slot = 'Appointment Slot';
   static const String customer_hint = 'Customer Name';
   static const String Services = 'Services';
+  static const String time1 = '10:30 AM';
+  static const String time2 = '11:30 AM';
+  static const String time3 = '12:30 AM';
+  static const String time4 = '01:30 PM';
+  static const String time5 = '02:30 PM';
+  static const String time6 = '04:00 PM';
+  static const String time7 = '05:00 PM';
+  static const String time8 = '06:00 PM';
+  static const String time9 = '07:00 PM';
+  static const String time10 = '08:00 PM';
+  static const String time11 = '09:00 PM';
+  static const String time12 = '10:00 PM';
 }

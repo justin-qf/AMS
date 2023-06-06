@@ -53,7 +53,7 @@ class HomeAppBar extends StatelessWidget {
                             )
                       : SvgPicture.asset(
                           Asset.cart,
-                          color: !isLightMode() ? black : white ,
+                          color: !isLightMode() ? black : white,
                         )),
           Expanded(
             child: Padding(
@@ -93,7 +93,8 @@ class HomeAppBar extends StatelessWidget {
                   title == 'Add Customer' ||
                   title == 'Add Product' ||
                   title == 'Add Course' ||
-                  title == 'Report Bug'
+                  title == 'Report Bug' ||
+                  title == 'Appointment Booking'
               ? Container()
               : isfilter == true
                   ? Row(

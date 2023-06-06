@@ -5,13 +5,13 @@ import 'package:get_storage/get_storage.dart';
 import '../Models/sign_in_form_validation.dart';
 import 'internet_controller.dart';
 
-class AddVendorServiceController extends GetxController {
+class ChangePasswordController extends GetxController {
   late final GetStorage _getStorage;
   final InternetController _networkManager = Get.find<InternetController>();
 
-  late FocusNode FieldNode, TimeNode, ApproxNode, DurationNode;
+  late FocusNode PreNode, NewNode, ConfirmNode;
 
-  late TextEditingController fieldctr, timectr, approxctr, durationctr;
+  late TextEditingController prectr, newctr, confirmctr;
 
   final formKey = GlobalKey<FormState>();
 
@@ -19,15 +19,13 @@ class AddVendorServiceController extends GetxController {
   void onInit() {
     _getStorage = GetStorage();
 
-    FieldNode = FocusNode();
-    TimeNode = FocusNode();
-    ApproxNode = FocusNode();
-    DurationNode = FocusNode();
+    PreNode = FocusNode();
+    NewNode = FocusNode();
+    ConfirmNode = FocusNode();
 
-    fieldctr = TextEditingController();
-    timectr = TextEditingController();
-    approxctr = TextEditingController();
-    durationctr = TextEditingController();
+    prectr = TextEditingController();
+    newctr = TextEditingController();
+    confirmctr = TextEditingController();
 
     enableSignUpButton();
     super.onInit();
@@ -35,27 +33,24 @@ class AddVendorServiceController extends GetxController {
 
   var isLoading = false.obs;
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  var FieldModel = ValidationModel(null, null, isValidate: false).obs;
-  var TimeModel = ValidationModel(null, null, isValidate: false).obs;
-  var ApproxModel = ValidationModel(null, null, isValidate: false).obs;
-  var DurationModel = ValidationModel(null, null, isValidate: false).obs;
+  var PreModel = ValidationModel(null, null, isValidate: false).obs;
+  var NewModel = ValidationModel(null, null, isValidate: false).obs;
+  var ConfirmModel = ValidationModel(null, null, isValidate: false).obs;
 
   void enableSignUpButton() {
-    if (FieldModel.value.isValidate == false) {
+    if (PreModel.value.isValidate == false) {
       isFormInvalidate.value = false;
-    } else if (TimeModel.value.isValidate == false) {
+    } else if (NewModel.value.isValidate == false) {
       isFormInvalidate.value = false;
-    } else if (ApproxModel.value.isValidate == false) {
-      isFormInvalidate.value = false;
-    } else if (DurationModel.value.isValidate == false) {
+    } else if (ConfirmModel.value.isValidate == false) {
       isFormInvalidate.value = false;
     } else {
       isFormInvalidate.value = true;
     }
   }
 
-  void validateFieldname(String? val) {
-    FieldModel.update((model) {
+  void validatePrePass(String? val) {
+    PreModel.update((model) {
       if (val != null && val.isEmpty) {
         model!.error = "Enter Name";
         model.isValidate = false;
@@ -68,8 +63,8 @@ class AddVendorServiceController extends GetxController {
     enableSignUpButton();
   }
 
-  void validateTime(String? val) {
-    TimeModel.update((model) {
+  void validateNewPass(String? val) {
+    NewModel.update((model) {
       if (val != null && val.isEmpty) {
         model!.error = "Enter Time";
         model.isValidate = false;
@@ -82,24 +77,10 @@ class AddVendorServiceController extends GetxController {
     enableSignUpButton();
   }
 
-  void validateApprox(String? val) {
-    ApproxModel.update((model) {
+  void validateConfirmPass(String? val) {
+    ConfirmModel.update((model) {
       if (val != null && val.isEmpty) {
         model!.error = "Enter Approx Sitting";
-        model.isValidate = false;
-      } else {
-        model!.error = null;
-        model.isValidate = true;
-      }
-    });
-
-    enableSignUpButton();
-  }
-
-  void validateDuration(String? val) {
-    DurationModel.update((model) {
-      if (val != null && val.isEmpty) {
-        model!.error = "Enter Duration of Sitting";
         model.isValidate = false;
       } else {
         model!.error = null;

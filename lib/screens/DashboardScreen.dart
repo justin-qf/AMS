@@ -1,14 +1,14 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/Screens/AppointmentScreen/Appointment.dart';
+import 'package:booking_app/Screens/HomeScreen.dart';
+import 'package:booking_app/Screens/ProfileScreen.dart';
 import 'package:booking_app/core/themes/color_const.dart';
-import 'package:booking_app/screens/homepage.dart';
-import 'package:booking_app/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../controllers/home_screen_controller.dart';
-import 'Appointment.dart';
-import 'navdrawer.dart';
+import 'NavdrawerScreen.dart';
 
 class dashboard extends StatelessWidget {
   const dashboard({super.key});
@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Navdrawer(),
+      drawer: NavdrawerScreen(),
       key: controller.drawer_key,
       body: Center(
         child: _buildScreens.elementAt(controller.currentPage),
@@ -110,8 +110,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   static final List<Widget> _buildScreens = <Widget>[
-    home(),
-    Appointment(),
-    profile(),
+    HomeScreen(),
+    AppointmentScreen(),
+    ProfileScreen(),
   ];
 }

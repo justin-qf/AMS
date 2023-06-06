@@ -1,50 +1,52 @@
-import 'package:booking_app/Models/hairservice.dart';
-import 'package:booking_app/Screens/AddServiceScreen.dart';
+import 'package:booking_app/Screens/AddExpertScreen.dart';
+import 'package:booking_app/screens/NavdrawerScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:sizer/sizer.dart';
 
-import '../Models/hairservice_model.dart';
+import '../Models/Listofexpert.dart';
+import '../Models/Listofexpert_model.dart';
 import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
-import '../core/constants/strings.dart';
 import '../core/themes/font_constant.dart';
 
-class Servicepage extends StatefulWidget {
-  const Servicepage({super.key});
+class Expert extends StatefulWidget {
+  const Expert({super.key});
 
   @override
-  State<Servicepage> createState() => _ServicepageState();
+  State<Expert> createState() => _ExpertState();
 }
 
-class _ServicepageState extends State<Servicepage> {
-  List<hairservice> staticData = hairserviceItems;
+class _ExpertState extends State<Expert> {
+  List<ExpertItems> staticData = Expert_Items;
   TextEditingController _search = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(children: [
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
           SizedBox(
             height: double.infinity,
             width: double.infinity,
             child: SvgPicture.asset(Asset.bg, fit: BoxFit.cover),
           ),
           SafeArea(
-              minimum: EdgeInsets.only(top: 1.h),
               child: Container(
-                  margin: EdgeInsets.only(
-                    top: 0.5.h,
-                  ),
+                  margin: EdgeInsets.only(top: 0.5.h),
                   child: Center(
                       child: Column(children: [
                     HomeAppBar(
-                      title: Strings.services,
+                      title: 'Experts',
                       leading: Asset.backbutton,
                       isfilter: false,
                       icon: Asset.filter,
                       isBack: true,
-                      onClick: () {},
+                      onClick: () {
+                        Get.to(NavdrawerScreen());
+                      },
                     ),
                   ])))),
           Container(
@@ -55,9 +57,9 @@ class _ServicepageState extends State<Servicepage> {
               height: 5.5.h,
               child: TextField(
                 decoration: InputDecoration(
+                    hintText: 'Search',
                     contentPadding:
                         EdgeInsets.only(top: 1.h, left: 2.h, bottom: 1.h),
-                    hintText: Strings.search,
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -76,14 +78,15 @@ class _ServicepageState extends State<Servicepage> {
                 shrinkWrap: false,
                 clipBehavior: Clip.antiAlias,
                 itemBuilder: (context, index) {
-                  hairservice data = staticData[index];
+                  ExpertItems data = staticData[index];
+
                   return Container(
                     margin: EdgeInsets.only(
-                        top: 1.h, left: 7.w, right: 7.w, bottom: 1.h),
+                        top: 1.5.h, left: 8.w, right: 8.w, bottom: 1.5.h),
                     child: Expanded(
                       child: Container(
                         padding: EdgeInsets.only(
-                            top: 1.h, left: 3.w, right: 4.w, bottom: 1.h),
+                            top: 1.h, left: 4.w, right: 4.w, bottom: 1.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -94,7 +97,7 @@ class _ServicepageState extends State<Servicepage> {
                               children: [
                                 Stack(children: [
                                   CircleAvatar(
-                                    radius: 3.5.h,
+                                    radius: 3.7.h,
                                     backgroundColor: Colors.white,
                                     child: SvgPicture.asset(
                                       Asset.profileimg,
@@ -110,53 +113,33 @@ class _ServicepageState extends State<Servicepage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        child: Text(
-                                          data.name,
-                                          style: TextStyle(
-                                              fontFamily: opensansMedium,
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.w700),
-                                        ),
+                                          child: Text(
+                                        data.name,
+                                        style: TextStyle(
+                                            fontFamily: opensansMedium,
+                                            fontSize: 15.5.sp,
+                                            fontWeight: FontWeight.w700),
+                                      )),
+                                      SizedBox(
+                                        height: 0.5.h,
                                       ),
-                                      Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              child: Text(
-                                                data.title,
-                                                style: TextStyle(
-                                                    fontFamily: opensansMedium,
-                                                    fontSize: 11.sp,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                            ),
-                                            Container(
-                                              margin:
-                                                  EdgeInsets.only(top: 0.5.h),
-                                              child: Text(
-                                                data.rupee,
-                                                style: TextStyle(
-                                                    fontFamily: opensansMedium,
-                                                    fontSize: 16.sp,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              ),
-                                            ),
-                                          ]),
+                                      Text(
+                                        data.title,
+                                        style: TextStyle(
+                                            fontFamily: opensansMedium,
+                                            fontSize: 11.sp,
+                                            fontWeight: FontWeight.w400),
+                                      )
                                     ],
                                   ),
                                 ),
                               ],
-                            ),
+                            )
                           ],
                         ),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.black.withOpacity(0.2),
@@ -189,7 +172,7 @@ class _ServicepageState extends State<Servicepage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AddServiceScreen(),
+                              builder: (context) => AddExpertScreen(),
                             ));
                       },
                       child: Icon(
@@ -203,6 +186,8 @@ class _ServicepageState extends State<Servicepage> {
               ),
             ],
           ),
-        ]));
+        ],
+      ),
+    );
   }
 }
