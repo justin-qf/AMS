@@ -1,4 +1,6 @@
 import 'package:booking_app/controllers/notification_screen_controller.dart';
+import 'package:booking_app/core/themes/color_const.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -8,29 +10,33 @@ import '../../Models/product.dart';
 import '../../core/constants/assets.dart';
 import '../../core/themes/font_constant.dart';
 
-class PreviousNotificationScreen extends StatefulWidget {
-  const PreviousNotificationScreen({super.key});
+class UpcomingNotificationScreen extends StatefulWidget {
+  const UpcomingNotificationScreen({super.key});
 
   @override
-  State<PreviousNotificationScreen> createState() =>
-      _PreviousNotificationScreenState();
+  State<UpcomingNotificationScreen> createState() =>
+      _UpcomingNotificationScreenState();
 }
 
-class _PreviousNotificationScreenState
-    extends State<PreviousNotificationScreen> {
+class _UpcomingNotificationScreenState
+    extends State<UpcomingNotificationScreen> {
   var controller = Get.put(NotificationScreenController());
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-        child: ListView.builder(
+    return ListView.builder(
       shrinkWrap: false,
       clipBehavior: Clip.antiAlias,
       itemBuilder: (context, index) {
         return getListItem(context, index);
       },
       itemCount: controller.staticData.length,
-    ));
+    );
   }
 
   getListItem(BuildContext context, int index) {
@@ -38,7 +44,7 @@ class _PreviousNotificationScreenState
     return Container(
       margin: EdgeInsets.only(top: 1.h, left: 7.w, right: 7.w, bottom: 1.h),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDarkMode() ? white : white,
         borderRadius: BorderRadius.all(Radius.circular(10)),
         boxShadow: [
           BoxShadow(
@@ -60,10 +66,11 @@ class _PreviousNotificationScreenState
               Stack(children: [
                 CircleAvatar(
                   radius: 3.7.h,
-                  backgroundColor: Colors.white,
+                  backgroundColor: isDarkMode() ? black : white,
                   child: SvgPicture.asset(
                     Asset.profileimg,
                     fit: BoxFit.cover,
+                    color: isDarkMode() ? white : black,
                   ),
                 ),
                 Positioned(
@@ -100,6 +107,7 @@ class _PreviousNotificationScreenState
                           child: Text(
                             data.Name,
                             style: TextStyle(
+                                color: isDarkMode() ? white : black,
                                 fontFamily: opensansMedium,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w700),
@@ -115,8 +123,7 @@ class _PreviousNotificationScreenState
                                       ? Colors.orange
                                       : Colors.red,
                               fontFamily: opensans_Regular,
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.w400),
+                              fontSize: 10.sp),
                         ),
                       ],
                     ),
@@ -124,12 +131,18 @@ class _PreviousNotificationScreenState
                         child: Text(
                       data.title,
                       style: TextStyle(
-                          fontFamily: opensansMedium, fontSize: 11.sp),
+                          color: isDarkMode() ? white : black,
+                          fontFamily: opensansMedium,
+                          fontSize: 11.sp,
+                          fontWeight: FontWeight.w400),
                     )),
                     Text(
                       data.time,
                       style: TextStyle(
-                          fontFamily: opensansMedium, fontSize: 10.5.sp),
+                          color: isDarkMode() ? white : black,
+                          fontFamily: opensansMedium,
+                          fontSize: 10.5.sp,
+                          fontWeight: FontWeight.w400),
                     )
                   ],
                 ),

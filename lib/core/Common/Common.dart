@@ -229,7 +229,7 @@ class Common {
   void trasparent_statusbar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarIconBrightness:
-            !isLightMode() ? Brightness.light : Brightness.dark,
+            isDarkMode() ? Brightness.dark : Brightness.light,
         statusBarColor: Colors.transparent));
   }
 }

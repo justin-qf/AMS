@@ -1,16 +1,17 @@
-import 'package:booking_app/Screens/ServiceBasedOffer.dart';
-import 'package:booking_app/screens/PackageBasedOffer.dart';
-import 'package:booking_app/screens/ProductBasedOffer.dart';
+import 'package:booking_app/Screens/OfferScreen/PackageBasedOffer.dart';
+import 'package:booking_app/Screens/OfferScreen/ProductBasedOffer.dart';
+import 'package:booking_app/Screens/OfferScreen/ServiceBasedOffer.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
-import '../Models/offers.dart';
-import '../Models/offers_model.dart';
-import '../core/Common/appbar.dart';
-import '../core/constants/assets.dart';
-import '../core/themes/font_constant.dart';
+import '../../Models/offers.dart';
+import '../../Models/offers_model.dart';
+import '../../core/Common/appbar.dart';
+import '../../core/constants/assets.dart';
+import '../../core/themes/font_constant.dart';
 
 class OfferScreen extends StatefulWidget {
   const OfferScreen({super.key});
@@ -41,10 +42,15 @@ class _OfferScreenState extends State<OfferScreen>
           SizedBox(
             height: double.infinity,
             width: double.infinity,
-            child: SvgPicture.asset(
-              Asset.bg,
-              fit: BoxFit.cover,
-            ),
+            child: isDarkMode()
+            ? SvgPicture.asset(
+                Asset.dark_bg,
+                fit: BoxFit.cover,
+              )
+            : SvgPicture.asset(
+                Asset.bg,
+                fit: BoxFit.cover,
+              ),
           ),
           SafeArea(
               minimum: EdgeInsets.only(top: 1.h),

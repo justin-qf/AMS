@@ -1,5 +1,6 @@
 import 'package:booking_app/Models/hairservice.dart';
 import 'package:booking_app/Screens/AddServiceScreen.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
@@ -10,14 +11,14 @@ import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 import '../core/themes/font_constant.dart';
 
-class Servicepage extends StatefulWidget {
-  const Servicepage({super.key});
+class ServiceScreen extends StatefulWidget {
+  const ServiceScreen({super.key});
 
   @override
-  State<Servicepage> createState() => _ServicepageState();
+  State<ServiceScreen> createState() => _ServiceScreenState();
 }
 
-class _ServicepageState extends State<Servicepage> {
+class _ServiceScreenState extends State<ServiceScreen> {
   List<hairservice> staticData = hairserviceItems;
   TextEditingController _search = TextEditingController();
   @override
@@ -28,7 +29,15 @@ class _ServicepageState extends State<Servicepage> {
           SizedBox(
             height: double.infinity,
             width: double.infinity,
-            child: SvgPicture.asset(Asset.bg, fit: BoxFit.cover),
+            child: isDarkMode()
+            ? SvgPicture.asset(
+                Asset.dark_bg,
+                fit: BoxFit.cover,
+              )
+            : SvgPicture.asset(
+                Asset.bg,
+                fit: BoxFit.cover,
+              ),
           ),
           SafeArea(
               minimum: EdgeInsets.only(top: 1.h),

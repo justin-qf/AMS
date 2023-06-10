@@ -3,6 +3,7 @@ import 'package:booking_app/Screens/OtpScreen.dart';
 import 'package:booking_app/controllers/Phone_controller.dart';
 import 'package:booking_app/core/constants/assets.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:booking_app/custom_componannt/common_views.dart';
 import 'package:booking_app/custom_componannt/form_inputs.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,15 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
         SizedBox(
           height: double.infinity,
           width: double.infinity,
-          child: SvgPicture.asset(Asset.bg, fit: BoxFit.cover),
+          child: isDarkMode()
+              ? SvgPicture.asset(
+                  Asset.dark_bg,
+                  fit: BoxFit.cover,
+                )
+              : SvgPicture.asset(
+                  Asset.bg,
+                  fit: BoxFit.cover,
+                ),
         ),
         SingleChildScrollView(
           child: Column(
@@ -135,11 +144,12 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                     height: 6.h,
                                     child: ElevatedButton(
                                         onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const OtpScreen()));
+                                          Get.to(OtpScreen());
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //         builder: (context) =>
+                                          //             const OtpScreen()));
                                         },
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.black,

@@ -36,10 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
         SizedBox(
           height: double.infinity,
           width: double.infinity,
-          child: SvgPicture.asset(
-            Asset.bg,
-            fit: BoxFit.cover,
-          ),
+          child: isDarkMode()
+              ? SvgPicture.asset(
+                  Asset.dark_bg,
+                  fit: BoxFit.cover,
+                )
+              : SvgPicture.asset(
+                  Asset.bg,
+                  fit: BoxFit.cover,
+                ),
         ),
         Container(
           margin: EdgeInsets.only(top: 5.h),
@@ -93,7 +98,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Text(
                               '04:48 PM',
                               style: TextStyle(
-                                  fontSize: 13.sp, fontFamily: opensansMedium),
+                                fontSize: 13.sp,
+                                fontFamily: opensansMedium,
+                              ),
                             ),
                           ),
                         ),
@@ -431,7 +438,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void trasparent_statusbar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarIconBrightness:
-            !isLightMode() ? Brightness.light : Brightness.dark,
+            isDarkMode() ? Brightness.dark : Brightness.light,
         statusBarColor: Colors.transparent));
   }
 }

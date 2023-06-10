@@ -1,9 +1,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/constants/assets.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:booking_app/screens/DashboardScreen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/Common/Common.dart';
@@ -51,7 +54,15 @@ class _OtpScreenState extends State<OtpScreen> {
           SizedBox(
             height: double.infinity,
             width: double.infinity,
-            child: SvgPicture.asset(Asset.bg, fit: BoxFit.cover),
+            child: isDarkMode()
+            ? SvgPicture.asset(
+                Asset.dark_bg,
+                fit: BoxFit.cover,
+              )
+            : SvgPicture.asset(
+                Asset.bg,
+                fit: BoxFit.cover,
+              ),
           ),
           SingleChildScrollView(
             child: Column(
@@ -183,10 +194,11 @@ class _OtpScreenState extends State<OtpScreen> {
                             height: 6.h,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => dashboard()));
+                                  Get.to(dashboard());
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => dashboard()));
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,

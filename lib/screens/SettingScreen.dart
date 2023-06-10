@@ -1,6 +1,7 @@
 import 'package:booking_app/Screens/InviteFriendScreen.dart';
 import 'package:booking_app/Screens/ProfileScreen.dart';
 import 'package:booking_app/controllers/theme_controller.dart';
+import 'package:booking_app/core/themes/color_const.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/get_storage_key.dart';
 import '../core/constants/strings.dart';
+import '../core/utils/helper.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -26,7 +28,7 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   List<SettingItem> staticData = SettingsItems;
   get index => null;
-  int isDarkMode = 0;
+  int _isDarkMode = 0;
   final getStorage = GetStorage();
 
   bool state = false;
@@ -38,10 +40,15 @@ class _SettingsState extends State<Settings> {
       SizedBox(
         height: double.infinity,
         width: double.infinity,
-        child: SvgPicture.asset(
-          Asset.bg,
-          fit: BoxFit.cover,
-        ),
+        child: isDarkMode()
+            ? SvgPicture.asset(
+                Asset.dark_bg,
+                fit: BoxFit.cover,
+              )
+            : SvgPicture.asset(
+                Asset.bg,
+                fit: BoxFit.cover,
+              ),
       ),
       SafeArea(
           minimum: EdgeInsets.only(top: 2.h),
@@ -83,7 +90,7 @@ class _SettingsState extends State<Settings> {
                         //     data.button != null ? data.button : null),
                         leading: SvgPicture.asset(
                           Asset.user,
-                          color: Colors.black,
+                          color: isDarkMode() ? white : black,
                         ),
                         horizontalTitleGap: 0.1,
                         visualDensity:
@@ -110,7 +117,10 @@ class _SettingsState extends State<Settings> {
                                   MaterialPageRoute(
                                       builder: (context) => ProfileScreen()));
                             },
-                            icon: SvgPicture.asset(Asset.rightbackbutton)),
+                            icon: SvgPicture.asset(
+                              Asset.rightbackbutton,
+                              color: isDarkMode() ? white : black,
+                            )),
                       ),
                       Divider(
                         height: 1.5,
@@ -121,7 +131,7 @@ class _SettingsState extends State<Settings> {
                       ListTile(
                         leading: SvgPicture.asset(
                           Asset.adduser,
-                          color: Colors.black,
+                          color: isDarkMode() ? white : black,
                         ),
                         visualDensity:
                             VisualDensity(horizontal: 0, vertical: -1),
@@ -150,7 +160,10 @@ class _SettingsState extends State<Settings> {
                                       builder: (context) =>
                                           InviteFriendScreen()));
                             },
-                            icon: SvgPicture.asset(Asset.rightbackbutton)),
+                            icon: SvgPicture.asset(
+                              Asset.rightbackbutton,
+                              color: isDarkMode() ? white : black,
+                            )),
                         // trailing: TextButton(
                         //     onPressed: () {
                         //       Navigator.push(
@@ -167,7 +180,10 @@ class _SettingsState extends State<Settings> {
                         endIndent: 4.h,
                       ),
                       ListTile(
-                          leading: SvgPicture.asset(Asset.moon),
+                          leading: SvgPicture.asset(
+                            Asset.moon,
+                            color: isDarkMode() ? white : black,
+                          ),
                           horizontalTitleGap: 0.1,
                           visualDensity:
                               VisualDensity(horizontal: 0, vertical: -1),
@@ -181,11 +197,11 @@ class _SettingsState extends State<Settings> {
                           trailing: Container(
                             padding: EdgeInsets.only(right: 1.5.h),
                             child: CupertinoSwitch(
-                              value: state,
+                              value: isDarkMode() ? true : false,
                               onChanged: (value) async {
                                 state = value;
                                 setState(() {
-                                  isDarkMode = isDarkMode == 0 ? 1 : 0;
+                                  _isDarkMode = _isDarkMode == 0 ? 1 : 0;
                                 });
                                 var switchOn;
                                 if (value == true) {
@@ -194,11 +210,13 @@ class _SettingsState extends State<Settings> {
                                   switchOn = 0;
                                 }
                                 await getStorage.write(
-                                    GetStorageKey.IS_DARK_MODE, isDarkMode);
+                                    GetStorageKey.IS_DARK_MODE, _isDarkMode);
                                 //setState(() {});
                                 Get.find<ThemeController>()
-                                    .updateState(isDarkMode);
+                                    .updateState(_isDarkMode);
                                 Get.find<ThemeController>().update();
+                                print(getStorage
+                                    .read(GetStorageKey.IS_DARK_MODE));
                                 setState(
                                   () {},
                                 );
@@ -229,7 +247,7 @@ class _SettingsState extends State<Settings> {
                       ListTile(
                         leading: SvgPicture.asset(
                           Asset.rate_us,
-                          color: Colors.black,
+                          color: isDarkMode() ? white : black,
                         ),
                         horizontalTitleGap: 0.1,
                         visualDensity:
@@ -251,7 +269,7 @@ class _SettingsState extends State<Settings> {
                       ListTile(
                         leading: SvgPicture.asset(
                           Asset.share,
-                          color: Colors.black,
+                          color: isDarkMode() ? white : black,
                         ),
                         horizontalTitleGap: 0.1,
                         visualDensity:
@@ -273,7 +291,7 @@ class _SettingsState extends State<Settings> {
                       ListTile(
                         leading: SvgPicture.asset(
                           Asset.signout,
-                          color: Colors.black,
+                          color: isDarkMode() ? white : black,
                         ),
                         horizontalTitleGap: 0.1,
                         visualDensity:

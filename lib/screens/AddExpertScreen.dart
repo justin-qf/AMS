@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/Screens/ExpertScreen.dart';
 import 'package:booking_app/controllers/addexpert_controller.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -31,10 +33,15 @@ class _AddExpertScreenState extends State<AddExpertScreen> {
             SizedBox(
               height: double.infinity,
               width: double.infinity,
-              child: SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+              child: isDarkMode()
+                  ? SvgPicture.asset(
+                      Asset.dark_bg,
+                      fit: BoxFit.cover,
+                    )
+                  : SvgPicture.asset(
+                      Asset.bg,
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(
               height: 0.5.h,
@@ -124,9 +131,7 @@ class _AddExpertScreenState extends State<AddExpertScreen> {
                             width: double.infinity,
                             height: 6.h,
                             child: getButton(() {
-                              if (Addexpertcontroller.isFormInvalidate.value) {
-                                // Get.to(Signup2());
-                              }
+                              Get.to(ExpertScreen());
                             })),
                       ],
                     )),

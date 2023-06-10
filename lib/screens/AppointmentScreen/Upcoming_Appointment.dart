@@ -1,3 +1,4 @@
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,6 +9,7 @@ import '../../Models/notification_model.dart';
 import '../../Models/product.dart';
 import '../../controllers/notification_screen_controller.dart';
 import '../../core/constants/assets.dart';
+import '../../core/themes/color_const.dart';
 import '../../core/themes/font_constant.dart';
 
 class UpcomingAppointment extends StatefulWidget {
@@ -45,9 +47,11 @@ class _UpcomingAppointmentState extends State<UpcomingAppointment> {
                 Text(
                   'March 22,2023',
                   style: TextStyle(
-                      fontFamily: opensansMedium,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15.sp),
+                    fontFamily: opensansMedium,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15.sp,
+                    color: isDarkMode() ? white : black,
+                  ),
                 ),
                 SizedBox(
                   height: 1.h,
@@ -59,10 +63,11 @@ class _UpcomingAppointmentState extends State<UpcomingAppointment> {
                     Stack(children: [
                       CircleAvatar(
                         radius: 3.7.h,
-                        backgroundColor: Colors.white,
+                        backgroundColor: isDarkMode() ? black : white,
                         child: SvgPicture.asset(
                           Asset.profileimg,
                           fit: BoxFit.cover,
+                          color: isDarkMode() ? white : black,
                         ),
                       ),
                     ]),
@@ -80,6 +85,7 @@ class _UpcomingAppointmentState extends State<UpcomingAppointment> {
                                 child: Text(
                                   data.Name,
                                   style: TextStyle(
+                                      color: isDarkMode() ? white : black,
                                       fontFamily: opensansMedium,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w700),
@@ -91,6 +97,7 @@ class _UpcomingAppointmentState extends State<UpcomingAppointment> {
                               child: Text(
                             data.title,
                             style: TextStyle(
+                                color: isDarkMode() ? white : black,
                                 fontFamily: opensansMedium,
                                 fontSize: 11.sp,
                                 fontWeight: FontWeight.w400),
@@ -107,13 +114,19 @@ class _UpcomingAppointmentState extends State<UpcomingAppointment> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SvgPicture.asset(
+                      color: isDarkMode() ? white : black,
                       Asset.user,
                       height: 2.h,
                     ),
                     SizedBox(
                       width: 2.w,
                     ),
-                    Text('Ahn Hyeon Seop')
+                    Text(
+                      'Ahn Hyeon Seop',
+                      style: TextStyle(
+                        color: isDarkMode() ? white : black,
+                      ),
+                    )
                   ],
                 ),
                 Row(
@@ -135,9 +148,18 @@ class _UpcomingAppointmentState extends State<UpcomingAppointment> {
                         trackColor: Colors.grey,
                       ),
                     ),
-                    Text('Remind me'),
+                    Text(
+                      'Remind me',
+                      style: TextStyle(
+                        color: isDarkMode() ? white : black,
+                      ),
+                    ),
                     IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_drop_down)),
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: isDarkMode() ? white : black,
+                        )),
                     Spacer(),
                     SizedBox(
                         width: 25.w,
@@ -145,13 +167,13 @@ class _UpcomingAppointmentState extends State<UpcomingAppointment> {
                         child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
+                                backgroundColor: isDarkMode() ? white : black,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10))),
                             child: Text(
                               'Cancel',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: isDarkMode() ? black : white,
                                 fontSize: 12.5.sp,
                                 fontFamily: opensansMedium,
                               ),
@@ -161,7 +183,7 @@ class _UpcomingAppointmentState extends State<UpcomingAppointment> {
               ],
             ),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: isDarkMode() ? black : white,
               borderRadius: BorderRadius.all(Radius.circular(10)),
               boxShadow: [
                 BoxShadow(

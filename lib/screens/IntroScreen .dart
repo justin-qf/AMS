@@ -1,7 +1,10 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/core/themes/color_const.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../core/constants/assets.dart';
 import 'LoginScreen/LoginScreen.dart';
@@ -53,10 +56,15 @@ class _IntroScreenState extends State<IntroScreen> {
           SizedBox(
             height: double.infinity,
             width: double.infinity,
-            child: SvgPicture.asset(
-              Asset.bg,
-              fit: BoxFit.cover,
-            ),
+            child: isDarkMode()
+                ? SvgPicture.asset(
+                    Asset.dark_bg,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    Asset.bg,
+                    fit: BoxFit.cover,
+                  ),
           ),
           Column(
             children: [
@@ -117,6 +125,7 @@ class _IntroScreenState extends State<IntroScreen> {
                                   child: Text(
                                       'Lorem ipsum dolor sit amet consectetur.\nId sed purus malesuada euismod.',
                                       style: TextStyle(
+                                          color: isDarkMode() ? white : black,
                                           fontSize: 13.sp,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: opensansMedium),
@@ -145,11 +154,12 @@ class _IntroScreenState extends State<IntroScreen> {
                                 from: 50,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const LoginScreen()));
+                                    Get.to(LoginScreen());
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             const LoginScreen()));
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,

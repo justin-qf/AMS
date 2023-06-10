@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/controllers/UpdateVendor_controller.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,10 +34,15 @@ class _UpdateVendorState extends State<UpdateVendor> {
             SizedBox(
               height: double.infinity,
               width: double.infinity,
-              child: SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+              child: isDarkMode()
+                  ? SvgPicture.asset(
+                      Asset.dark_bg,
+                      fit: BoxFit.cover,
+                    )
+                  : SvgPicture.asset(
+                      Asset.bg,
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(
               height: 0.5.h,

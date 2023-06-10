@@ -1,16 +1,16 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/Screens/ProfileScreen.dart';
+import 'package:booking_app/Screens/ServiceScreen.dart';
 import 'package:booking_app/Screens/SettingScreen.dart';
 import 'package:booking_app/core/constants/assets.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
-import 'package:booking_app/screens/Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:sizer/sizer.dart';
 
 import 'ExpertScreen.dart';
-import 'OfferScreen.dart';
+import 'OfferScreen/OfferScreen.dart';
 
 class NavdrawerScreen extends StatelessWidget {
   const NavdrawerScreen({super.key});
@@ -130,19 +130,24 @@ class NavdrawerScreen extends StatelessWidget {
             padding: EdgeInsets.only(left: 2.2.h, top: 1.5.h, bottom: 1.h),
             child: Wrap(
               children: [
-                ListTile(
-                  hoverColor: Colors.white,
-                  horizontalTitleGap: 0.1,
-                  visualDensity: VisualDensity(horizontal: -2, vertical: -2),
-                  leading: SvgPicture.asset(
-                    Asset.user,
-                  ),
-                  title: Text(
-                    'Profile',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontFamily: opensansMedium,
-                        fontSize: 11.5.sp),
+                InkWell(
+                  child: ListTile(
+                    hoverColor: Colors.white,
+                    horizontalTitleGap: 0.1,
+                    visualDensity: VisualDensity(horizontal: -2, vertical: -2),
+                    leading: SvgPicture.asset(
+                      Asset.user,
+                    ),
+                    title: Text(
+                      'Profile',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontFamily: opensansMedium,
+                          fontSize: 11.5.sp),
+                    ),
+                    onTap: () {
+                      Get.to(ProfileScreen());
+                    },
                   ),
                 ),
                 InkWell(
@@ -160,11 +165,12 @@ class NavdrawerScreen extends StatelessWidget {
                           fontSize: 11.5.sp),
                     ),
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Servicepage(),
-                          ));
+                      Get.to(ServiceScreen());
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => Servicepage(),
+                      //     ));
                     },
                   ),
                 ),
@@ -181,7 +187,7 @@ class NavdrawerScreen extends StatelessWidget {
                             fontFamily: opensansMedium,
                             fontSize: 11.5.sp)),
                     onTap: () {
-                      Get.to(Expert());
+                      Get.to(ExpertScreen());
                       // Navigator.push(
                       //     context,
                       //     MaterialPageRoute(
@@ -203,11 +209,12 @@ class NavdrawerScreen extends StatelessWidget {
                             fontFamily: opensansMedium,
                             fontSize: 11.5.sp)),
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => OfferScreen(),
-                          ));
+                      Get.to(OfferScreen());
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => OfferScreen(),
+                      //     ));
                     },
                   ),
                 ),
@@ -237,11 +244,12 @@ class NavdrawerScreen extends StatelessWidget {
                             fontFamily: opensansMedium,
                             fontSize: 11.5.sp)),
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Settings(),
-                          ));
+                      Get.to(Settings());
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => Settings(),
+                      //     ));
                     },
                   ),
                 ),

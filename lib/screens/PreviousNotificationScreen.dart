@@ -1,4 +1,5 @@
 import 'package:booking_app/controllers/notification_screen_controller.dart';
+import 'package:booking_app/core/themes/color_const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -7,34 +8,31 @@ import 'package:sizer/sizer.dart';
 import '../../Models/product.dart';
 import '../../core/constants/assets.dart';
 import '../../core/themes/font_constant.dart';
+import '../core/utils/helper.dart';
 
-class UpcomingNotificationScreen extends StatefulWidget {
-  const UpcomingNotificationScreen({super.key});
+class PreviousNotificationScreen extends StatefulWidget {
+  const PreviousNotificationScreen({super.key});
 
   @override
-  State<UpcomingNotificationScreen> createState() =>
-      _UpcomingNotificationScreenState();
+  State<PreviousNotificationScreen> createState() =>
+      _PreviousNotificationScreenState();
 }
 
-class _UpcomingNotificationScreenState
-    extends State<UpcomingNotificationScreen> {
+class _PreviousNotificationScreenState
+    extends State<PreviousNotificationScreen> {
   var controller = Get.put(NotificationScreenController());
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Container(
+        child: ListView.builder(
       shrinkWrap: false,
       clipBehavior: Clip.antiAlias,
       itemBuilder: (context, index) {
         return getListItem(context, index);
       },
       itemCount: controller.staticData.length,
-    );
+    ));
   }
 
   getListItem(BuildContext context, int index) {
@@ -42,7 +40,7 @@ class _UpcomingNotificationScreenState
     return Container(
       margin: EdgeInsets.only(top: 1.h, left: 7.w, right: 7.w, bottom: 1.h),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDarkMode() ? black : white,
         borderRadius: BorderRadius.all(Radius.circular(10)),
         boxShadow: [
           BoxShadow(
@@ -64,10 +62,11 @@ class _UpcomingNotificationScreenState
               Stack(children: [
                 CircleAvatar(
                   radius: 3.7.h,
-                  backgroundColor: Colors.white,
+                  backgroundColor: isDarkMode() ? black : white,
                   child: SvgPicture.asset(
                     Asset.profileimg,
                     fit: BoxFit.cover,
+                    color: isDarkMode() ? white : black,
                   ),
                 ),
                 Positioned(
@@ -104,6 +103,7 @@ class _UpcomingNotificationScreenState
                           child: Text(
                             data.Name,
                             style: TextStyle(
+                                color: isDarkMode() ? white : black,
                                 fontFamily: opensansMedium,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w700),
@@ -119,7 +119,8 @@ class _UpcomingNotificationScreenState
                                       ? Colors.orange
                                       : Colors.red,
                               fontFamily: opensans_Regular,
-                              fontSize: 10.sp),
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -127,6 +128,7 @@ class _UpcomingNotificationScreenState
                         child: Text(
                       data.title,
                       style: TextStyle(
+                          color: isDarkMode() ? white : black,
                           fontFamily: opensansMedium,
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w400),
@@ -134,6 +136,7 @@ class _UpcomingNotificationScreenState
                     Text(
                       data.time,
                       style: TextStyle(
+                          color: isDarkMode() ? white : black,
                           fontFamily: opensansMedium,
                           fontSize: 10.5.sp,
                           fontWeight: FontWeight.w400),

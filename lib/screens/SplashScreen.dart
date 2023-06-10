@@ -1,12 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:booking_app/Screens/AddCourseScreen.dart';
-import 'package:booking_app/Screens/AddCustomerScreen.dart';
-import 'package:booking_app/Screens/AddProductScreen.dart';
-import 'package:booking_app/Screens/AddVendorScreen.dart';
-import 'package:booking_app/Screens/AddVendorServiceScreen.dart';
 import 'package:booking_app/Screens/IntroScreen%20.dart';
-import 'package:booking_app/Screens/ReportBugScreen.dart';
-import 'package:booking_app/Screens/UpdateVendor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../core/constants/assets.dart';

@@ -15,6 +15,8 @@ class Asset {
 
   static const splash_bg = '$assets${svgFolder}white-logo.svg';
   static const bg = '$assets${svgFolder}Frame.svg';
+  static const dark_bg = '$assets${svgFolder}dark_bg.svg';
+  static const ams_black_logo = '$assets${svgFolder}AMS_WHITE_LOGO.svg';
   static const introscreen_one = '$assets${svgFolder}IntroScreen-1.svg';
   static const introscreen_two = '$assets${svgFolder}IntroScreen-2.svg';
   static const introscreen_three = '$assets${svgFolder}IntroScreen-3.svg';

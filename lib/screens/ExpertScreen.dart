@@ -1,4 +1,5 @@
 import 'package:booking_app/Screens/AddExpertScreen.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:booking_app/screens/NavdrawerScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,14 +13,14 @@ import '../core/Common/appbar.dart';
 import '../core/constants/assets.dart';
 import '../core/themes/font_constant.dart';
 
-class Expert extends StatefulWidget {
-  const Expert({super.key});
+class ExpertScreen extends StatefulWidget {
+  const ExpertScreen({super.key});
 
   @override
-  State<Expert> createState() => _ExpertState();
+  State<ExpertScreen> createState() => _ExpertScreenState();
 }
 
-class _ExpertState extends State<Expert> {
+class _ExpertScreenState extends State<ExpertScreen> {
   List<ExpertItems> staticData = Expert_Items;
   TextEditingController _search = TextEditingController();
   @override
@@ -31,7 +32,15 @@ class _ExpertState extends State<Expert> {
           SizedBox(
             height: double.infinity,
             width: double.infinity,
-            child: SvgPicture.asset(Asset.bg, fit: BoxFit.cover),
+             child: isDarkMode()
+            ? SvgPicture.asset(
+                Asset.dark_bg,
+                fit: BoxFit.cover,
+              )
+            : SvgPicture.asset(
+                Asset.bg,
+                fit: BoxFit.cover,
+              ),
           ),
           SafeArea(
               child: Container(
@@ -169,11 +178,12 @@ class _ExpertState extends State<Expert> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AddExpertScreen(),
-                            ));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => AddExpertScreen(),
+                        //     ));
+                        Get.to(AddExpertScreen());
                       },
                       child: Icon(
                         Icons.add,

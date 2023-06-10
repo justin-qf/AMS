@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -32,7 +33,12 @@ class _AddCourseScreenState extends State<AddCourseScreen> {
             SizedBox(
               height: double.infinity,
               width: double.infinity,
-              child: SvgPicture.asset(
+              child:   isDarkMode()
+            ? SvgPicture.asset(
+                Asset.dark_bg,
+                fit: BoxFit.cover,
+              )
+            : SvgPicture.asset(
                 Asset.bg,
                 fit: BoxFit.cover,
               ),

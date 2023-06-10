@@ -6,11 +6,14 @@ import 'package:booking_app/controllers/Appointment_screen_controller.dart';
 import 'package:booking_app/core/Common/appbar.dart';
 import 'package:booking_app/core/constants/assets.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
+import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../core/themes/color_const.dart';
 
 class AppointmentScreen extends StatefulWidget {
   AppointmentScreen({super.key, this.openDrawer});
@@ -48,10 +51,15 @@ class _AppointmentScreenState extends State<AppointmentScreen>
           SizedBox(
             height: double.infinity,
             width: double.infinity,
-            child: SvgPicture.asset(
-              Asset.bg,
-              fit: BoxFit.cover,
-            ),
+            child: isDarkMode()
+                ? SvgPicture.asset(
+                    Asset.dark_bg,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    Asset.bg,
+                    fit: BoxFit.cover,
+                  ),
           ),
           Column(
             children: [
@@ -467,12 +475,18 @@ class _AppointmentScreenState extends State<AppointmentScreen>
             currentPage == index
                 ? Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: currentPage == index ? Colors.white : null),
+                      borderRadius: BorderRadius.circular(10),
+                      color:
+                          currentPage == index || isDarkMode() ? white : black,
+                    ),
                     padding:
                         EdgeInsets.only(left: 5, right: 5, top: 1, bottom: 1),
                     child: currentPage == index
-                        ? Text("6", style: TextStyle(fontSize: 12.5.sp))
+                        ? Text("6",
+                            style: TextStyle(
+                              fontSize: 12.5.sp,
+                              color: isDarkMode() ? black : null,
+                            ))
                         : null,
                   )
                 : Container()

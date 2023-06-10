@@ -9,11 +9,11 @@ class ChangePasswordController extends GetxController {
   late final GetStorage _getStorage;
   final InternetController _networkManager = Get.find<InternetController>();
 
+  final formKey = GlobalKey<FormState>();
+
   late FocusNode PreNode, NewNode, ConfirmNode;
 
   late TextEditingController prectr, newctr, confirmctr;
-
-  final formKey = GlobalKey<FormState>();
 
   @override
   void onInit() {

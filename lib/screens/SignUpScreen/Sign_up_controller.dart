@@ -43,7 +43,7 @@ class SignUpController extends GetxController {
   }
 
   var isLoading = false.obs;
-  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
   var vendorNameModel = ValidationModel(null, null, isValidate: false).obs;
   var companyNameModel = ValidationModel(null, null, isValidate: false).obs;
   var addressModel = ValidationModel(null, null, isValidate: false).obs;

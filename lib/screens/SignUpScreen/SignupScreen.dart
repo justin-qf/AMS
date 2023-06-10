@@ -12,14 +12,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class signuppage extends StatefulWidget {
-  const signuppage({super.key});
+import '../../core/utils/helper.dart';
+
+class SignupScreens extends StatefulWidget {
+  const SignupScreens({super.key});
 
   @override
-  State<signuppage> createState() => _signuppageState();
+  State<SignupScreens> createState() => _SignupScreensState();
 }
 
-class _signuppageState extends State<signuppage> {
+class _SignupScreensState extends State<SignupScreens> {
   final signinController = Get.put(SignUpController());
 
   @override
@@ -27,17 +29,21 @@ class _signuppageState extends State<signuppage> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         extendBody: true,
-        backgroundColor: Colors.white,
         body: SafeArea(
           minimum: EdgeInsets.only(top: 1.h),
           child: Stack(children: [
             SizedBox(
               height: double.infinity,
               width: double.infinity,
-              child: SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+              child: isDarkMode()
+                  ? SvgPicture.asset(
+                      Asset.dark_bg,
+                      fit: BoxFit.cover,
+                    )
+                  : SvgPicture.asset(
+                      Asset.bg,
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(
               height: 0.5.h,
@@ -55,12 +61,13 @@ class _signuppageState extends State<signuppage> {
                 },
               ),
             ])),
-            Container(
-              margin: EdgeInsets.only(top: 6.h, left: 1.0.w, right: 1.0.w),
-              padding: EdgeInsets.only(
-                  left: 7.0.w, right: 7.0.w, top: 2.h, bottom: 1.h),
+            SingleChildScrollView(
               child: Form(
-                  key: signinController.formKey,
+                key: signinController.formKey,
+                child: Container(
+                  margin: EdgeInsets.only(top: 6.h, left: 1.0.w, right: 1.0.w),
+                  padding: EdgeInsets.only(
+                      left: 7.0.w, right: 7.0.w, top: 2.h, bottom: 1.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,7 +173,6 @@ class _signuppageState extends State<signuppage> {
                                   ],
                                   errorText: signinController
                                       .mobileNoModel.value.error,
-                                  wantSuffix: true,
                                   inputType: TextInputType.number,
                                 );
                               }))),
@@ -177,10 +183,14 @@ class _signuppageState extends State<signuppage> {
                           child: getButton(() {
                             if (signinController.isFormInvalidate.value) {
                               Get.to(LoginScreen());
+                            } else {
+                              Get.to(LoginScreen());
                             }
                           })),
                     ],
-                  )),
+                  ),
+                ),
+              ),
             ),
           ]),
         ));

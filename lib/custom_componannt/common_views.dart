@@ -42,7 +42,7 @@ Widget getText(contex, String title, String str) {
             textAlign: TextAlign.start,
             style: TextStyle(
                 fontFamily: fontSemiBold,
-                color: !isLightMode() ? labelTextColor : Colors.white,
+                color: isDarkMode() ? labelTextColor : Colors.white,
                 fontSize:
                     SizerUtil.deviceType == DeviceType.mobile ? 8.0.sp : 6.sp,
                 overflow: TextOverflow.ellipsis),
@@ -54,7 +54,7 @@ Widget getText(contex, String title, String str) {
               textAlign: TextAlign.start,
               style: TextStyle(
                   fontFamily: fontSemiBold,
-                  color: !isLightMode() ? labelTextColor : Colors.white,
+                  color: isDarkMode() ? labelTextColor : Colors.white,
                   fontSize:
                       SizerUtil.deviceType == DeviceType.mobile ? 7.0.sp : 6.sp,
                   overflow: TextOverflow.ellipsis),
@@ -154,12 +154,12 @@ getTime(String time, AppointmentBookingController controler) {
 
 getTopBackground(context) {
   return SvgPicture.asset(Asset.add_service,
-      height: 20.h, width: 20.h, color: !isLightMode() ? null : Colors.white);
+      height: 20.h, width: 20.h, color: isDarkMode() ? null : Colors.white);
 }
 
 getBottomBackground(context) {
   return SvgPicture.asset(Asset.ams_logo,
-      height: 9.h, width: 9.h, color: !isLightMode() ? null : Colors.white);
+      height: 9.h, width: 9.h, color: isDarkMode() ? null : Colors.white);
 }
 
 getButton(

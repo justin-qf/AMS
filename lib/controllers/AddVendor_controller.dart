@@ -40,7 +40,7 @@ class AddVendorController extends GetxController {
   }
 
   var isLoading = false.obs;
-  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
   var VendorModel = ValidationModel(null, null, isValidate: false).obs;
   var CompanyModel = ValidationModel(null, null, isValidate: false).obs;
   var AddressModel = ValidationModel(null, null, isValidate: false).obs;

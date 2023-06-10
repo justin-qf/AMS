@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../Models/offers.dart';
-import '../Models/offers_model.dart';
-import '../core/themes/font_constant.dart';
+import '../../Models/offers.dart';
+import '../../Models/offers_model.dart';
+import '../../core/themes/font_constant.dart';
 
 class ProductBasedOffer extends StatefulWidget {
   const ProductBasedOffer({super.key});

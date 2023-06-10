@@ -45,15 +45,15 @@ class HomeAppBar extends StatelessWidget {
                       ? isBack == true
                           ? SvgPicture.asset(
                               Asset.backbutton,
-                              color: !isLightMode() ? black : white,
+                              color: isDarkMode() ? white : black,
                             )
                           : SvgPicture.asset(
                               Asset.menu,
-                              color: !isLightMode() ? black : white,
+                              color: isDarkMode() ? white : black,
                             )
                       : SvgPicture.asset(
                           Asset.cart,
-                          color: !isLightMode() ? black : white,
+                          color: isDarkMode() ? white : black,
                         )),
           Expanded(
             child: Padding(
@@ -69,7 +69,7 @@ class HomeAppBar extends StatelessWidget {
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       fontSize: 16.5.sp,
-                      color: !isLightMode() ? black : white,
+                      color: isDarkMode() ? white : black,
                       fontFamily: opensans_Bold,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w800,
@@ -123,7 +123,10 @@ class HomeAppBar extends StatelessWidget {
                               //     MaterialPageRoute(builder: (context) => notification()));
                             },
                             borderRadius: BorderRadius.all(Radius.circular(24)),
-                            child: SvgPicture.asset(Asset.cart),
+                            child: SvgPicture.asset(
+                              Asset.cart,
+                              color: isDarkMode() ? white : black,
+                            ),
                           ),
                         ),
                       ],
@@ -135,7 +138,10 @@ class HomeAppBar extends StatelessWidget {
                           onClick!();
                         },
                         borderRadius: BorderRadius.all(Radius.circular(24)),
-                        child: SvgPicture.asset(Asset.filter),
+                        child: SvgPicture.asset(
+                          Asset.filter,
+                          color: isDarkMode() ? white : black,
+                        ),
                       ),
                     )
         ],

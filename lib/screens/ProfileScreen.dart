@@ -34,13 +34,13 @@ class _ProfileScreenState extends State<ProfileScreen>
   List<StaffItem> staticData1 = StaffItems;
   var currentPage = 0;
   bool state = false;
-  int isDarkMode = 0;
+  int isDarkModes = 0;
   final getStorage = GetStorage();
 
   @override
   void initState() {
     tabController = TabController(vsync: this, length: 3, initialIndex: 0);
-    isDarkMode = getStorage.read(GetStorageKey.IS_DARK_MODE) ?? 1;
+    isDarkModes = getStorage.read(GetStorageKey.IS_DARK_MODE) ?? 1;
     super.initState();
   }
 
@@ -50,20 +50,21 @@ class _ProfileScreenState extends State<ProfileScreen>
     return Scaffold(
         resizeToAvoidBottomInset: false,
         extendBody: true,
-        backgroundColor: !isLightMode() ? black : white,
+        backgroundColor: isDarkMode() ? black : white,
         body: SafeArea(
           minimum: EdgeInsets.only(top: 1.h),
           child: Stack(children: [
-            SizedBox(
-              height: double.infinity,
-              width: double.infinity,
-              child: SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
-            ),
+            isDarkMode()
+                ? SvgPicture.asset(
+                    Asset.dark_bg,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    Asset.bg,
+                    fit: BoxFit.cover,
+                  ),
             Container(
-              color: !isLightMode() ? white : black,
+              color: isDarkMode() ? black : white,
               child: Column(
                 children: [
                   Container(
@@ -83,6 +84,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                           ),
                         ],
                       ))),
+                  SizedBox(
+                    height: 2.h,
+                  ),
                   // Container(
                   //   child: CupertinoSwitch(
                   //     value: state,
@@ -115,14 +119,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                     child: SvgPicture.asset(
                       Asset.profileimg,
                       height: 10.h,
-                      color: !isLightMode() ? black : white,
+                      color: isDarkMode() ? white : black,
                     ),
                   ),
                   SizedBox(height: 1.h),
                   Text(
                     Strings.name,
                     style: TextStyle(
-                        color: !isLightMode() ? black : white,
+                        color: isDarkMode() ? white : black,
                         fontFamily: opensansMedium,
                         fontSize: 16.5.sp,
                         fontWeight: FontWeight.w700),
@@ -137,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   getListViewItem() {
     return Container(
-      color: !isLightMode() ? white : black,
+      color: isDarkMode() ? black : white,
       margin: EdgeInsets.only(top: 26.h),
       child: DefaultTabController(
           length: 3,
@@ -178,7 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 style: TextStyle(
                                     fontFamily: opensansMedium,
                                     fontWeight: FontWeight.w400,
-                                    color: Colors.grey,
+                                    color: isDarkMode() ? Colors.grey : black,
                                     fontSize: 13.5.sp),
                               ),
                               IconButton(
@@ -186,13 +190,15 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   onPressed: () {
                                     Get.to(UpdateVendor());
                                   },
-                                  icon: SvgPicture.asset(Asset.edit))
+                                  icon: SvgPicture.asset(Asset.edit,
+                                      color: isDarkMode() ? white : black))
                             ],
                           ),
                           SizedBox(height: 0.5.h),
                           Text(
                             Strings.abc,
                             style: TextStyle(
+                                color: isDarkMode() ? white : black,
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 13.sp),
@@ -205,7 +211,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.grey,
+                                color: isDarkMode() ? Colors.grey : black,
                                 fontSize: 13.5.sp),
                           ),
                           SizedBox(
@@ -214,6 +220,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           Text(
                             Strings.company_name_hint,
                             style: TextStyle(
+                                color: isDarkMode() ? white : black,
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 13.sp),
@@ -226,7 +233,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.grey,
+                                color: isDarkMode() ? Colors.grey : black,
                                 fontSize: 13.5.sp),
                           ),
                           SizedBox(
@@ -235,6 +242,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           Text(
                             Strings.address_hint,
                             style: TextStyle(
+                                color: isDarkMode() ? white : black,
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 13.sp),
@@ -247,7 +255,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.grey,
+                                color: isDarkMode() ? Colors.grey : black,
                                 fontSize: 13.5.sp),
                           ),
                           SizedBox(
@@ -256,6 +264,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           Text(
                             Strings.contact_one_hint,
                             style: TextStyle(
+                                color: isDarkMode() ? white : black,
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 13.sp),
@@ -268,7 +277,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             style: TextStyle(
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.grey,
+                                color: isDarkMode() ? Colors.grey : black,
                                 fontSize: 13.5.sp),
                           ),
                           SizedBox(
@@ -277,6 +286,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           Text(
                             Strings.contact_two_hint,
                             style: TextStyle(
+                                color: isDarkMode() ? white : black,
                                 fontFamily: opensansMedium,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 13.sp),
@@ -284,7 +294,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         ],
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: isDarkMode() ? black : white,
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         boxShadow: [
                           BoxShadow(
@@ -477,7 +487,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         padding: EdgeInsets.only(top: 11, bottom: 11),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            color: currentPage == index ? Colors.black : Colors.white,
+            color: currentPage == index || isDarkMode() ? white : black,
             boxShadow: [
               BoxShadow(
                 blurRadius: 10,
@@ -490,15 +500,13 @@ class _ProfileScreenState extends State<ProfileScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              str,
-              style: TextStyle(
+            Text(str,
+                style: TextStyle(
                   fontSize: 12.2.sp,
                   fontFamily: opensans_Bold,
                   fontWeight: FontWeight.w700,
-                  color:
-                      currentPage == index ? Colors.white : Colors.grey[850]),
-            ),
+                  color: currentPage == index || isDarkMode() ? black : white,
+                )),
           ],
         ),
       ),
