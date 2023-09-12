@@ -9,7 +9,9 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../controllers/notification_screen_controller.dart';
+import '../../core/Common/Common.dart';
 import '../../core/Common/appbar.dart';
+import '../../core/Common/toolbar.dart';
 import '../../core/constants/assets.dart';
 import '../../core/constants/strings.dart';
 import '../../core/themes/font_constant.dart';
@@ -42,6 +44,7 @@ class _NotificationScreenState extends State<NotificationScreen>
 
   @override
   Widget build(BuildContext context) {
+    Common().trasparent_statusbar();
     return Scaffold(
       extendBody: true,
       body: SafeArea(
@@ -66,6 +69,9 @@ class _NotificationScreenState extends State<NotificationScreen>
               ),
               child: Center(
                   child: Column(children: [
+                // getToolbar("Notifications", showBackButton: true, callback: () {
+                //   Get.back();
+                // })
                 HomeAppBar(
                   title: 'Notifications',
                   leading: Asset.backbutton,

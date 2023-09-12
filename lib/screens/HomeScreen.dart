@@ -53,7 +53,13 @@ class _HomeScreenState extends State<HomeScreen> {
               FadeInDown(
                 from: 50,
                 child: Container(
-                  child: HomeAppBar(
+                  child:
+                      //     getToolbar("Book My Appointment",
+                      //         showBackButton: true, callback: () {
+                      //   Get.back();
+                      // })
+
+                      HomeAppBar(
                     openDrawer: controller.drawer_key,
                     title: 'Book My Appointment',
                     leading: Asset.backbutton,

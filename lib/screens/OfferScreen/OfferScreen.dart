@@ -5,11 +5,15 @@ import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Models/offers.dart';
 import '../../Models/offers_model.dart';
+import '../../core/Common/Common.dart';
 import '../../core/Common/appbar.dart';
+import '../../core/Common/toolbar.dart';
 import '../../core/constants/assets.dart';
 import '../../core/themes/font_constant.dart';
 
@@ -36,6 +40,7 @@ class _OfferScreenState extends State<OfferScreen>
 
   @override
   Widget build(BuildContext context) {
+    Common().trasparent_statusbar();
     return Scaffold(
       body: Stack(
         children: [
@@ -43,14 +48,14 @@ class _OfferScreenState extends State<OfferScreen>
             height: double.infinity,
             width: double.infinity,
             child: isDarkMode()
-            ? SvgPicture.asset(
-                Asset.dark_bg,
-                fit: BoxFit.cover,
-              )
-            : SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+                ? SvgPicture.asset(
+                    Asset.dark_bg,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    Asset.bg,
+                    fit: BoxFit.cover,
+                  ),
           ),
           SafeArea(
               minimum: EdgeInsets.only(top: 1.h),
@@ -60,14 +65,18 @@ class _OfferScreenState extends State<OfferScreen>
                   ),
                   child: Center(
                       child: Column(children: [
-                    HomeAppBar(
-                      title: 'Offer',
-                      leading: Asset.backbutton,
-                      isfilter: false,
-                      icon: Asset.filter,
-                      isBack: true,
-                      onClick: () {},
-                    ),
+                    getToolbar("Offer", showBackButton: true, notify: false,
+                        callback: () {
+                      Get.back();
+                    })
+                    // HomeAppBar(
+                    //   title: 'Offer',
+                    //   leading: Asset.backbutton,
+                    //   isfilter: false,
+                    //   icon: Asset.filter,
+                    //   isBack: true,
+                    //   onClick: () {},
+                    // ),
                   ])))),
           Container(
             margin: EdgeInsets.only(top: 5.h),

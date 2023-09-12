@@ -2,13 +2,18 @@ import 'package:booking_app/core/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:sizer/sizer.dart';
 import '../../core/themes/color_const.dart';
+import '../controllers/ChangePassword_controller.dart';
+import '../controllers/login_controller.dart';
 import '../core/themes/font_constant.dart';
 import '../core/themes/style.dart';
+import '../core/utils/log.dart';
 import 'form_inputs.dart';
 
-class CustomFormField extends StatelessWidget {
+class CustomFormField extends StatefulWidget {
   CustomFormField(
       {Key? key,
       required this.hintText,
@@ -34,6 +39,8 @@ class CustomFormField extends StatelessWidget {
       this.onTap,
       this.isPick,
       this.isPassword,
+      this.fromObsecureText,
+      this.index,
       this.isFromAddStory = false,
       this.isEnable = true})
       : super(key: key);
@@ -59,27 +66,53 @@ class CustomFormField extends StatelessWidget {
   final bool? wantSuffix;
   final bool? isHidden;
   final bool? isDataValidated;
+  final String? fromObsecureText;
   final Function? onTap;
   bool isEnable = true;
+  final String? index;
   bool isFromAddStory = false;
-  bool obscuretext = false;
+  bool obsecuretext = false;
+
+  @override
+  State<CustomFormField> createState() => _CustomFormFieldState();
+}
+
+class _CustomFormFieldState extends State<CustomFormField> {
   @override
   Widget build(BuildContext context) {
-    print(
-      "wantSuffix${wantSuffix}",
-    );
     return TextFormField(
-      enabled: isEnable,
+      enabled: widget.isEnable,
       cursorColor: primaryColor,
       onTap: () {
-        if (onTap != null) onTap!();
+        if (widget.onTap != null) widget.onTap!();
       },
+      obscureText: widget.fromObsecureText == "LOGIN"
+          ? Get.find<LoginController>().obsecureText.value
+          : widget.fromObsecureText == "RESETPASS"
+              ? widget.index == "0"
+                  ? Get.find<ChangePasswordController>()
+                      .obsecureOldPasswordText
+                      .value
+                  : widget.index == "1"
+                      ? Get.find<ChangePasswordController>()
+                          .obsecureNewPasswordText
+                          .value
+                      : widget.index == "2"
+                          ? Get.find<ChangePasswordController>()
+                              .obsecureConfirmPasswordText
+                              .value
+                          : widget.obsecuretext
+              : widget.index == "2"
+                  ? Get.find<ChangePasswordController>()
+                      .obsecureConfirmPasswordText
+                      .value
+                  : widget.obsecuretext,
       textInputAction: TextInputAction.next,
-      keyboardType: inputType,
-      validator: validator,
-      controller: controller,
-      maxLength: inputType == TextInputType.number ? 16 : null,
-      style: isFromAddStory
+      keyboardType: widget.inputType,
+      validator: widget.validator,
+      controller: widget.controller,
+      maxLength: widget.inputType == TextInputType.number ? 16 : null,
+      style: widget.isFromAddStory
           ? TextStyle(
               fontFamily: fontRegular,
               fontSize:
@@ -87,23 +120,21 @@ class CustomFormField extends StatelessWidget {
               color: black)
           : styleTextFormFieldText(),
       textAlignVertical: TextAlignVertical.center,
-      obscureText: obscuretext,
       obscuringCharacter: '*',
       decoration: InputDecoration(
-        labelStyle: styleTextForFieldLabel(node),
+        labelStyle: styleTextForFieldLabel(widget.node),
         contentPadding: EdgeInsets.only(
             left: 5.w,
             right: 5.w,
             top: SizerUtil.deviceType == DeviceType.mobile
-                ? isExpand!
+                ? widget.isExpand!
                     ? 10.h
                     : 0.w
                 : 3.w,
             bottom: SizerUtil.deviceType == DeviceType.mobile ? 0.w : 3.w),
         //EdgeInsets.symmetric(vertical: 1.8.h, horizontal: 5.w),
-        hintText: hintText,
-        errorText: errorText,
-
+        hintText: widget.hintText,
+        errorText: widget.errorText,
         hintStyle: styleTextForFieldHint(),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
@@ -125,7 +156,8 @@ class CustomFormField extends StatelessWidget {
         ),
 
         // prefixStyle: styleTextFormFieldText(),
-        prefixIcon: formType != null && formType == FieldType.Mobile
+        prefixIcon: widget.formType != null &&
+                widget.formType == FieldType.Mobile
             ? Container(
                 padding: const EdgeInsets.only(left: 16, bottom: 3, right: 3),
                 child: Row(
@@ -138,24 +170,57 @@ class CustomFormField extends StatelessWidget {
             : null,
         prefixIconConstraints:
             const BoxConstraints(minHeight: 25, maxHeight: 30),
-        suffixIcon: wantSuffix == true
+        suffixIcon: widget.wantSuffix == true
             ? GestureDetector(
                 onTap: () {
-                  obscuretext = !obscuretext;
-                  print('Hidden');
-                  // onVerifiyButtonClick!();
+                  if (widget.fromObsecureText == "LOGIN") {
+                    Get.find<LoginController>().obsecureText.value =
+                        !Get.find<LoginController>().obsecureText.value;
+                    setState(() {});
+                  } else if (widget.fromObsecureText == "RESETPASS") {
+                    if (widget.index == "0") {
+                      Get.find<ChangePasswordController>()
+                              .obsecureOldPasswordText
+                              .value =
+                          !Get.find<ChangePasswordController>()
+                              .obsecureOldPasswordText
+                              .value;
+                      setState(() {});
+                      logcat("ResetpassController", widget.index);
+                    } else if (widget.index == "1") {
+                      logcat("ResetpassController:111", widget.index);
+                      Get.find<ChangePasswordController>()
+                              .obsecureNewPasswordText
+                              .value =
+                          !Get.find<ChangePasswordController>()
+                              .obsecureNewPasswordText
+                              .value;
+                      setState(() {});
+                    } else {
+                      logcat("ResetpassController:ELSE", widget.index);
+                      Get.find<ChangePasswordController>()
+                              .obsecureConfirmPasswordText
+                              .value =
+                          !Get.find<ChangePasswordController>()
+                              .obsecureConfirmPasswordText
+                              .value;
+                      setState(() {});
+                    }
+                  } else {
+                    _togglePasswordView(context);
+                  }
                 },
-                child: isStarting == true
+                child: widget.isStarting == true
                     ? SvgPicture.asset(Asset.time,
                         height: 5, width: 5, fit: BoxFit.scaleDown)
-                    : isDropdown == true
+                    : widget.isDropdown == true
                         ? SvgPicture.asset(
                             Asset.dropdown,
                             height: 5,
                             width: 5,
                             fit: BoxFit.scaleDown,
                           )
-                        : isCalender == true
+                        : widget.isCalender == true
                             ? SvgPicture.asset(
                                 Asset.calender,
                                 height: 5,
@@ -164,18 +229,60 @@ class CustomFormField extends StatelessWidget {
                                 color: Colors.grey,
                               )
                             : InkWell(
-                                child: isPassword == true
-                                    ? Icon(
-                                        Icons.visibility_off,
-                                        color: Colors.grey,
-                                        size: 20.sp,
+                                child: widget.isPassword == true
+                                    ? Padding(
+                                        padding: EdgeInsets.only(
+                                            right: SizerUtil.deviceType ==
+                                                    DeviceType.mobile
+                                                ? 0.w
+                                                : 3.w),
+                                        child: Icon(
+                                          widget.fromObsecureText == "LOGIN"
+                                              ? Get.find<LoginController>()
+                                                      .obsecureText
+                                                      .value
+                                                  ? Icons.visibility_off
+                                                  : Icons.visibility
+                                              : widget.fromObsecureText ==
+                                                      "RESETPASS"
+                                                  ? widget.index == "0"
+                                                      ? Get.find<ChangePasswordController>()
+                                                              .obsecureOldPasswordText
+                                                              .value
+                                                          ? Icons.visibility_off
+                                                          : Icons.visibility
+                                                      : widget.index == "1"
+                                                          ? Get.find<ChangePasswordController>()
+                                                                  .obsecureNewPasswordText
+                                                                  .value
+                                                              ? Icons
+                                                                  .visibility_off
+                                                              : Icons.visibility
+                                                          : widget.index == "2"
+                                                              ? Get.find<ChangePasswordController>()
+                                                                      .obsecureConfirmPasswordText
+                                                                      .value
+                                                                  ? Icons
+                                                                      .visibility_off
+                                                                  : Icons
+                                                                      .visibility
+                                                              : widget
+                                                                      .obsecuretext
+                                                                  ? Icons
+                                                                      .visibility_off
+                                                                  : Icons
+                                                                      .visibility
+                                                  : widget.obsecuretext
+                                                      ? Icons.visibility_off
+                                                      : Icons.visibility,
+                                          color: Colors.grey,
+                                          size: SizerUtil.deviceType ==
+                                                  DeviceType.mobile
+                                              ? 20.sp
+                                              : 15.sp,
+                                        ),
                                       )
-                                    :
-                                    // : Icon(
-                                    //     Icons.photo,
-                                    //     size: 25,
-                                    //   ))
-                                    SvgPicture.asset(Asset.photos,
+                                    : SvgPicture.asset(Asset.photos,
                                         height: 5,
                                         width: 5,
                                         fit: BoxFit.scaleDown),
@@ -203,8 +310,14 @@ class CustomFormField extends StatelessWidget {
           ),
         ),
       ),
-      onChanged: onChanged,
-      inputFormatters: inputFormatters,
+      onChanged: widget.onChanged,
+      inputFormatters: widget.inputFormatters,
     );
+  }
+
+  void _togglePasswordView(BuildContext context) {
+    setState(() {
+      widget.obsecuretext = !widget.obsecuretext;
+    });
   }
 }

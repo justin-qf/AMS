@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/core/themes/color_const.dart';
 import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../controllers/AppointmentBooking_controller.dart';
-import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 import '../core/themes/font_constant.dart';
@@ -23,7 +24,7 @@ class AppointmentBookingScreen extends StatefulWidget {
 }
 
 class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
-  final Booking = Get.put(AppointmentBookingController());
+  final controller = Get.put(AppointmentBookingController());
   bool check1 = false;
 
   @override
@@ -39,30 +40,34 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
               height: double.infinity,
               width: double.infinity,
               child: isDarkMode()
-            ? SvgPicture.asset(
-                Asset.dark_bg,
-                fit: BoxFit.cover,
-              )
-            : SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+                  ? SvgPicture.asset(
+                      Asset.dark_bg,
+                      fit: BoxFit.cover,
+                    )
+                  : SvgPicture.asset(
+                      Asset.bg,
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(
               height: 0.5.h,
             ),
             Center(
                 child: Column(children: [
-              HomeAppBar(
-                title: Strings.appointment_booking,
-                leading: Asset.backbutton,
-                isfilter: false,
-                icon: Asset.filter,
-                isBack: true,
-                onClick: () {
-                  Get.back();
-                },
-              ),
+              getForgetToolbar("Appointment Booking", showBackButton: true,
+                  callback: () {
+                Get.back();
+              })
+              // HomeAppBar(
+              //   title: Strings.appointment_booking,
+              //   leading: Asset.backbutton,
+              //   isfilter: false,
+              //   icon: Asset.filter,
+              //   isBack: true,
+              //   onClick: () {
+              //     Get.back();
+              //   },
+              // ),
             ])),
             SingleChildScrollView(
               child: Container(
@@ -70,7 +75,7 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                 padding: EdgeInsets.only(
                     left: 7.0.w, right: 7.0.w, top: 2.h, bottom: 1.h),
                 child: Form(
-                    key: Booking.formKey,
+                    key: controller.formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,16 +87,16 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                                 duration: const Duration(milliseconds: 300),
                                 child: Obx(() {
                                   return getReactiveFormField(
-                                    node: Booking.CustomerNode,
-                                    controller: Booking.Customerctr,
+                                    node: controller.CustomerNode,
+                                    controller: controller.Customerctr,
                                     hintLabel: Strings.customer_hint,
                                     wantSuffix: true,
                                     isDropdown: true,
                                     onChanged: (val) {
-                                      Booking.validateCustomer(val);
+                                      controller.validateCustomer(val);
                                     },
                                     errorText:
-                                        Booking.CustomerModel.value.error,
+                                        controller.CustomerModel.value.error,
                                     inputType: TextInputType.text,
                                   );
                                 }))),
@@ -102,16 +107,17 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                                 duration: const Duration(milliseconds: 300),
                                 child: Obx(() {
                                   return getReactiveFormField(
-                                    node: Booking.ServiceNode,
-                                    controller: Booking.Servicectr,
+                                    node: controller.ServiceNode,
+                                    controller: controller.Servicectr,
                                     hintLabel: Strings.Services,
                                     wantSuffix: true,
                                     isDropdown: true,
                                     onChanged: (val) {
-                                      Booking.validateService(val);
+                                      controller.validateService(val);
                                       setState(() {});
                                     },
-                                    errorText: Booking.ServiceModel.value.error,
+                                    errorText:
+                                        controller.ServiceModel.value.error,
                                     inputType: TextInputType.text,
                                   );
                                 }))),
@@ -119,106 +125,155 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                         SizedBox(
                           height: 1.h,
                         ),
-                        GridView.count(
-                            shrinkWrap: true,
-                            childAspectRatio: 1.5,
-                            crossAxisCount: 3,
-                            crossAxisSpacing: 16.2,
-                            mainAxisSpacing: -0.0,
-                            children: List.generate(choices.length, (index) {
-                              return Container(
-                                child: SelectCard(
-                                    choice: choices[index], index: index),
-                              );
-                            })),
-                        // Column(
-                        //   children: [
-                        //     Obx(
-                        //       () {
-                        //         return Row(
-                        //           mainAxisAlignment:
-                        //               MainAxisAlignment.spaceBetween,
-                        //           children: [
-                        //             Container(
-                        //               child: getTime(Strings.time1, Booking),
-                        //             ),
-                        //             Container(
-                        //               child: getTime(Strings.time2, Booking),
-                        //             ),
-                        //             Container(
-                        //               child: getTime(Strings.time3, Booking),
-                        //             ),
-                        //           ],
-                        //         );
-                        //       },
-                        //     ),
-                        //     SizedBox(
-                        //       height: 1.h,
-                        //     ),
-                        //     // Obx(
-                        //     //   () {
-                        //     //     return Row(
-                        //     //       mainAxisAlignment:
-                        //     //           MainAxisAlignment.spaceBetween,
-                        //     //       children: [
-                        //     //         Container(
-                        //     //           child: getTime(Strings.time4,
-                        //     //                Booking),
-                        //     //         ),
-                        //     //         Container(
-                        //     //           child: getTime(Strings.time5,
-                        //     //                Booking),
-                        //     //         ),
-                        //     //         Container(
-                        //     //           child: getTime(Strings.time6,
-                        //     //                Booking),
-                        //     //         ),
-                        //     //       ],
-                        //     //     );
-                        //     //   },
-                        //     // ),
-                        //     SizedBox(
-                        //       height: 1.h,
-                        //     ),
-                        //     // Row(
-                        //     //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //     //   children: [
-                        //     //     Container(
-                        //     //       child: getTime(Strings.time7,
-                        //     //           Booking.isClickd.value, Booking),
-                        //     //     ),
-                        //     //     Container(
-                        //     //       child: getTime(Strings.time8,
-                        //     //           Booking.isClickd.value, Booking),
-                        //     //     ),
-                        //     //     Container(
-                        //     //       child: getTime(Strings.time9,
-                        //     //           Booking.isClickd.value, Booking),
-                        //     //     ),
-                        //     //   ],
-                        //     // ),
-                        //     SizedBox(
-                        //       height: 1.h,
-                        //     ),
-                        //     // Row(
-                        //     //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //     //   children: [
-                        //     //     Container(
-                        //     //       child: getTime(Strings.time10,
-                        //     //           Booking.isClickd.value, Booking),
-                        //     //     ),
-                        //     //     Container(
-                        //     //       child: getTime(Strings.time11,
-                        //     //           Booking.isClickd.value, Booking),
-                        //     //     ),
-                        //     //     Container(
-                        //     //       child: getTime(Strings.time12,
-                        //     //           Booking.isClickd.value, Booking),
-                        //     //     ),
-                        //     //   ],
-                        //     // ),
-                        //   ],
+                        Obx(
+                          () {
+                            return GridView.count(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                childAspectRatio: 2.0,
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 17,
+                                mainAxisSpacing: 4,
+                                children: List.generate(
+                                    controller.choices.length, (index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        controller.selectedIndex.value = index;
+                                      });
+                                    },
+                                    child: AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      width: 25.w,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(14),
+                                        color: controller.selectedIndex.value ==
+                                                index
+                                            ? Colors.black
+                                            : Colors.grey,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          controller.choices[index].title,
+                                          style: TextStyle(
+                                              fontFamily: opensans_Bold,
+                                              color: Colors.white,
+                                              fontSize: SizerUtil.deviceType ==
+                                                      DeviceType.mobile
+                                                  ? 12.sp
+                                                  : 13.sp,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }));
+                          },
+                        ),
+                        // Obx(
+                        //   () {
+                        //     return GridView.count(
+                        //         shrinkWrap: true,
+                        //         childAspectRatio: 1.5,
+                        //         crossAxisCount: 3,
+                        //         crossAxisSpacing: 16.2,
+                        //         mainAxisSpacing: -0.0,
+                        //         children:
+                        //             List.generate(choices.length, (index) {
+                        //           return SelectCard(
+                        //               choice: choices[index], index: index);
+                        //         }));
+                        //   },
                         // ),
+                        Column(
+                          children: [
+                            // Obx(
+                            //   () {
+                            //     return Row(
+                            //       mainAxisAlignment:
+                            //           MainAxisAlignment.spaceBetween,
+                            //       children: [
+                            //         Container(
+                            //           child: getTime(Strings.time1, Booking),
+                            //         ),
+                            //         Container(
+                            //           child: getTime(Strings.time2, Booking),
+                            //         ),
+                            //         Container(
+                            //           child: getTime(Strings.time3, Booking),
+                            //         ),
+                            //       ],
+                            //     );
+                            //   },
+                            // ),
+                            // SizedBox(
+                            //   height: 1.h,
+                            // ),
+                            // Obx(
+                            //   () {
+                            //     return Row(
+                            //       mainAxisAlignment:
+                            //           MainAxisAlignment.spaceBetween,
+                            //       children: [
+                            //         Container(
+                            //           child: getTime(Strings.time4,
+                            //                Booking),
+                            //         ),
+                            //         Container(
+                            //           child: getTime(Strings.time5,
+                            //                Booking),
+                            //         ),
+                            //         Container(
+                            //           child: getTime(Strings.time6,
+                            //                Booking),
+                            //         ),
+                            //       ],
+                            //     );
+                            //   },
+                            // ),
+                            // SizedBox(
+                            //   height: 1.h,
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   children: [
+                            //     Container(
+                            //       child: getTime(Strings.time7,
+                            //           Booking.isClickd.value, Booking),
+                            //     ),
+                            //     Container(
+                            //       child: getTime(Strings.time8,
+                            //           Booking.isClickd.value, Booking),
+                            //     ),
+                            //     Container(
+                            //       child: getTime(Strings.time9,
+                            //           Booking.isClickd.value, Booking),
+                            //     ),
+                            //   ],
+                            // ),
+                            // SizedBox(
+                            //   height: 1.h,
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   children: [
+                            //     Container(
+                            //       child: getTime(Strings.time10,
+                            //           Booking.isClickd.value, Booking),
+                            //     ),
+                            //     Container(
+                            //       child: getTime(Strings.time11,
+                            //           Booking.isClickd.value, Booking),
+                            //     ),
+                            //     Container(
+                            //       child: getTime(Strings.time12,
+                            //           Booking.isClickd.value, Booking),
+                            //     ),
+                            //   ],
+                            // ),
+                          ],
+                        ),
                         SizedBox(height: 2.h),
                         getTitle(Strings.amount),
                         FadeInUp(
@@ -227,14 +282,15 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                                 duration: const Duration(milliseconds: 300),
                                 child: Obx(() {
                                   return getReactiveFormField(
-                                    node: Booking.AmountNode,
-                                    controller: Booking.Amountctr,
+                                    node: controller.AmountNode,
+                                    controller: controller.Amountctr,
                                     hintLabel: Strings.amount_hint,
                                     onChanged: (val) {
-                                      Booking.validateAmount(val);
+                                      controller.validateAmount(val);
                                       setState(() {});
                                     },
-                                    errorText: Booking.AmountModel.value.error,
+                                    errorText:
+                                        controller.AmountModel.value.error,
                                     inputType: TextInputType.text,
                                   );
                                 }))),
@@ -245,15 +301,15 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                                 duration: const Duration(milliseconds: 300),
                                 child: Obx(() {
                                   return getReactiveFormField(
-                                    node: Booking.NoteNode,
-                                    controller: Booking.Notectr,
+                                    node: controller.NoteNode,
+                                    controller: controller.Notectr,
                                     hintLabel: Strings.notes_hint,
                                     onChanged: (val) {
-                                      Booking.validateNote(val);
+                                      controller.validateNote(val);
                                       setState(() {});
                                     },
                                     isExpand: true,
-                                    errorText: Booking.NoteModel.value.error,
+                                    errorText: controller.NoteModel.value.error,
                                     inputType: TextInputType.text,
                                   );
                                 }))),
@@ -289,7 +345,7 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                             width: double.infinity,
                             height: 6.h,
                             child: getButton(() {
-                              if (Booking.isFormInvalidate.value) {
+                              if (controller.isFormInvalidate.value) {
                                 // Get.to(Signup2());
                               }
                             })),

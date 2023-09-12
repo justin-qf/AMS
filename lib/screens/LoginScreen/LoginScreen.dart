@@ -1,12 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/Screens/ChangepasswordScreen.dart';
-import 'package:booking_app/Screens/PhoneNumberScreen.dart';
-import 'package:booking_app/Screens/SignUpScreen/SignupScreen.dart';
 import 'package:booking_app/core/constants/assets.dart';
 import 'package:booking_app/core/themes/color_const.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:booking_app/core/utils/helper.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../controllers/login_controller.dart';
+import '../../core/Common/Common.dart';
 import '../../core/Common/util.dart';
 import '../../core/constants/strings.dart';
 import '../../custom_componannt/common_views.dart';
@@ -32,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Common().trasparent_statusbar();
     return GestureDetector(
         onTap: () {
           hideKeyboard(context);
@@ -146,6 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         onChanged: (val) {
                                           controller.validatePassword(val);
                                         },
+                                        fromObsecureText: "LOGIN",
                                         errorText:
                                             controller.passModel.value.error,
                                         inputType: TextInputType.text,
@@ -163,11 +163,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           InkWell(
                             onTap: () {
                               Get.to(ChangepasswordScreen());
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) => ChangepasswordScreen(),
-                              //     ));
                             },
                             child: Text(
                               Strings.forgot_pass,
@@ -183,33 +178,45 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 4.h,
                       ),
                       FadeInUp(
-                        from: 50,
-                        child: SizedBox(
-                            width: 150.h,
-                            height: 6.h,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  Get.to(PhoneNumberScreen());
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             const PhoneNumberScreen()));
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.black,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50))),
-                                child: Text(
-                                  Strings.sing_in,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14.5.sp,
-                                      fontFamily: opensans_Bold,
-                                      fontWeight: FontWeight.w700),
-                                ))),
-                      ),
+                          from: 50,
+                          child: Obx(() {
+                            return getFormButton(() {
+                              if (controller.isFormInvalidate.value == true) {
+                                controller.signInAPI(context);
+                              }
+                            }, "Sign In",
+                                validate: controller.isFormInvalidate.value);
+                          })
+                          // child: SizedBox(
+                          //     width: 150.h,
+                          //     height: 6.h,
+                          //     child:
+                          //      ElevatedButton(
+                          //         onPressed: () {
+                          //           Get.to(dashboard());
+
+                          //           // Get.to(PhoneNumberScreen());
+
+                          //           // Navigator.push(
+                          //           //     context,
+                          //           //     MaterialPageRoute(
+                          //           //         builder: (context) =>
+                          //           //             const PhoneNumberScreen()));
+                          //         },
+                          //         style: ElevatedButton.styleFrom(
+                          //             backgroundColor: Colors.black,
+                          //             shape: RoundedRectangleBorder(
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(50))),
+                          //         child: Text(
+                          //           Strings.sing_in,
+                          //           style: TextStyle(
+                          //               color: Colors.white,
+                          //               fontSize: 14.5.sp,
+                          //               fontFamily: opensans_Bold,
+                          //               fontWeight: FontWeight.w700),
+                          //         ))),
+                          ),
                       SizedBox(
                         height: 4.5.h,
                       ),
@@ -272,41 +279,41 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 3.7.h,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          FadeInUp(
-                            from: 50,
-                            child: RichText(
-                                text: TextSpan(
-                                    style: TextStyle(
-                                        color: isDarkMode() ? white : black,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: opensansMedium,
-                                        fontSize: 14.sp),
-                                    children: [
-                                  TextSpan(
-                                    text: Strings.havnt_account,
-                                  ),
-                                  TextSpan(
-                                      text: Strings.sing_up,
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Get.to(SignupScreens());
-                                        },
-                                      style: TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          decorationThickness: 1.5.sp,
-                                          color:
-                                              Color.fromARGB(255, 77, 180, 224),
-                                          fontFamily: opensans_Bold,
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w700)),
-                                ])),
-                          ),
-                        ],
-                      )
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   children: [
+                      //     FadeInUp(
+                      //       from: 50,
+                      //       child: RichText(
+                      //           text: TextSpan(
+                      //               style: TextStyle(
+                      //                   color: isDarkMode() ? white : black,
+                      //                   fontWeight: FontWeight.w500,
+                      //                   fontFamily: opensansMedium,
+                      //                   fontSize: 14.sp),
+                      //               children: [
+                      //             TextSpan(
+                      //               text: Strings.havnt_account,
+                      //             ),
+                      //             TextSpan(
+                      //                 text: Strings.sing_up,
+                      //                 recognizer: TapGestureRecognizer()
+                      //                   ..onTap = () {
+                      //                     Get.to(SignupScreens());
+                      //                   },
+                      //                 style: TextStyle(
+                      //                     decoration: TextDecoration.underline,
+                      //                     decorationThickness: 1.5.sp,
+                      //                     color:
+                      //                         Color.fromARGB(255, 77, 180, 224),
+                      //                     fontFamily: opensans_Bold,
+                      //                     fontSize: 14.sp,
+                      //                     fontWeight: FontWeight.w700)),
+                      //           ])),
+                      //     ),
+                      //   ],
+                      // )
                     ],
                   ),
                 ),

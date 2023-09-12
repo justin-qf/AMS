@@ -27,7 +27,7 @@ class LoadingProgressDialog {
                     height: 60,
                     width: 60,
                     child: Image.asset(
-                      "assets/gif/loading.gif",
+                      "assets/gif/ZKZg.gif",
                       width: 60,
                       height: 60,
                     ),

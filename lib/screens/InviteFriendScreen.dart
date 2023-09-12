@@ -3,9 +3,12 @@ import 'package:booking_app/core/utils/helper.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 
@@ -27,15 +30,15 @@ class _InviteFriendScreenState extends State<InviteFriendScreen> {
           SizedBox(
             height: double.infinity,
             width: double.infinity,
-             child: isDarkMode()
-            ? SvgPicture.asset(
-                Asset.dark_bg,
-                fit: BoxFit.cover,
-              )
-            : SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+            child: isDarkMode()
+                ? SvgPicture.asset(
+                    Asset.dark_bg,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    Asset.bg,
+                    fit: BoxFit.cover,
+                  ),
           ),
           SafeArea(
               minimum: EdgeInsets.only(top: 1.h),
@@ -46,14 +49,18 @@ class _InviteFriendScreenState extends State<InviteFriendScreen> {
                   child: Center(
                       child: Column(
                     children: [
-                      HomeAppBar(
-                        title: Strings.invite_friends,
-                        leading: Asset.backbutton,
-                        isfilter: false,
-                        icon: Asset.filter,
-                        isBack: true,
-                        onClick: () {},
-                      ),
+                      getToolbar("Add Vendor Service", showBackButton: true,
+                          callback: () {
+                        Get.back();
+                      })
+                      // HomeAppBar(
+                      //   title: Strings.invite_friends,
+                      //   leading: Asset.backbutton,
+                      //   isfilter: false,
+                      //   icon: Asset.filter,
+                      //   isBack: true,
+                      //   onClick: () {},
+                      // ),
                     ],
                   )))),
           SingleChildScrollView(

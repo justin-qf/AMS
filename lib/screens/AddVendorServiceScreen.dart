@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../controllers/AddVendorService_controller.dart';
 import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 import '../custom_componannt/common_views.dart';
@@ -34,30 +35,34 @@ class _AddVendorServiceScreenState extends State<AddVendorServiceScreen> {
               height: double.infinity,
               width: double.infinity,
               child: isDarkMode()
-            ? SvgPicture.asset(
-                Asset.dark_bg,
-                fit: BoxFit.cover,
-              )
-            : SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+                  ? SvgPicture.asset(
+                      Asset.dark_bg,
+                      fit: BoxFit.cover,
+                    )
+                  : SvgPicture.asset(
+                      Asset.bg,
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(
               height: 0.5.h,
             ),
             Center(
                 child: Column(children: [
-              HomeAppBar(
-                title: Strings.add_vendor_service,
-                leading: Asset.backbutton,
-                isfilter: false,
-                icon: Asset.filter,
-                isBack: true,
-                onClick: () {
-                  Get.back();
-                },
-              ),
+              getToolbar("Add Vendor Service",
+                  showBackButton: true, notify: false, callback: () {
+                Get.back();
+              })
+              // HomeAppBar(
+              //   title: Strings.add_vendor_service,
+              //   leading: Asset.backbutton,
+              //   isfilter: false,
+              //   icon: Asset.filter,
+              //   isBack: true,
+              //   onClick: () {
+              //     Get.back();
+              //   },
+              // ),
             ])),
             Container(
               margin: EdgeInsets.only(top: 6.h, left: 1.0.w, right: 1.0.w),

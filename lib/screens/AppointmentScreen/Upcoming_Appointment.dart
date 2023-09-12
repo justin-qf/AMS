@@ -8,6 +8,7 @@ import 'package:sizer/sizer.dart';
 import '../../Models/notification_model.dart';
 import '../../Models/product.dart';
 import '../../controllers/notification_screen_controller.dart';
+import '../../core/Common/Common.dart';
 import '../../core/constants/assets.dart';
 import '../../core/themes/color_const.dart';
 import '../../core/themes/font_constant.dart';
@@ -31,6 +32,7 @@ class _UpcomingAppointmentState extends State<UpcomingAppointment> {
 
   @override
   Widget build(BuildContext context) {
+     Common().trasparent_statusbar();
     return ListView.builder(
         shrinkWrap: false,
         clipBehavior: Clip.antiAlias,

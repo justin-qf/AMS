@@ -14,6 +14,7 @@ import '../Models/service_model.dart';
 import '../Models/staff.dart';
 import '../core/Common/Common.dart';
 import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/get_storage_key.dart';
 import '../core/constants/strings.dart';
@@ -67,23 +68,26 @@ class _ProfileScreenState extends State<ProfileScreen>
               color: isDarkMode() ? black : white,
               child: Column(
                 children: [
-                  Container(
-                      margin: EdgeInsets.only(top: 0.5.h, right: 3.5.h),
-                      child: Center(
-                          child: Column(
-                        children: [
-                          HomeAppBar(
-                            title: Strings.profile,
-                            leading: Asset.backbutton,
-                            isfilter: false,
-                            icon: Asset.filter,
-                            isBack: true,
-                            onClick: () {
-                              Get.put(HomeScreen());
-                            },
-                          ),
-                        ],
-                      ))),
+                  Center(
+                      child: Column(
+                    children: [
+                      getToolbar("Profile", showBackButton: true, notify: false,
+                          callback: () {
+                        Get.back();
+                      })
+
+                      // HomeAppBar(
+                      //   title: Strings.profile,
+                      //   leading: Asset.backbutton,
+                      //   isfilter: false,
+                      //   icon: Asset.filter,
+                      //   isBack: true,
+                      //   onClick: () {
+                      //     Get.put(HomeScreen());
+                      //   },
+                      // ),
+                    ],
+                  )),
                   SizedBox(
                     height: 2.h,
                   ),

@@ -1,19 +1,33 @@
+import 'dart:convert';
+
+import 'package:booking_app/Screens/DashboardScreen.dart';
+import 'package:booking_app/models/SignInModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../Config/apicall_constant.dart';
 import '../Models/sign_in_form_validation.dart';
+import '../api_handle/Repository.dart';
+import '../core/utils/log.dart';
+import '../dialogs/dialogs.dart';
+import '../dialogs/loading_indicator.dart';
+import '../preference/UserPreference.dart';
+import 'Appointment_screen_controller.dart';
 import 'internet_controller.dart';
 
 class LoginController extends GetxController {
   late final GetStorage _getStorage;
-  final InternetController _networkManager = Get.find<InternetController>();
+  final InternetController networkManager = Get.find<InternetController>();
 
   late FocusNode Email, Pass;
 
   late TextEditingController emailctr, passctr;
 
+  Rx<ScreenState> state = ScreenState.apiLoading.obs;
+
   final formKey = GlobalKey<FormState>();
+  RxBool obsecureText = true.obs;
 
   @override
   void onInit() {
@@ -45,8 +59,11 @@ class LoginController extends GetxController {
 
   void validateEmail(String? val) {
     emailModel.update((model) {
-      if (val != null && val.isEmpty) {
-        model!.error = "Enter Email";
+      if (val != null && val.toString().trim().isEmpty) {
+        model!.error = "Enter Email Id";
+        model.isValidate = false;
+      } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(emailctr.text.trim())) {
+        model!.error = "Enter Valid Email Id";
         model.isValidate = false;
       } else {
         model!.error = null;
@@ -56,20 +73,50 @@ class LoginController extends GetxController {
 
     enableSignUpButton();
   }
+
+  // void validateEmail(String? val) {
+  //   emailModel.update((model) {
+  //     if (val != null && val.isEmpty) {
+  //       model!.error = "Enter Email";
+  //       model.isValidate = false;
+  //     } else {
+  //       model!.error = null;
+  //       model.isValidate = true;
+  //     }
+  //   });
+
+  //   enableSignUpButton();
+  // }
 
   void validatePassword(String? val) {
     passModel.update((model) {
-      if (val != null && val.isEmpty) {
+      if (val == null || val.toString().trim().isEmpty) {
         model!.error = "Enter Password";
+        model.isValidate = false;
+      } else if (val.length < 8) {
+        model!.error = "Enter Valid Password";
         model.isValidate = false;
       } else {
         model!.error = null;
         model.isValidate = true;
       }
     });
-
     enableSignUpButton();
   }
+
+  // void validatePassword(String? val) {
+  //   passModel.update((model) {
+  //     if (val != null && val.isEmpty) {
+  //       model!.error = "Enter Password";
+  //       model.isValidate = false;
+  //     } else {
+  //       model!.error = null;
+  //       model.isValidate = true;
+  //     }
+  //   });
+
+  //   enableSignUpButton();
+  // }
 
   RxBool isFormInvalidate = false.obs;
 
@@ -82,5 +129,61 @@ class LoginController extends GetxController {
 
   void navigate() {
     // Get.to(const SignUpScreen(false));
+  }
+
+  void signInAPI(context) async {
+    var loadingIndicator = LoadingProgressDialog();
+    try {
+      if (networkManager.connectionType == 0) {
+        loadingIndicator.hide(context);
+        showDialogForScreen(context, 'Connection.noConnection', callback: () {
+          Get.back();
+        });
+        return;
+      }
+      loadingIndicator.show(context, '');
+      var response = await Repository.post({
+        "email_id": emailctr.text.toString().trim(),
+        "password": passctr.text.toString().trim()
+      }, ApiUrl.login);
+      loadingIndicator.hide(context);
+      var data = jsonDecode(response.body);
+      logcat("RESPOSNE", data);
+      var responseDetail = GetLoginModel.fromJson(data);
+      if (response.statusCode == 200) {
+        if (responseDetail.status == 1) {
+          UserPreferences().saveSignInInfo(responseDetail.data);
+          UserPreferences().setToken(responseDetail.data.token.toString());
+          Get.to(const dashboard());
+        } else {
+          showDialogForScreen(context, responseDetail.message.toString(),
+              callback: () {});
+        }
+      } else {
+        state.value = ScreenState.apiError;
+        showDialogForScreen(context, responseDetail.message.toString(),
+            callback: () {});
+      }
+    } catch (e) {
+      logcat("Exception", e);
+      showDialogForScreen(context, 'ServerError.servererror.toString()',
+          callback: () {});
+      loadingIndicator.hide(context);
+    }
+  }
+
+  showDialogForScreen(context, String message, {Function? callback}) {
+    showMessage(
+        context: context,
+        callback: () {
+          if (callback != null) {
+            callback();
+          }
+          return true;
+        },
+        message: message,
+        title: "Sign In",
+        negativeButton: '',
+        positiveButton: "Continue");
   }
 }

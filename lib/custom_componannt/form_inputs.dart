@@ -26,8 +26,10 @@ Widget getReactiveFormField(
     bool? isPassword,
     Function? onTap,
     bool isExpand = false,
+    String? fromObsecureText,
     bool isFromAddStory = false,
     bool isFromIntro = false,
+    final String? index,
     bool isEnable = true}) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 1.2.h),
@@ -49,6 +51,8 @@ Widget getReactiveFormField(
         wantSuffix: wantSuffix,
         isPassword: isPassword,
         onTap: onTap,
+        index: index,
+        fromObsecureText: fromObsecureText,
         isFromAddStory: isFromAddStory,
         isEnable: isEnable),
   );

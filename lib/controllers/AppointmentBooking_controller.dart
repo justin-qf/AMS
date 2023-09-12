@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../Models/sign_in_form_validation.dart';
+import '../Screens/TimeSlot.dart';
 import 'internet_controller.dart';
 
 class AppointmentBookingController extends GetxController {
@@ -25,6 +26,7 @@ class AppointmentBookingController extends GetxController {
 
   final formKey = GlobalKey<FormState>();
   RxBool isClickd = false.obs;
+  RxInt selectedIndex = 0.obs;
 
   @override
   void onInit() {
@@ -48,6 +50,33 @@ class AppointmentBookingController extends GetxController {
     enableSignUpButton();
     super.onInit();
   }
+
+  RxList<Choice> choices = [
+    Choice(
+      title: '11:30 AM',
+      isSelected: false,
+    ),
+    Choice(
+      title: '01:30 AM',
+      isSelected: false,
+    ),
+    Choice(
+      title: '12:30 PM',
+      isSelected: false,
+    ),
+    Choice(
+      title: '01:30 PM',
+      isSelected: false,
+    ),
+    Choice(title: '02:30 PM', isSelected: false),
+    Choice(title: '04:00 PM', isSelected: false),
+    Choice(title: '05:00 PM', isSelected: false),
+    Choice(title: '06:00 PM', isSelected: false),
+    Choice(title: '07:00 PM', isSelected: false),
+    Choice(title: '08:00 PM', isSelected: false),
+    Choice(title: '09:00 PM', isSelected: false),
+    Choice(title: '12:00 PM', isSelected: false),
+  ].obs;
 
   void setOnClick(bool isClick) {
     isClickd.value = !isClick;

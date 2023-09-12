@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 import '../custom_componannt/common_views.dart';
@@ -48,16 +49,20 @@ class _AddExpertScreenState extends State<AddExpertScreen> {
             ),
             Center(
                 child: Column(children: [
-              HomeAppBar(
-                title: Strings.add_product,
-                leading: Asset.backbutton,
-                isfilter: false,
-                icon: Asset.filter,
-                isBack: true,
-                onClick: () {
-                  Get.back();
-                },
-              ),
+              getToolbar("Add Expert", showBackButton: true, notify: false,
+                  callback: () {
+                Get.back();
+              })
+              // HomeAppBar(
+              //   title: "Add Experts",
+              //   leading: Asset.backbutton,
+              //   isfilter: false,
+              //   icon: Asset.filter,
+              //   isBack: true,
+              //   onClick: () {
+              //     Get.back();
+              //   },
+              // ),
             ])),
             SingleChildScrollView(
               child: Container(

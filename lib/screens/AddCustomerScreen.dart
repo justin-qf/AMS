@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 import '../custom_componannt/common_views.dart';
@@ -50,16 +51,19 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
             ),
             Center(
                 child: Column(children: [
-              HomeAppBar(
-                title: Strings.add_customer,
-                leading: Asset.backbutton,
-                isfilter: false,
-                icon: Asset.filter,
-                isBack: true,
-                onClick: () {
-                  Get.back();
-                },
-              ),
+              getToolbar("Add Customer", showBackButton: true, callback: () {
+                Get.back();
+              })
+              // HomeAppBar(
+              //   title: Strings.add_customer,
+              //   leading: Asset.backbutton,
+              //   isfilter: false,
+              //   icon: Asset.filter,
+              //   isBack: true,
+              //   onClick: () {
+              //     Get.back();
+              //   },
+              // ),
             ])),
             SingleChildScrollView(
               child: Container(

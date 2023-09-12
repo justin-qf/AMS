@@ -13,6 +13,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../core/Common/Common.dart';
+import '../../core/Common/toolbar.dart';
 import '../../core/themes/color_const.dart';
 
 class AppointmentScreen extends StatefulWidget {
@@ -45,6 +47,7 @@ class _AppointmentScreenState extends State<AppointmentScreen>
 
   @override
   Widget build(BuildContext context) {
+    Common().trasparent_statusbar();
     return Scaffold(
       body: Stack(
         children: [
@@ -69,6 +72,10 @@ class _AppointmentScreenState extends State<AppointmentScreen>
                   ),
                   child: Center(
                       child: Column(children: [
+                    // getToolbar("Appointment", showBackButton: true,
+                    //     callback: () {
+                    //   Get.back();
+                    // })
                     HomeAppBar(
                       title: 'Appointment',
                       leading: Asset.backbutton,

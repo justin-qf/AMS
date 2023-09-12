@@ -7,23 +7,22 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../controllers/ChangePassword_controller.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
-import '../core/themes/font_constant.dart';
 import '../custom_componannt/common_views.dart';
 import '../custom_componannt/form_inputs.dart';
 
 class ChangepasswordScreen extends StatefulWidget {
-  const ChangepasswordScreen({super.key});
+  ChangepasswordScreen({super.key, this.fromProfile});
+  bool? fromProfile;
 
   @override
   State<ChangepasswordScreen> createState() => _ChangepasswordScreenState();
 }
 
 class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
-  final Controller = Get.put(ChangePasswordController());
-  bool _isHidden = true;
-  bool _isHidden1 = true;
+  final controller = Get.put(ChangePasswordController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,36 +32,30 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
           SizedBox(
             height: double.infinity,
             width: double.infinity,
-             child: isDarkMode()
-            ? SvgPicture.asset(
-                Asset.dark_bg,
-                fit: BoxFit.cover,
-              )
-            : SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+            child: isDarkMode()
+                ? SvgPicture.asset(
+                    Asset.dark_bg,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    Asset.bg,
+                    fit: BoxFit.cover,
+                  ),
           ),
           SingleChildScrollView(
               child: Form(
-            key: Controller.formKey,
+            key: controller.resetpasskey,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(
-                      right: 8.h,
-                    ),
                     padding: EdgeInsets.only(
-                      top: 8.h,
+                      top: 5.h,
                     ),
-                    child: Text(
-                      Strings.change_pass,
-                      style: TextStyle(
-                          fontFamily: opensans_Bold,
-                          fontSize: 25.sp,
-                          fontWeight: FontWeight.w700),
-                    ),
+                    child: getViewProfile("Change Password",
+                        showBackButton: true, callback: () {
+                      Get.back();
+                    }),
                   ),
                   SizedBox(
                     height: 3.5.h,
@@ -97,27 +90,33 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              getTitle(Strings.previous_pass),
-                              FadeInUp(
-                                  from: 30,
-                                  child: AnimatedSize(
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      child: Obx(() {
-                                        return getReactiveFormField(
-                                          node: Controller.PreNode,
-                                          controller: Controller.prectr,
-                                          hintLabel: Strings.pass_hint,
-                                          wantSuffix: true,
-                                          isPassword: true,
-                                          onChanged: (val) {
-                                            Controller.validatePrePass(val);
-                                          },
-                                          errorText:
-                                              Controller.PreModel.value.error,
-                                          inputType: TextInputType.text,
-                                        );
-                                      }))),
+                              if (widget.fromProfile == true)
+                                getTitle(Strings.previous_pass),
+                              widget.fromProfile == true
+                                  ? FadeInUp(
+                                      from: 30,
+                                      child: AnimatedSize(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          child: Obx(() {
+                                            return getReactiveFormField(
+                                              node: controller.currentpassNode,
+                                              controller: controller.currentCtr,
+                                              hintLabel: Strings.pass_hint,
+                                              wantSuffix: true,
+                                              isPassword: true,
+                                              onChanged: (val) {
+                                                controller
+                                                    .validateCurrentPass(val);
+                                              },
+                                              index: "0",
+                                              fromObsecureText: "RESETPASS",
+                                              errorText: controller
+                                                  .currentPassModel.value.error,
+                                              inputType: TextInputType.text,
+                                            );
+                                          })))
+                                  : Container(),
                               getTitle(Strings.new_pass),
                               FadeInUp(
                                   from: 30,
@@ -126,16 +125,22 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                                           const Duration(milliseconds: 300),
                                       child: Obx(() {
                                         return getReactiveFormField(
-                                          node: Controller.NewNode,
-                                          controller: Controller.newctr,
+                                          node: controller.newpassNode,
+                                          controller: controller.newpassCtr,
                                           hintLabel: Strings.new_pass,
                                           wantSuffix: true,
                                           isPassword: true,
                                           onChanged: (val) {
-                                            Controller.validateNewPass(val);
+                                            widget.fromProfile == true
+                                                ? controller
+                                                    .validateNewPass(val)
+                                                : controller
+                                                    .validateNewPassword(val);
                                           },
-                                          errorText:
-                                              Controller.NewModel.value.error,
+                                          index: "1",
+                                          fromObsecureText: "RESETPASS",
+                                          errorText: controller
+                                              .newPassModel.value.error,
                                           inputType: TextInputType.text,
                                         );
                                       }))),
@@ -147,16 +152,22 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                                           const Duration(milliseconds: 300),
                                       child: Obx(() {
                                         return getReactiveFormField(
-                                          node: Controller.ConfirmNode,
-                                          controller: Controller.confirmctr,
+                                          node: controller.confirmpassNode,
+                                          controller: controller.confirmCtr,
                                           hintLabel: Strings.pass_hint,
                                           onChanged: (val) {
-                                            Controller.validateConfirmPass(val);
+                                            widget.fromProfile == true
+                                                ? controller
+                                                    .validateConfirmPass(val)
+                                                : controller
+                                                    .validateForgotPass(val);
                                           },
+                                          index: "2",
+                                          fromObsecureText: "RESETPASS",
                                           wantSuffix: true,
                                           isPassword: true,
-                                          errorText: Controller
-                                              .ConfirmModel.value.error,
+                                          errorText: controller
+                                              .confirmPassModel.value.error,
                                           inputType: TextInputType.text,
                                         );
                                       }))),
@@ -242,31 +253,32 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                               SizedBox(
                                 height: 5.h,
                               ),
-                              SizedBox(
-                                  width: 100.w,
-                                  height: 6.h,
-                                  child: ElevatedButton(
-                                      onPressed: () {
-                                        //Get.to(LoginScreen());
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    LoginScreen()));
+                              Container(
+                                margin: EdgeInsets.only(
+                                  left: 14.w,
+                                  right: 14.w,
+                                ),
+                                child: FadeInUp(
+                                  from: 50,
+                                  child: Obx(() {
+                                    return getFormButton(
+                                      () {
+                                        if (controller.isFormInvalidate.value ==
+                                            true) {
+                                          controller.getResetPass(context,
+                                              widget.fromProfile == true);
+                                          Get.to(LoginScreen());
+                                        }
                                       },
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.black,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(50))),
-                                      child: Text(
-                                        Strings.submit,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14.5.sp,
-                                            fontFamily: opensans_Bold,
-                                            fontWeight: FontWeight.w700),
-                                      ))),
+                                      "Done",
+                                      validate: widget.fromProfile == true
+                                          ? controller.isFormInvalidate.value
+                                          : controller
+                                              .isForgotPasswordValidate.value,
+                                    );
+                                  }),
+                                ),
+                              ),
                             ],
                           ),
                         )
@@ -276,17 +288,5 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                 ]),
           ))
         ]));
-  }
-
-  void _togglePasswordView() {
-    setState(() {
-      _isHidden = !_isHidden;
-    });
-  }
-
-  void _togglePasswordView1() {
-    setState(() {
-      _isHidden1 = !_isHidden1;
-    });
   }
 }

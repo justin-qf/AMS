@@ -76,4 +76,5 @@ class Asset {
   static const photos = '$assets${svgFolder}photos_img.svg';
   static const time = '$assets${svgFolder}time.svg';
   static const dropdown = '$assets${svgFolder}dropdown.svg';
+  static const arrowBack = '$assets${svgFolder}arrowback.svg';
 }

@@ -3,10 +3,13 @@ import 'package:booking_app/Screens/AddServiceScreen.dart';
 import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Models/hairservice_model.dart';
 import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 import '../core/themes/font_constant.dart';
@@ -30,14 +33,14 @@ class _ServiceScreenState extends State<ServiceScreen> {
             height: double.infinity,
             width: double.infinity,
             child: isDarkMode()
-            ? SvgPicture.asset(
-                Asset.dark_bg,
-                fit: BoxFit.cover,
-              )
-            : SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+                ? SvgPicture.asset(
+                    Asset.dark_bg,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    Asset.bg,
+                    fit: BoxFit.cover,
+                  ),
           ),
           SafeArea(
               minimum: EdgeInsets.only(top: 1.h),
@@ -47,14 +50,18 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   ),
                   child: Center(
                       child: Column(children: [
-                    HomeAppBar(
-                      title: Strings.services,
-                      leading: Asset.backbutton,
-                      isfilter: false,
-                      icon: Asset.filter,
-                      isBack: true,
-                      onClick: () {},
-                    ),
+                    getToolbar("Service", showBackButton: true, notify: false,
+                        callback: () {
+                      Get.back();
+                    })
+                    // HomeAppBar(
+                    //   title: Strings.services,
+                    //   leading: Asset.backbutton,
+                    //   isfilter: false,
+                    //   icon: Asset.filter,
+                    //   isBack: true,
+                    //   onClick: () {},
+                    // ),
                   ])))),
           Container(
             margin: EdgeInsets.only(top: 8.h, left: 1.0.w, right: 1.0.w),

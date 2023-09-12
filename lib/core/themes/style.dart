@@ -13,7 +13,7 @@ styleTextForFieldLabel(FocusNode node) {
 
 styleTextForFieldHint() {
   return TextStyle(
-      fontSize: 13.sp, fontFamily: fontRegular, color: primaryColor);
+      fontSize: 11.sp, fontFamily: fontRegular, color: primaryColor);
 }
 
 styleTextFormFieldText() {

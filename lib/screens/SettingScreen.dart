@@ -13,6 +13,7 @@ import 'package:sizer/sizer.dart';
 import '../Models/setting.dart';
 import '../Models/settings_model.dart';
 import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/get_storage_key.dart';
 import '../core/constants/strings.dart';
@@ -58,14 +59,18 @@ class _SettingsState extends State<Settings> {
               ),
               child: Center(
                   child: Column(children: [
-                HomeAppBar(
-                  title: Strings.settings,
-                  leading: Asset.backbutton,
-                  isfilter: false,
-                  icon: Asset.filter,
-                  isBack: true,
-                  onClick: () {},
-                ),
+                getToolbar("Settings", showBackButton: true, notify: false,
+                    callback: () {
+                  Get.back();
+                }),
+                // HomeAppBar(
+                //   title: Strings.settings,
+                //   leading: Asset.backbutton,
+                //   isfilter: false,
+                //   icon: Asset.filter,
+                //   isBack: true,
+                //   onClick: () {},
+                // ),
                 SizedBox(
                   height: 3.h,
                 ),

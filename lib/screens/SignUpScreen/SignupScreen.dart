@@ -12,6 +12,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../core/Common/toolbar.dart';
 import '../../core/utils/helper.dart';
 
 class SignupScreens extends StatefulWidget {
@@ -50,16 +51,20 @@ class _SignupScreensState extends State<SignupScreens> {
             ),
             Center(
                 child: Column(children: [
-              HomeAppBar(
-                title: Strings.add_vendor,
-                leading: Asset.backbutton,
-                isfilter: false,
-                icon: Asset.filter,
-                isBack: true,
-                onClick: () {
-                  Get.back();
-                },
-              ),
+              getToolbar("Add Vendor Service", showBackButton: true,
+                  callback: () {
+                Get.back();
+              })
+              // HomeAppBar(
+              //   title: Strings.add_vendor,
+              //   leading: Asset.backbutton,
+              //   isfilter: false,
+              //   icon: Asset.filter,
+              //   isBack: true,
+              //   onClick: () {
+              //     Get.back();
+              //   },
+              // ),
             ])),
             SingleChildScrollView(
               child: Form(

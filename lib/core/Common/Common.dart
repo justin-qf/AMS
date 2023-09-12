@@ -228,8 +228,10 @@ class Common {
 
   void trasparent_statusbar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarIconBrightness:
-            isDarkMode() ? Brightness.dark : Brightness.light,
-        statusBarColor: Colors.transparent));
+      statusBarIconBrightness:
+          isDarkMode() ? Brightness.light : Brightness.dark,
+      statusBarColor: isDarkMode() ? Colors.transparent : Colors.transparent,
+      statusBarBrightness: isDarkMode() ? Brightness.dark : Brightness.light,
+    ));
   }
 }

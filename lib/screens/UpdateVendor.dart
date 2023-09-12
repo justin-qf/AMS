@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 import '../custom_componannt/common_views.dart';
@@ -49,16 +50,19 @@ class _UpdateVendorState extends State<UpdateVendor> {
             ),
             Center(
                 child: Column(children: [
-              HomeAppBar(
-                title: Strings.update_vendor,
-                leading: Asset.backbutton,
-                isfilter: false,
-                icon: Asset.filter,
-                isBack: true,
-                onClick: () {
-                  Get.back();
-                },
-              ),
+              getToolbar("Update Vendor", showBackButton: true, callback: () {
+                Get.back();
+              })
+              // HomeAppBar(
+              //   title: Strings.update_vendor,
+              //   leading: Asset.backbutton,
+              //   isfilter: false,
+              //   icon: Asset.filter,
+              //   isBack: true,
+              //   onClick: () {
+              //     Get.back();
+              //   },
+              // ),
             ])),
             SingleChildScrollView(
               child: Container(

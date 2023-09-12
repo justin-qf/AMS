@@ -228,12 +228,12 @@ getFormButton(Function fun, str, {required bool validate}) {
     child: Container(
       height: SizerUtil.deviceType == DeviceType.mobile ? 6.h : 5.9.h,
       alignment: Alignment.center,
-      padding: const EdgeInsets.only(top: 5),
+      //  padding: EdgeInsets.only(top: 1.h),
       width: SizerUtil.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-            SizerUtil.deviceType == DeviceType.mobile ? 1.5.h : 1.4.h),
-        color: validate ? lightPrimaryColor : Colors.grey,
+            SizerUtil.deviceType == DeviceType.mobile ? 5.h : 1.4.h),
+        color: validate ? black : Colors.grey,
         boxShadow: [
           BoxShadow(
               color: validate

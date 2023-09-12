@@ -111,9 +111,9 @@ class Strings {
   static const String change_pass = 'Change Password';
   static const String previous_pass = 'Previous Password';
   static const String enter_previous_pass = 'Enter Previous Password';
-  static const String new_pass = 'Create New Password';
+  static const String new_pass = 'Enter New Password';
   static const String enter_new_pass = 'Enter New Password';
-  static const String confirm_new_pass = 'Confirm New Password';
+  static const String confirm_new_pass = 'Confirm Password';
   static const String submit = 'Submit';
 
   //Welocme Back

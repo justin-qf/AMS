@@ -6,7 +6,6 @@ import 'package:booking_app/screens/DashboardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/Common/Common.dart';

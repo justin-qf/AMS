@@ -10,6 +10,7 @@ import 'package:sizer/sizer.dart';
 import '../Models/Listofexpert.dart';
 import '../Models/Listofexpert_model.dart';
 import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/themes/font_constant.dart';
 
@@ -32,31 +33,35 @@ class _ExpertScreenState extends State<ExpertScreen> {
           SizedBox(
             height: double.infinity,
             width: double.infinity,
-             child: isDarkMode()
-            ? SvgPicture.asset(
-                Asset.dark_bg,
-                fit: BoxFit.cover,
-              )
-            : SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+            child: isDarkMode()
+                ? SvgPicture.asset(
+                    Asset.dark_bg,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    Asset.bg,
+                    fit: BoxFit.cover,
+                  ),
           ),
           SafeArea(
               child: Container(
                   margin: EdgeInsets.only(top: 0.5.h),
                   child: Center(
                       child: Column(children: [
-                    HomeAppBar(
-                      title: 'Experts',
-                      leading: Asset.backbutton,
-                      isfilter: false,
-                      icon: Asset.filter,
-                      isBack: true,
-                      onClick: () {
-                        Get.to(NavdrawerScreen());
-                      },
-                    ),
+                    getToolbar("Experts", showBackButton: true, notify: false,
+                        callback: () {
+                      Get.back();
+                    })
+                    // HomeAppBar(
+                    //   title: 'Experts',
+                    //   leading: Asset.backbutton,
+                    //   isfilter: false,
+                    //   icon: Asset.filter,
+                    //   isBack: true,
+                    //   onClick: () {
+                    //     Get.to(NavdrawerScreen());
+                    //   },
+                    // ),
                   ])))),
           Container(
             margin: EdgeInsets.only(top: 8.h, left: 1.0.w, right: 1.0.w),

@@ -29,7 +29,7 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 22, right: 20, top: 10),
+      padding: EdgeInsets.only(left: 22, right: 5.w, top: 10),
       child: Row(
         children: [
           title == 'Settings'
@@ -44,7 +44,8 @@ class HomeAppBar extends StatelessWidget {
                   child: isBack != null
                       ? isBack == true
                           ? SvgPicture.asset(
-                              Asset.backbutton,
+                              Asset.arrowBack,
+                              height: 4.h,
                               color: isDarkMode() ? white : black,
                             )
                           : SvgPicture.asset(

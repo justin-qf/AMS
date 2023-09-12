@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/core/Common/toolbar.dart';
 import 'package:booking_app/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,31 +34,34 @@ class _AddCourseScreenState extends State<AddCourseScreen> {
             SizedBox(
               height: double.infinity,
               width: double.infinity,
-              child:   isDarkMode()
-            ? SvgPicture.asset(
-                Asset.dark_bg,
-                fit: BoxFit.cover,
-              )
-            : SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+              child: isDarkMode()
+                  ? SvgPicture.asset(
+                      Asset.dark_bg,
+                      fit: BoxFit.cover,
+                    )
+                  : SvgPicture.asset(
+                      Asset.bg,
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(
               height: 0.5.h,
             ),
             Center(
                 child: Column(children: [
-              HomeAppBar(
-                title: Strings.add_course,
-                leading: Asset.backbutton,
-                isfilter: false,
-                icon: Asset.filter,
-                isBack: true,
-                onClick: () {
-                  Get.back();
-                },
-              ),
+              getToolbar("Add Course", showBackButton: true, callback: () {
+                Get.back();
+              })
+              // HomeAppBar(
+              //   title: Strings.add_course,
+              //   leading: Asset.backbutton,
+              //   isfilter: false,
+              //   icon: Asset.filter,
+              //   isBack: true,
+              //   onClick: () {
+              //     Get.back();
+              //   },
+              // ),
             ])),
             SingleChildScrollView(
               child: Container(

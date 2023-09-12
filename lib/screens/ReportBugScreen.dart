@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../controllers/ReportBug_controller.dart';
 import '../core/Common/appbar.dart';
+import '../core/Common/toolbar.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/strings.dart';
 import '../custom_componannt/common_views.dart';
@@ -35,30 +36,33 @@ class _ReportBugScreenState extends State<ReportBugScreen> {
               height: double.infinity,
               width: double.infinity,
               child: isDarkMode()
-            ? SvgPicture.asset(
-                Asset.dark_bg,
-                fit: BoxFit.cover,
-              )
-            : SvgPicture.asset(
-                Asset.bg,
-                fit: BoxFit.cover,
-              ),
+                  ? SvgPicture.asset(
+                      Asset.dark_bg,
+                      fit: BoxFit.cover,
+                    )
+                  : SvgPicture.asset(
+                      Asset.bg,
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(
               height: 0.5.h,
             ),
             Center(
                 child: Column(children: [
-              HomeAppBar(
-                title: Strings.report_bug,
-                leading: Asset.backbutton,
-                isfilter: false,
-                icon: Asset.filter,
-                isBack: true,
-                onClick: () {
-                  Get.back();
-                },
-              ),
+              getToolbar("Report Bug", showBackButton: true, callback: () {
+                Get.back();
+              })
+              // HomeAppBar(
+              //   title: Strings.report_bug,
+              //   leading: Asset.backbutton,
+              //   isfilter: false,
+              //   icon: Asset.filter,
+              //   isBack: true,
+              //   onClick: () {
+              //     Get.back();
+              //   },
+              // ),
             ])),
             SingleChildScrollView(
               child: Container(
