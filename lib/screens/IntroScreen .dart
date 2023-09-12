@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:booking_app/core/constants/strings.dart';
 import 'package:booking_app/core/themes/color_const.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:booking_app/core/utils/helper.dart';
@@ -87,8 +88,13 @@ class _IntroScreenState extends State<IntroScreen> {
                             from: 50,
                             child: SvgPicture.asset(
                               contents[i].image,
-                              // height: SizeConfig.blockV! * 30,
-                              height: i == 1 ? 25.h : 35.h,
+                              height: i == 1
+                                  ? SizerUtil.deviceType == DeviceType.mobile
+                                      ? 25.h
+                                      : 27.h
+                                  : SizerUtil.deviceType == DeviceType.mobile
+                                      ? 35.h
+                                      : 37.h,
                             ),
                           ),
                           SizedBox(
@@ -126,7 +132,10 @@ class _IntroScreenState extends State<IntroScreen> {
                                       'Lorem ipsum dolor sit amet consectetur.\nId sed purus malesuada euismod.',
                                       style: TextStyle(
                                           color: isDarkMode() ? white : black,
-                                          fontSize: 13.sp,
+                                          fontSize: SizerUtil.deviceType ==
+                                                  DeviceType.mobile
+                                              ? 13.sp
+                                              : 12.sp,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: opensansMedium),
                                       textAlign: TextAlign.center),
@@ -136,7 +145,10 @@ class _IntroScreenState extends State<IntroScreen> {
                                   child: Text(
                                       'Lorem ipsum dolor sit amet consectetur.\nId sed purus malesuada euismod.',
                                       style: TextStyle(
-                                          fontSize: 13.sp,
+                                          fontSize: SizerUtil.deviceType ==
+                                                  DeviceType.mobile
+                                              ? 13.sp
+                                              : 12.sp,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: opensansMedium),
                                       textAlign: TextAlign.center),
@@ -155,11 +167,6 @@ class _IntroScreenState extends State<IntroScreen> {
                                 child: ElevatedButton(
                                   onPressed: () {
                                     Get.to(LoginScreen());
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             const LoginScreen()));
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
@@ -168,12 +175,14 @@ class _IntroScreenState extends State<IntroScreen> {
                                     ),
                                     padding: EdgeInsets.all(15),
                                     textStyle: TextStyle(
-                                        fontSize:
-                                            (double.infinity <= 550) ? 13 : 17),
+                                        fontSize: SizerUtil.deviceType ==
+                                                DeviceType.mobile
+                                            ? 13.sp
+                                            : 17.sp),
                                   ),
                                   child: Center(
                                       child: Text(
-                                    "Let's Get Started",
+                                    Strings.started,
                                     style: TextStyle(
                                         fontFamily: opensans_Bold,
                                         fontSize: 15.sp,

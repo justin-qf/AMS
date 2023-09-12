@@ -5,10 +5,8 @@ class Strings {
   //themes
   static const lightTheme = 'light';
   static const darkTheme = 'dark';
-
   static const lightThemeText = 'Theme (Light)';
   static const darkThemeText = 'Theme (Dark)';
-
   static const noInternetConnection =
       "Internet connection is not active. Please enable it and try again";
   static const dashboard = 'Dashbaord';
@@ -26,6 +24,7 @@ class Strings {
   static const services = "Services";
   static const software = "Software";
   static const others = "Others";
+  static const started = "Let's Get Started";
 
   //API DATA
   static const instituteCaps = "THE INSTITUTE";
@@ -305,4 +304,12 @@ class Strings {
   static const String time10 = '08:00 PM';
   static const String time11 = '09:00 PM';
   static const String time12 = '10:00 PM';
+
+  static const String done = 'Done';
+
+  //Change Paasord
+  static const String changePassTitle = 'Change Password';
+  static const String currentPassHint = 'Enter Current Password';
+  static const String passHint = 'Enter Password';
+  static const String chanagePassHint = 'Enter Confirm Password';
 }

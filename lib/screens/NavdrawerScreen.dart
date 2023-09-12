@@ -1,10 +1,10 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:booking_app/Screens/ChangepasswordScreen.dart';
 import 'package:booking_app/Screens/ProfileScreen.dart';
 import 'package:booking_app/Screens/ServiceScreen.dart';
 import 'package:booking_app/Screens/SettingScreen.dart';
 import 'package:booking_app/core/constants/assets.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
+import 'package:booking_app/screens/ChangepasswordScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -231,7 +231,7 @@ class NavdrawerScreen extends StatelessWidget {
                           fontFamily: opensansMedium,
                           fontSize: 11.5.sp)),
                   onTap: () {
-                    Get.to(ChangepasswordScreen(
+                    Get.to(ChangePasswordScreen(
                       fromProfile: true,
                     ));
                   },

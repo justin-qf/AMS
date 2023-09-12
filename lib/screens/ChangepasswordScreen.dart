@@ -13,15 +13,15 @@ import '../core/constants/strings.dart';
 import '../custom_componannt/common_views.dart';
 import '../custom_componannt/form_inputs.dart';
 
-class ChangepasswordScreen extends StatefulWidget {
-  ChangepasswordScreen({super.key, this.fromProfile});
+class ChangePasswordScreen extends StatefulWidget {
+  ChangePasswordScreen({super.key, this.fromProfile});
   bool? fromProfile;
 
   @override
-  State<ChangepasswordScreen> createState() => _ChangepasswordScreenState();
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
 
-class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final controller = Get.put(ChangePasswordController());
 
   @override
@@ -52,7 +52,7 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                     padding: EdgeInsets.only(
                       top: 5.h,
                     ),
-                    child: getViewProfile("Change Password",
+                    child: getViewProfile(Strings.changePassTitle,
                         showBackButton: true, callback: () {
                       Get.back();
                     }),
@@ -102,7 +102,7 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                                             return getReactiveFormField(
                                               node: controller.currentpassNode,
                                               controller: controller.currentCtr,
-                                              hintLabel: Strings.pass_hint,
+                                              hintLabel: Strings.currentPassHint,
                                               wantSuffix: true,
                                               isPassword: true,
                                               onChanged: (val) {
@@ -127,7 +127,7 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                                         return getReactiveFormField(
                                           node: controller.newpassNode,
                                           controller: controller.newpassCtr,
-                                          hintLabel: Strings.new_pass,
+                                          hintLabel: Strings.passHint,
                                           wantSuffix: true,
                                           isPassword: true,
                                           onChanged: (val) {
@@ -154,7 +154,7 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                                         return getReactiveFormField(
                                           node: controller.confirmpassNode,
                                           controller: controller.confirmCtr,
-                                          hintLabel: Strings.pass_hint,
+                                          hintLabel: Strings.chanagePassHint,
                                           onChanged: (val) {
                                             widget.fromProfile == true
                                                 ? controller
@@ -171,88 +171,7 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                                           inputType: TextInputType.text,
                                         );
                                       }))),
-                              SizedBox(height: 1.0.h),
-                              // Container(
-                              //   height: 5.7.h,
-                              //   child: TextField(
-                              //     obscureText: _isHidden,
-                              //     obscuringCharacter: '*',
-                              //     decoration: InputDecoration(
-                              //         hintText: Strings.enter_new_pass,
-                              //         hintStyle: TextStyle(fontSize: 12.sp),
-                              //         contentPadding: EdgeInsets.only(
-                              //             top: 1.h, left: 3.h, bottom: 1.h),
-                              //         focusedBorder: OutlineInputBorder(
-                              //           borderRadius:
-                              //               BorderRadius.circular(30),
-                              //         ),
-                              //         enabledBorder: OutlineInputBorder(
-                              //             borderRadius:
-                              //                 BorderRadius.circular(30)),
-                              //         suffixIcon: InkWell(
-                              //           onTap: _togglePasswordView,
-                              //           child: Icon(
-                              //             _isHidden
-                              //                 ? Icons.visibility_off
-                              //                 : Icons.visibility,
-                              //             color: Colors.grey,
-                              //             size: 20.sp,
-                              //           ),
-                              //         )),
-                              //     keyboardType: TextInputType.name,
-                              //   ),
-                              // ),
-                              // SizedBox(
-                              //   height: 1.5.h,
-                              // ),
-                              // Column(
-                              //   crossAxisAlignment: CrossAxisAlignment.start,
-                              //   // ignore: prefer_const_literals_to_create_immutables
-                              //   children: [
-                              //     Text(
-                              //       Strings.confirm_new_pass,
-                              //       style: TextStyle(
-                              //           fontFamily: opensans_Bold,
-                              //           fontWeight: FontWeight.w700,
-                              //           fontSize: 14.sp),
-                              //     ),
-                              //   ],
-                              // ),
-                              // SizedBox(height: 1.0.h),
-                              // Container(
-                              //   height: 5.7.h,
-                              //   child: TextField(
-                              //     obscureText: _isHidden1,
-                              //     obscuringCharacter: '*',
-                              //     decoration: InputDecoration(
-                              //         hintText: Strings.confirm_new_pass,
-                              //         contentPadding: EdgeInsets.only(
-                              //             top: 1.h, left: 3.h, bottom: 1.h),
-                              //         hintStyle: TextStyle(fontSize: 12.sp),
-                              //         focusedBorder: OutlineInputBorder(
-                              //           borderRadius:
-                              //               BorderRadius.circular(30),
-                              //         ),
-                              //         enabledBorder: OutlineInputBorder(
-                              //             borderRadius:
-                              //                 BorderRadius.circular(30)),
-                              //         suffixIcon: InkWell(
-                              //           onTap: _togglePasswordView1,
-                              //           child: Icon(
-                              //             _isHidden1
-                              //                 ? Icons.visibility_off
-                              //                 : Icons.visibility,
-                              //             color: Colors.grey,
-                              //             size: 20.sp,
-                              //           ),
-                              //         )),
-                              //     keyboardType: TextInputType.name,
-                              //   ),
-                              // ),
-
-                              SizedBox(
-                                height: 5.h,
-                              ),
+                              SizedBox(height: 5.0.h),
                               Container(
                                 margin: EdgeInsets.only(
                                   left: 14.w,
@@ -270,7 +189,7 @@ class _ChangepasswordScreenState extends State<ChangepasswordScreen> {
                                           Get.to(LoginScreen());
                                         }
                                       },
-                                      "Done",
+                                      Strings.done,
                                       validate: widget.fromProfile == true
                                           ? controller.isFormInvalidate.value
                                           : controller

@@ -1,9 +1,9 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:booking_app/Screens/ChangepasswordScreen.dart';
 import 'package:booking_app/core/constants/assets.dart';
 import 'package:booking_app/core/themes/color_const.dart';
 import 'package:booking_app/core/themes/font_constant.dart';
 import 'package:booking_app/core/utils/helper.dart';
+import 'package:booking_app/screens/ChangepasswordScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -162,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           InkWell(
                             onTap: () {
-                              Get.to(ChangepasswordScreen());
+                              Get.to(ChangePasswordScreen());
                             },
                             child: Text(
                               Strings.forgot_pass,
