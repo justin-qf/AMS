@@ -178,14 +178,17 @@ class _IntroScreenState extends State<IntroScreen> {
                                         fontSize: SizerUtil.deviceType ==
                                                 DeviceType.mobile
                                             ? 13.sp
-                                            : 17.sp),
+                                            : 15.sp),
                                   ),
                                   child: Center(
                                       child: Text(
                                     Strings.started,
                                     style: TextStyle(
                                         fontFamily: opensans_Bold,
-                                        fontSize: 15.sp,
+                                        fontSize: SizerUtil.deviceType ==
+                                                DeviceType.mobile
+                                            ? 15.sp
+                                            : 14.sp,
                                         fontWeight: FontWeight.w700),
                                   )),
                                 ),
@@ -211,15 +214,11 @@ class _IntroScreenState extends State<IntroScreen> {
                                         shape: const CircleBorder(
                                             side: BorderSide(width: 11)),
                                         elevation: 0,
-                                        // padding: (width <= 550)
-                                        //     ? const EdgeInsets.symmetric(
-                                        //         horizontal: 5, vertical: 5)
-                                        //     : const EdgeInsets.symmetric(
-                                        //         horizontal: 30, vertical: 25),
                                         textStyle: TextStyle(
-                                            fontSize: (double.infinity <= 550)
-                                                ? 13
-                                                : 17),
+                                            fontSize: SizerUtil.deviceType ==
+                                                    DeviceType.mobile
+                                                ? 13.sp
+                                                : 15.sp),
                                       ),
                                       child: Icon(
                                           Icons.arrow_forward_ios_rounded,
